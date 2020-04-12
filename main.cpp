@@ -52,7 +52,6 @@ int main()
 		window.display();
 		window.clear();
 		window.pollEvent (event);
-
         if(event.type == sf::Event::Closed){
             window.close();
         }

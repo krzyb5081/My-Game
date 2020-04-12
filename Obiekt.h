@@ -5,8 +5,6 @@
 
 class Obiekt {
 
-	
-
 public:
 
 	sf::Texture * texture;
@@ -16,12 +14,16 @@ public:
 	bool * isVisible;
 	float * startX;
 	float * startY;
+	float * height;
+	float * width;
 
 	Obiekt();
 
     void load(const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa);
 	void copy(Obiekt &obiekt);
 	void move(float x, float y);
+	void setScale(float scaleX, float scaleY);
+	
     
 
 

@@ -13,12 +13,12 @@ public:
 	bool naKrawedziLeft;
 	bool naKrawedziRight;
 
-	float xPrzesuniecie;
-	float yPrzesuniecie;
+	float xPos;
+	float yPos;
 
 	Player();
 
-	//Obiekt getObject();
+	void copy(Obiekt &obiekt);
 	void sterowanie();
 };
 

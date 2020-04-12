@@ -10,8 +10,8 @@ Player::Player(){
 	load("bohater.png", 600, 360, 0.2, 0);
 	sprite->setScale(0.15, 0.15);
 
-	xPrzesuniecie = 0;
-	yPrzesuniecie = 0;
+	xPos = 0;
+	yPos = 0;
 }
 
 void Player::sterowanie(){
@@ -28,9 +28,9 @@ void Player::sterowanie(){
 			move(0, -*predkosc);
 		}
 		else{
-			yPrzesuniecie -= *predkosc;
 			naKrawedziTop = true;
 		}
+		yPos -= *predkosc;
 		
 	}
 	if (keyboard.isKeyPressed(sf::Keyboard::Down)) {
@@ -38,9 +38,9 @@ void Player::sterowanie(){
 			move(0, *predkosc);
 		}
 		else{
-			yPrzesuniecie += *predkosc;
 			naKrawedziDown = true;
 		}
+		yPos += *predkosc;
 		
 	}
 	if (keyboard.isKeyPressed(sf::Keyboard::Left)) {
@@ -48,9 +48,9 @@ void Player::sterowanie(){
 			move(-*predkosc, 0);
 		}
 		else{
-			xPrzesuniecie -= *predkosc;
 			naKrawedziLeft = true;
 		}
+		xPos -= *predkosc;
 		
 	}
 	if (keyboard.isKeyPressed(sf::Keyboard::Right)) {
@@ -58,9 +58,25 @@ void Player::sterowanie(){
 			move(*predkosc, 0);
 		}
 		else{
-			xPrzesuniecie += *predkosc;
 			naKrawedziRight = true;
 		}
+		xPos += *predkosc;
 		
 	}
+}
+
+
+void Player::copy(Obiekt &obiekt){
+	texture = obiekt.texture;
+	sprite = obiekt.sprite;
+	predkosc = obiekt.predkosc;
+	warstwa = obiekt.warstwa;
+	startX = obiekt.startX;
+	startY = obiekt.startY;
+	isVisible = obiekt.isVisible;
+	height = obiekt.height;
+	width = obiekt.width;
+
+	xPos = *startX;
+	yPos = *startY;
 }

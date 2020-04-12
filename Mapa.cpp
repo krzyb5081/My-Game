@@ -14,7 +14,7 @@ void Mapa::loadMap(Player * player, Background * background, GameItems * gameIte
 
 	this->player = player;
 	
-	iloscObiektow = 6;
+	iloscObiektow = 5;
 	obiekty = new Obiekt[iloscObiektow];
 
 
@@ -35,22 +35,23 @@ void Mapa::loadMap(Player * player, Background * background, GameItems * gameIte
 	
 	//loading bohatera ///////////////////////////////////////////////////////////////////////////////
 	obiekty[3].load("bohater.png", 600, 360, 0.2, 0);
-	obiekty[3].sprite->setScale(0.15, 0.15);
+	obiekty[3].setScale(0.15, 0.15);
 	player->copy(obiekty[3]);
 
 	//loading gameitemsow ////////////////////////////////////////////////////////////////////////
-	gameItems->load(player, 2);
+	gameItems->load(player, 1);
 
-	obiekty[4].load("bohater.png", 0, 360, 0, 0);
-	obiekty[4].sprite->setScale(0.15, 0.15);
+	obiekty[4].load("bohater.png", 400, 0, 0, 0);
+	obiekty[4].setScale(0.15, 0.15);
 	gameItems->items[0].copy(obiekty[4]);
 	
+	/*
 	obiekty[5].load("bohater.png", 50, 500, 0, 0);
 	obiekty[5].sprite->setScale(0.15, 0.15);
-	gameItems->items[1].copy(obiekty[5]);
+	gameItems->items[1].copy(obiekty[5]);*/
 
 	//sprawdzanie widzialnosci gameItemsow ////////////////////////////////////////////////////////////
-	gameItems->checkingVisibility();
+	//gameItems->checkingVisibility();
 
 }
 
