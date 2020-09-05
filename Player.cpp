@@ -24,7 +24,7 @@ void Player::sterowanie(){
 	naKrawedziRight = false;
 
 	if (keyboard.isKeyPressed(sf::Keyboard::Up)){
-		if (sprite->getPosition().y - *predkosc > 370){
+		if (sprite->getPosition().y - *predkosc > 520){
 			move(0, -*predkosc);
 		}
 		else{
@@ -34,7 +34,7 @@ void Player::sterowanie(){
 		
 	}
 	if (keyboard.isKeyPressed(sf::Keyboard::Down)) {
-		if (sprite->getPosition().y + *predkosc < 650){
+		if (sprite->getPosition().y + *predkosc < 520){
 			move(0, *predkosc);
 		}
 		else{
@@ -44,7 +44,7 @@ void Player::sterowanie(){
 		
 	}
 	if (keyboard.isKeyPressed(sf::Keyboard::Left)) {
-		if (sprite->getPosition().x - *predkosc > 50){
+		if (sprite->getPosition().x - *predkosc > 650){
 			move(-*predkosc, 0);
 		}
 		else{
@@ -54,7 +54,7 @@ void Player::sterowanie(){
 		
 	}
 	if (keyboard.isKeyPressed(sf::Keyboard::Right)) {
-		if (sprite->getPosition().x + *predkosc < 1200){
+		if (sprite->getPosition().x + *predkosc < 650){
 			move(*predkosc, 0);
 		}
 		else{

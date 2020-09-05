@@ -26,10 +26,12 @@ public:
 	Mapa(Player * player, Background * background, GameItems * gameItems);
 
 	void loadMap(Player * player, Background * background, GameItems * gameItems);
+	void sortowanieObiektow();
 	int getSizeX();
 	int getSizeY();
 	int getNumberOfObiects();
 	Obiekt * getObiects();
+	
 
 };
 #endif // MAPA_H

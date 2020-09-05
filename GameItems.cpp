@@ -20,74 +20,50 @@ void GameItems::load(Player * player, int iloscItems){
 void GameItems::ruszanie(){
 	if ((player->naKrawedziTop) || (player->naKrawedziDown) || (player->naKrawedziLeft) || (player->naKrawedziRight)){
 
-		
+		checkingVisibility();
 
-		for (int i = 0; i < iloscItems; i++){
-			if (player->naKrawedziTop){
-
-
-				////dziwne rzeczy alert!!!!!!!!!!!!!!!!!!!!!!!
-				
-				float odleglosc = 0;
-				if (player->yPos > *items[i].startY){
-					odleglosc = (player->yPos - *items[i].startY);
-				} else if (player->yPos < *items[i].startY){
-					odleglosc = (*items[i].startY - player->yPos);
-				} else {
-					odleglosc = 0;
-				}
-				
-				std::cout << "Odleglosc: " << odleglosc << " height + 20: " << 2 * (*items[i].height) + 20 << std::endl;
-				if ((odleglosc > 20) && (player->yPos - *items[i].startY > 0)){
-					*items[i].isVisible = false;
-				}
-				else {
-					*items[i].isVisible = true;
-				}
-				if ((player->yPos - *items[i].startY > 0) && (odleglosc <= 2 * (*items[i].height) + 20) && (odleglosc >= 20)){
-					items[i].sprite->setPosition(items[i].sprite->getPosition().x, 350);
-					std::cout << "if i hui";
-				}
-				else{
-					items[i].move(0, *player->predkosc);
-				}
-				////dziwne rzeczy alert!!!!!!!!!!!!!!!!!!!!!!!
-
-				//items[i].move(0, *player->predkosc);
-			}if (player->naKrawedziDown){
-				items[i].move(0, -*player->predkosc);
-			}if (player->naKrawedziLeft){
-				items[i].move(*player->predkosc, 0);
-			}if (player->naKrawedziRight){
-				items[i].move(-*player->predkosc, 0);
+		float playerPredkosc = *player->predkosc;
+		if (player->naKrawedziTop){
+			for (int i = 0; i < iloscItems; i++){
+				items[i].move(0, playerPredkosc);
+			}
+		}if (player->naKrawedziDown){
+			for (int i = 0; i < iloscItems; i++){
+				items[i].move(0, -playerPredkosc);
+			}
+		}if (player->naKrawedziLeft){
+			for (int i = 0; i < iloscItems; i++){
+				items[i].move(playerPredkosc, 0);
+			}
+		}if (player->naKrawedziRight){
+			for (int i = 0; i < iloscItems; i++){
+				items[i].move(-playerPredkosc, 0);
 			}
 		}
 	}
 }
 
 void GameItems::checkingVisibility(){
-	/*
-	if (obiekty(kordy + wysokosc) < niz kordy planszy)
-		to
-		maja sie pojawic na wysokosci(kordy planszy + wysokosc obiektu)
-		i
-		isc w gore zamiast w dol
-		i
-		byc widoczne
-		*/
+	for (int i = 0; i < iloscItems; i++){
+		float odleglosc = player->yPos - *items[i].startY;//odleglosc Y
+		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - 350;//350 to pozycja y sprajta odpowiedzialnego za trawe
 
-	//dodac sprawdzanko wszystkiego czy ma byc widzialne czy nie
+		//std::cout << "Jakby odleglosc: " << odleglosc << " player.y: " << player->sprite->getPosition().y << " item.y: " << items[i].sprite->getPosition().y << std::endl;
+
+		if ((odleglosc <= 2 * (*items[i].height) + odlegloscPlayeraOdKrawedzi) && (odleglosc >= odlegloscPlayeraOdKrawedzi + *items[i].height)){
+			*items[i].isVisible = true;
+			*items[i].warstwa = 1;
+			items[i].sprite->setPosition(items[i].sprite->getPosition().x, 350 + odleglosc - 2 * (*items[i].height) - odlegloscPlayeraOdKrawedzi);
+		}
+		else if (odleglosc > 2 * (*items[i].height) + odlegloscPlayeraOdKrawedzi){
+			*items[i].isVisible = false;
+			*items[i].warstwa = 3;
+			
+		}
+		else {
+			*items[i].warstwa = 3;
+		}
+		
+		//dodac sprawdzanko wszystkiego czy ma byc widzialne czy nie
+	}
 }
-
-/*
-//if (500-300) <= 150
-if ((plejer->xPos - obiekt.startX) <= obiekt->height + 50) && ((plejer->xPos - obiekt.startX) >= 50{
-	//set pozycja na (x=stary x, y=500-50-(500-400) 
-	obiekt->sprite->setPosition(obiekt->sprite->getPosition().x, plejer.xPos - 50 - (plajer->xPos - obiekt.startX));
-}
-*/
-
-
-/*
-
-*/

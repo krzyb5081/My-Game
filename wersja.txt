@@ -1,0 +1,2 @@
+SFML-2.5.1
+sfml na kompilator z visual studio 2017

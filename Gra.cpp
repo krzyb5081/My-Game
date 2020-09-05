@@ -19,6 +19,8 @@ void Gra::loop(sf::RenderWindow & window){
 }
 
 void Gra::rysuj(sf::RenderWindow & window) {
+	mapa.sortowanieObiektow();
+	obiekty = mapa.getObiects();
 
 	for (int i = 0; i < mapa.getNumberOfObiects(); i++){
 		if (*obiekty[i].isVisible == true){
@@ -29,4 +31,4 @@ void Gra::rysuj(sf::RenderWindow & window) {
 }
 
 
-//pozmieniac wszystkie pola w Obiekt na wskazniki!@!@!
+//zrobic sortowanie obiektow (do porzadku) w mapie zeby sie ukladaly od najnizszej warstwy do najwyzszej i moze dodac cos ze obiekt jest za plansza nie wiem xD
