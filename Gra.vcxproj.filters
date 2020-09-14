@@ -39,28 +39,34 @@
     <ClCompile Include="GameItems.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Gra.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mapa.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Obiekt.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameItems.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Obiekt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gra.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mapa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -44,7 +44,7 @@ void Mapa::loadMap(Player * player, Background * background, GameItems * gameIte
 	gameItems->load(player, 2);
 
 	obiekty[4].load("Cytadela.bmp", 650, 520, 0, 3);
-	obiekty[4].setScale(0.5, 0.5);
+	obiekty[4].setScale(4, 3);
 	gameItems->items[0].copy(obiekty[4]);
 	
 	

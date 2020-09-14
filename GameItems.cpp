@@ -48,8 +48,6 @@ void GameItems::checkingVisibility(){
 		float odleglosc = player->yPos - *items[i].startY;//odleglosc Y
 		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - 350;//350 to pozycja y sprajta odpowiedzialnego za trawe
 
-		//std::cout << "Jakby odleglosc: " << odleglosc << " player.y: " << player->sprite->getPosition().y << " item.y: " << items[i].sprite->getPosition().y << std::endl;
-
 		if ((odleglosc <= 2 * (*items[i].height) + odlegloscPlayeraOdKrawedzi) && (odleglosc >= odlegloscPlayeraOdKrawedzi + *items[i].height)){
 			*items[i].isVisible = true;
 			*items[i].warstwa = 1;
@@ -66,4 +64,8 @@ void GameItems::checkingVisibility(){
 		
 		//dodac sprawdzanko wszystkiego czy ma byc widzialne czy nie
 	}
+}
+
+void GameItems::doColision() {
+
 }

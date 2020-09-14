@@ -1,5 +1,4 @@
-#ifndef MAPA_H
-#define MAPA_H
+#pragma once
 
 #include "Obiekt.h"
 #include "Player.h"
@@ -34,4 +33,3 @@ public:
 	
 
 };
-#endif // MAPA_H

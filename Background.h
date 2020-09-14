@@ -1,5 +1,4 @@
-#ifndef BACKGROUND_H
-#define BACKGROUND_H
+#pragma once
 
 #include "Obiekt.h"
 #include "Player.h"
@@ -16,5 +15,3 @@ public:
 	void load(Player * player, int iloscObiektow);
 	void sterowanie();
 };
-
-#endif

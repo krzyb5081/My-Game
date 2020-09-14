@@ -1,5 +1,4 @@
-#ifndef GRA_H
-#define GRA_H
+#pragma once
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -23,4 +22,3 @@ public:
 	void rysuj(sf::RenderWindow & window);
 
 };
-#endif // GRA_H

@@ -1,5 +1,4 @@
-#ifndef OBIEKT_H
-#define OBIEKT_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -29,4 +28,3 @@ public:
 
 
 };
-#endif // OBIEKT_H

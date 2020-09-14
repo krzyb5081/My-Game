@@ -1,5 +1,4 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
 #include "Obiekt.h"
 
@@ -21,5 +20,3 @@ public:
 	void copy(Obiekt &obiekt);
 	void sterowanie();
 };
-
-#endif

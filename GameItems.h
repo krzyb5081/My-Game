@@ -1,5 +1,4 @@
-#ifndef GAMEITEMS_H
-#define GAMEITEMS_H
+#pragma once
 
 #include "Obiekt.h"
 #include "Player.h"
@@ -17,7 +16,6 @@ public:
 	void load(Player * player, int iloscItems);
 	void ruszanie();
 	void checkingVisibility();
+	void doColision();
 
 };
-
-#endif

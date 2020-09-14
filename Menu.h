@@ -1,5 +1,4 @@
-#ifndef MENU_H
-#define MENU_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -22,5 +21,3 @@ public:
     Menu();
 
 };
-
-#endif // MENU_H
