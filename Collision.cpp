@@ -1,15 +1,14 @@
 #include "Collision.h"
 
-Collision::Collision(Player * player, Obiekt * gameItems, int iloscItems) {
-	load(player, gameItems, iloscItems);
-}
 
-void Collision::load(Player * player, Obiekt * gameItems, int iloscItems) {
-	this->player = player;
-	this->gameItems = gameItems;
-	this->itemsAmount = iloscItems;
-}
+bool Collision::checkPlayerCollision(Player player, Obiekt obiekt) {
+	sf::FloatRect playerRect = player.sprite->getGlobalBounds();
+	sf::FloatRect obiektRect = obiekt.sprite->getGlobalBounds();
 
-void Collision::checkCollisions() {
-
+	if (playerRect.intersects(obiektRect)) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }

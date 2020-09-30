@@ -13,9 +13,8 @@ void GameItems::load(Player * player, int iloscItems){
 	items = new Obiekt[iloscItems];
 	this->player = player;
 	this->iloscItems = iloscItems;
+	this->collision = new Collision;
 }
-
-
 
 void GameItems::ruszanie(){
 	if ((player->naKrawedziTop) || (player->naKrawedziDown) || (player->naKrawedziLeft) || (player->naKrawedziRight)){
@@ -23,9 +22,12 @@ void GameItems::ruszanie(){
 		checkingVisibility();
 
 		float playerPredkosc = *player->predkosc;
+
 		if (player->naKrawedziTop){
-			for (int i = 0; i < iloscItems; i++){
-				items[i].move(0, playerPredkosc);
+			if (checkPlayerCollisionTop()) {
+				for (int i = 0; i < iloscItems; i++){
+					items[i].move(0, playerPredkosc);
+				}
 			}
 		}if (player->naKrawedziDown){
 			for (int i = 0; i < iloscItems; i++){
@@ -66,6 +68,20 @@ void GameItems::checkingVisibility(){
 	}
 }
 
-void GameItems::doColision() {
+bool GameItems::checkPlayerCollisionTop() {
+	float playerPredkosc = *player->predkosc;
 
+	player->move(0, -playerPredkosc);
+	for (int i = 0; i < iloscItems; i++) {
+		if (collision->checkPlayerCollision(*player, items[i])==true) {
+			player->move(0, playerPredkosc);
+			return false;
+		}
+	}
+	player->move(0, playerPredkosc);
+	return true;
 }
+
+przeniesc czekplejerkolizjontop i inne plejerkolizjony do Collision i w petli glownej uruchomic zaraz po sterowaniu bohaterem
+
+naprawic te krawedzie zeby tego juz nie bylo w backgroundach tez
