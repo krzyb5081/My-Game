@@ -6,12 +6,15 @@
 #include "Obiekt.h"
 #include "Background.h"
 #include "GameItems.h"
+#include "Collision.h"
 
 class Gra {
 
 	Mapa mapa;
 	Obiekt * obiekty;
+
 	Player * player;
+	Collision * collision;
 	Background * background;
 	GameItems * gameItems;
 

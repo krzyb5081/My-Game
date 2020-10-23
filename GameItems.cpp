@@ -13,31 +13,28 @@ void GameItems::load(Player * player, int iloscItems){
 	items = new Obiekt[iloscItems];
 	this->player = player;
 	this->iloscItems = iloscItems;
-	this->collision = new Collision;
 }
 
 void GameItems::ruszanie(){
-	if ((player->naKrawedziTop) || (player->naKrawedziDown) || (player->naKrawedziLeft) || (player->naKrawedziRight)){
+	if ((player->moveTop) || (player->moveBot) || (player->moveLeft) || (player->moveRight)){
 
 		checkingVisibility();
 
 		float playerPredkosc = *player->predkosc;
 
-		if (player->naKrawedziTop){
-			if (checkPlayerCollisionTop()) {
-				for (int i = 0; i < iloscItems; i++){
-					items[i].move(0, playerPredkosc);
-				}
+		if (player->moveTop){
+			for (int i = 0; i < iloscItems; i++){
+				items[i].move(0, playerPredkosc);
 			}
-		}if (player->naKrawedziDown){
+		}if (player->moveBot){
 			for (int i = 0; i < iloscItems; i++){
 				items[i].move(0, -playerPredkosc);
 			}
-		}if (player->naKrawedziLeft){
+		}if (player->moveLeft){
 			for (int i = 0; i < iloscItems; i++){
 				items[i].move(playerPredkosc, 0);
 			}
-		}if (player->naKrawedziRight){
+		}if (player->moveRight){
 			for (int i = 0; i < iloscItems; i++){
 				items[i].move(-playerPredkosc, 0);
 			}
@@ -68,20 +65,6 @@ void GameItems::checkingVisibility(){
 	}
 }
 
-bool GameItems::checkPlayerCollisionTop() {
-	float playerPredkosc = *player->predkosc;
+//przeniesc czekplejerkolizjontop i inne plejerkolizjony do Collision i w petli glownej uruchomic zaraz po sterowaniu bohaterem
 
-	player->move(0, -playerPredkosc);
-	for (int i = 0; i < iloscItems; i++) {
-		if (collision->checkPlayerCollision(*player, items[i])==true) {
-			player->move(0, playerPredkosc);
-			return false;
-		}
-	}
-	player->move(0, playerPredkosc);
-	return true;
-}
-
-przeniesc czekplejerkolizjontop i inne plejerkolizjony do Collision i w petli glownej uruchomic zaraz po sterowaniu bohaterem
-
-naprawic te krawedzie zeby tego juz nie bylo w backgroundach tez
+//naprawic te krawedzie zeby tego juz nie bylo w backgroundach tez

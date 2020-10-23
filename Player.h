@@ -7,10 +7,15 @@ class Player :public Obiekt{
 
 public:
 
-	bool naKrawedziTop;
-	bool naKrawedziDown;
-	bool naKrawedziLeft;
-	bool naKrawedziRight;
+	bool moveTop;
+	bool moveBot;
+	bool moveLeft;
+	bool moveRight;
+
+	bool collisionTop;
+	bool collisionBot;
+	bool collisionLeft;
+	bool collisionRight;
 
 	float xPos;
 	float yPos;

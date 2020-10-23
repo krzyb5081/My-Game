@@ -3,14 +3,14 @@
 #include <iostream>
 
 Mapa::Mapa(){
-	loadMap(new Player, new Background, new GameItems);
+	loadMap(new Player, new Collision, new Background, new GameItems);
 }
 
-Mapa::Mapa(Player * player, Background * background, GameItems * gameItems){
-	loadMap(player, background, gameItems);
+Mapa::Mapa(Player * player, Collision * collision, Background * background, GameItems * gameItems){
+	loadMap(player, collision, background, gameItems);
 }
 
-void Mapa::loadMap(Player * player, Background * background, GameItems * gameItems){
+void Mapa::loadMap(Player * player, Collision * collision, Background * background, GameItems * gameItems){
 	wielkoscX = 1000;
 	wielkoscY = 1000;
 
@@ -26,10 +26,10 @@ void Mapa::loadMap(Player * player, Background * background, GameItems * gameIte
 	// loading backgroundu //////////////////////////////////////////////////////////////////////////
 	background->load(player, 3);
 
-	obiekty[0].load("Niebo.bmp", -400, 0, 0.04, 0);//niebo.png
+	obiekty[0].load("Niebo.bmp", -400, 0, 0.004, 0);//niebo.png
 	background->obiekty[0].copy(obiekty[0]);
 
-	obiekty[1].load("Gory.bmp", -400, 200 ,0.08, 0);//drzewa.png
+	obiekty[1].load("Gory.bmp", -400, 200 ,0.008, 0);//drzewa.png
 	background->obiekty[1].copy(obiekty[1]);
 
 	obiekty[2].load("trawa.bmp", -400, 350, 0, 2);//trawa.bmp
@@ -43,7 +43,7 @@ void Mapa::loadMap(Player * player, Background * background, GameItems * gameIte
 	//loading gameitemsow ////////////////////////////////////////////////////////////////////////
 	gameItems->load(player, 2);
 
-	obiekty[4].load("Cytadela.bmp", 650, 520, 0, 3);
+	obiekty[4].load("Cytadela.bmp", 350, 520, 0, 3);
 	obiekty[4].setScale(4, 3);
 	gameItems->items[0].copy(obiekty[4]);
 	
@@ -51,6 +51,10 @@ void Mapa::loadMap(Player * player, Background * background, GameItems * gameIte
 	obiekty[5].load("bohater.png", 50, 500, 0, 3);
 	obiekty[5].setScale(0.15, 0.15);
 	gameItems->items[1].copy(obiekty[5]);
+
+	//loading gameitemsow do collision //////////////////////////////////////////////////////////////
+	
+	collision->load(player, gameItems->items, gameItems->iloscItems);
 
 	//sprawdzanie widzialnosci gameItemsow ////////////////////////////////////////////////////////////
 	gameItems->checkingVisibility();

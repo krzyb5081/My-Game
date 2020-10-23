@@ -2,10 +2,15 @@
 
 Player::Player(){
 
-	naKrawedziTop = false;
-	naKrawedziDown = false;
-	naKrawedziLeft = false;
-	naKrawedziRight = false;
+	moveTop = false;
+	moveBot = false;
+	moveLeft = false;
+	moveRight = false;
+
+	collisionTop = false;
+	collisionBot = false;
+	collisionLeft = false;
+	collisionRight = false;
 
 	load("bohater.png", 600, 360, 0.2, 0);
 	sprite->setScale(0.15, 0.15);
@@ -18,50 +23,34 @@ void Player::sterowanie(){
 	
 	sf::Keyboard keyboard;
 
-	naKrawedziTop = false;
-	naKrawedziDown = false;
-	naKrawedziLeft = false;
-	naKrawedziRight = false;
+	moveTop = false;
+	moveBot = false;
+	moveLeft = false;
+	moveRight = false;
 
-	if (keyboard.isKeyPressed(sf::Keyboard::Up)){
-		if (sprite->getPosition().y - *predkosc > 520){
-			move(0, -*predkosc);
+	if (!collisionTop) {
+		if (keyboard.isKeyPressed(sf::Keyboard::Up)) {
+			moveTop = true;
+			yPos -= *predkosc;
 		}
-		else{
-			naKrawedziTop = true;
-		}
-		yPos -= *predkosc;
-		
 	}
-	if (keyboard.isKeyPressed(sf::Keyboard::Down)) {
-		if (sprite->getPosition().y + *predkosc < 520){
-			move(0, *predkosc);
+	if (!collisionBot) {
+		if (keyboard.isKeyPressed(sf::Keyboard::Down)) {
+			moveBot = true;
+			yPos += *predkosc;
 		}
-		else{
-			naKrawedziDown = true;
-		}
-		yPos += *predkosc;
-		
 	}
-	if (keyboard.isKeyPressed(sf::Keyboard::Left)) {
-		if (sprite->getPosition().x - *predkosc > 650){
-			move(-*predkosc, 0);
+	if (!collisionLeft) {
+		if (keyboard.isKeyPressed(sf::Keyboard::Left)) {
+			moveLeft = true;
+			xPos -= *predkosc;
 		}
-		else{
-			naKrawedziLeft = true;
-		}
-		xPos -= *predkosc;
-		
 	}
-	if (keyboard.isKeyPressed(sf::Keyboard::Right)) {
-		if (sprite->getPosition().x + *predkosc < 650){
-			move(*predkosc, 0);
+	if (!collisionRight) {
+		if (keyboard.isKeyPressed(sf::Keyboard::Right)) {
+			moveRight = true;
+			xPos += *predkosc;
 		}
-		else{
-			naKrawedziRight = true;
-		}
-		xPos += *predkosc;
-		
 	}
 }
 

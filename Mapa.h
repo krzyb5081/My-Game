@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Obiekt.h"
+#include "Collision.h"
 #include "Player.h"
 #include "Background.h"
 #include "GameItems.h"
@@ -14,6 +15,7 @@ class Mapa {
 
     Obiekt * obiekty;
 	Player * player;
+	Collision * collision;
 	Background * background;
 	GameItems * gameItems;
 
@@ -22,9 +24,9 @@ class Mapa {
 public:
 	
 	Mapa();
-	Mapa(Player * player, Background * background, GameItems * gameItems);
+	Mapa(Player * player, Collision * collision, Background * background, GameItems * gameItems);
 
-	void loadMap(Player * player, Background * background, GameItems * gameItems);
+	void loadMap(Player * player, Collision * collision, Background * background, GameItems * gameItems);
 	void sortowanieObiektow();
 	int getSizeX();
 	int getSizeY();

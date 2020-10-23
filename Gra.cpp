@@ -2,15 +2,19 @@
 
 Gra::Gra() {
 	obiekty = new Obiekt;
+
 	player = new Player;
+	collision = new Collision;
 	background = new Background;
 	gameItems = new GameItems;
 
-	mapa.loadMap(player, background, gameItems);
+	mapa.loadMap(player, collision, background, gameItems);
 	obiekty = mapa.getObiects();
 }
 
 void Gra::loop(sf::RenderWindow & window){
+
+	collision->doCollision();
 	player->sterowanie();
 	background->sterowanie();
 	gameItems->ruszanie();
