@@ -64,7 +64,3 @@ void GameItems::checkingVisibility(){
 		//dodac sprawdzanko wszystkiego czy ma byc widzialne czy nie
 	}
 }
-
-//przeniesc czekplejerkolizjontop i inne plejerkolizjony do Collision i w petli glownej uruchomic zaraz po sterowaniu bohaterem
-
-//naprawic te krawedzie zeby tego juz nie bylo w backgroundach tez

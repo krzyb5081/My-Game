@@ -1,0 +1,14 @@
+/*
+
+zrobic rozne rodzaje kolizji w Obiekt
+zrobic kolizje e to use
+zrobic kolizje doors
+zrobic kolizje wall
+
+
+
+
+
+
+
+*/

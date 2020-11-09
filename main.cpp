@@ -31,6 +31,7 @@
 
 
 using namespace std;
+
 enum stan_gry {
     MENU = 0,
     GRA = 1
