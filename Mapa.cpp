@@ -62,9 +62,11 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 }
 
 void Mapa::sortowanieObiektow(){
-	Obiekt * miejsceNaObiekty = new Obiekt[iloscObiektow];
-	int warstwa = 0;
+	Obiekt *miejsceNaObiekty = new Obiekt[iloscObiektow];
+
 	int iloscObiektowWMiejscuNaObiekty = 0;
+	int warstwa = 0;
+	
 	
 	while (iloscObiektowWMiejscuNaObiekty < iloscObiektow){
 		for (int i = 0; i < iloscObiektow; i++){
@@ -76,7 +78,11 @@ void Mapa::sortowanieObiektow(){
 		warstwa++;
 	}
 
-	obiekty = miejsceNaObiekty;
+	for (int i = 0; i < iloscObiektow; i++) {
+		obiekty[i].copy(miejsceNaObiekty[i]);
+	}
+
+	delete[] miejsceNaObiekty;
 }
 
 int Mapa::getSizeX(){

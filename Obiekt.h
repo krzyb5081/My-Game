@@ -16,7 +16,6 @@ public:
 	float * height;
 	float * width;
 
-	Obiekt();
 
     void load(const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa);
 	void copy(Obiekt &obiekt);

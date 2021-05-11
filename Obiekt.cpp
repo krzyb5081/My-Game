@@ -1,28 +1,18 @@
 #include "Obiekt.h"
 
-Obiekt::Obiekt(){
-	texture = new sf::Texture;
-	sprite = new sf::Sprite;
-
-	predkosc = new float;
-	warstwa = new int;
-	startX = new float;
-	startY = new float;
-	isVisible = new bool;
-	width = new float;
-	height = new float;
-	
-	*predkosc = 0;
-	*warstwa = 0;
-	*startX = 0;
-	*startY = 0;
-	*isVisible = true;
-	*width = 0;
-	*height = 0;
-}
-
 
 void Obiekt::load(const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa){
+	this->texture = new sf::Texture;
+	this->sprite = new sf::Sprite;
+
+	this->predkosc = new float;
+	this->warstwa = new int;
+	this->startX = new float;
+	this->startY = new float;
+	this->isVisible = new bool;
+	this->width = new float;
+	this->height = new float;
+
     texture->loadFromFile(nazwaTextury);
     sprite->setTexture(*texture);
 	sprite->setPosition(startX, startY);
