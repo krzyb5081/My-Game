@@ -13,6 +13,11 @@ pozmieniac wszedzie loady i w ogole zwiazane z obiektem, dodano zmienne dotyczac
 -naprawic psujace sie po wychodzeniu zza planszy warstwy
 
 
+-zobaczyc czy sortowany obiekt nie moze byc dodany wiecej niz raz do listy sortowanych obiektow
+
+-upozadkowac loading mapy poprawic niektore funckje load na init na przyklad
+-zmienic kolejnosc ladowania zeby player byl pierwszy
 
 
+ZROBIC KLASE GOALS czy cos takiego KTORA BEDZIE SPRAWDZALA CZY ZOSTALY WYKONANE CELE GRY 
 */

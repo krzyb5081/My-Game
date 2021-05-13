@@ -44,23 +44,21 @@ void GameItems::ruszanie(){
 
 void GameItems::checkingVisibility(){
 	for (int i = 0; i < iloscItems; i++){
-		float odleglosc = player->yPos - *items[i].startY;//odleglosc Y
-		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - 350;//350 to pozycja y sprajta odpowiedzialnego za trawe
+		float odlegloscY = player->yPos - *items[i].startY;
+		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - 350;//350 to pozycja y sprajta odpowiedzialnego za trawe                                                                                                                                               ZBUGOWANY BUG OMG
 
-		if ((odleglosc <= 2 * (*items[i].height) + odlegloscPlayeraOdKrawedzi) && (odleglosc >= odlegloscPlayeraOdKrawedzi + *items[i].height)){
+		if ((odlegloscY <= 2 * (*items[i].height) + odlegloscPlayeraOdKrawedzi) && (odlegloscY >= odlegloscPlayeraOdKrawedzi + *items[i].height)){//obiekt wychodzi albo zachodzi za scene ale juz albo jeszcze jest widoczny
 			*items[i].isVisible = true;
-			*items[i].warstwa = 1;
-			items[i].sprite->setPosition(items[i].sprite->getPosition().x, 350 + odleglosc - 2 * (*items[i].height) - odlegloscPlayeraOdKrawedzi);
+			*items[i].isBehindScene = true;
+			items[i].sprite->setPosition(items[i].sprite->getPosition().x, 350 + odlegloscY - 2 * (*items[i].height) - odlegloscPlayeraOdKrawedzi);
 		}
-		else if (odleglosc > 2 * (*items[i].height) + odlegloscPlayeraOdKrawedzi){
+		else if (odlegloscY > 2 * (*items[i].height) + odlegloscPlayeraOdKrawedzi){//obiekt jest juz za scena, jest niewidoczny, obiekt jest za scena wiec obiekt isBehindScene = true
 			*items[i].isVisible = false;
-			*items[i].warstwa = 3;
+			*items[i].isBehindScene = true;
 			
 		}
 		else {
-			*items[i].warstwa = 3;
+			*items[i].isBehindScene = false;
 		}
-		
-		//dodac sprawdzanko wszystkiego czy ma byc widzialne czy nie
 	}
 }

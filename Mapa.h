@@ -12,6 +12,7 @@ class Mapa {
     int wielkoscY;
 
 	int iloscObiektow;
+	int najwyzszaWarstwa;
 
     Obiekt * obiekty;
 	Player * player;

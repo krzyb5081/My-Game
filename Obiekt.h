@@ -16,6 +16,7 @@ public:
 	float * predkosc;
 	int * warstwa;
 	bool * isVisible;
+	bool * isBehindScene;
 	float * startX;
 	float * startY;
 	float * height;

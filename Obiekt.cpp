@@ -10,20 +10,23 @@ void Obiekt::load(const char * nazwaTextury, float startX, float startY, float p
 	this->startX = new float;
 	this->startY = new float;
 	this->isVisible = new bool;
+	this->isBehindScene = new bool;
 	this->width = new float;
 	this->height = new float;
 	this->interactionType = new int;
 	this->interactionData = new int;
 
-    texture->loadFromFile(nazwaTextury);
-    sprite->setTexture(*texture);
-	sprite->setPosition(startX, startY);
+
+    this->texture->loadFromFile(nazwaTextury);
+    this->sprite->setTexture(*texture);
+	this->sprite->setPosition(startX, startY);
 
 	*this->predkosc = predkosc;
 	*this->warstwa = warstwa;
 	*this->startX = startX;
 	*this->startY = startY;
 	*this->isVisible = true;
+	*this->isBehindScene = false;
 	*this->width = (sprite->getTexture()->getSize().x)*(sprite->getScale().x);
 	*this->height = (sprite->getTexture()->getSize().y)*(sprite->getScale().y);
 	*this->interactionType = interactionType;
@@ -41,6 +44,7 @@ void Obiekt::copy(Obiekt &obiekt){
 	startX = obiekt.startX;
 	startY = obiekt.startY;
 	isVisible = obiekt.isVisible;
+	isBehindScene = obiekt.isBehindScene;
 	width = obiekt.width;
 	height = obiekt.height;
 	interactionType = obiekt.interactionType;

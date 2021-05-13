@@ -11,11 +11,15 @@ Mapa::Mapa(Player * player, Collision * collision, Background * background, Game
 }
 
 void Mapa::loadMap(Player * player, Collision * collision, Background * background, GameItems * gameItems){
+	
+	// ustawianie wlasciwosci mapy //////////////////////////////////////////////////////////////////////////
 	wielkoscX = 1000;
 	wielkoscY = 1000;
 
 	this->player = player;
 	
+	najwyzszaWarstwa = 20;
+
 	iloscObiektow = 6;
 	obiekty = new Obiekt[iloscObiektow];
 
@@ -62,27 +66,39 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 }
 
 void Mapa::sortowanieObiektow(){
-	Obiekt *miejsceNaObiekty = new Obiekt[iloscObiektow];
+	Obiekt *tablicaPosortowanychObiektow = new Obiekt[iloscObiektow];
 
-	int iloscObiektowWMiejscuNaObiekty = 0;
-	int warstwa = 0;
+	int iloscPosortowanychObiektow = 0;//ilosc posortowanych obiektow
+	int warstwa = 0;// najdalsza warstwa lezy za scena, czyli plansz¹ po której chodzi gracz, jezeli obiekt ma warstwê 12 ale ma ustawiony parametr isBehindScene na true to bêdzie pierwszy w sortowaniu przed warstw¹ 0. Dziêki temu ka¿dy obiekt zachowa swoj¹ warstwê nawet za scen¹, sprawi to ze obiekty stojace jeden na drugim beda wychodzic zza sceny w odpowiedniej kolejnosci
 	
-	
-	while (iloscObiektowWMiejscuNaObiekty < iloscObiektow){
+	for (int warstwa = 0; warstwa > 100; warstwa++) {//sortowanie najpierw obiektow za scena (parametr isBehindScene = true)
 		for (int i = 0; i < iloscObiektow; i++){
-			if (*obiekty[i].warstwa == warstwa){
-				miejsceNaObiekty[iloscObiektowWMiejscuNaObiekty].copy(obiekty[i]);
-				iloscObiektowWMiejscuNaObiekty++;
+			if (*obiekty[i].isBehindScene = true) {
+				if (*obiekty[i].warstwa == warstwa) {
+					tablicaPosortowanychObiektow[iloscPosortowanychObiektow].copy(obiekty[i]);//SPRAWDZIC CZY JEDEN OBIEKT NIE MOZE BYC DODANY WIECEJ NIZ JEDEN RAZ
+					iloscPosortowanychObiektow++;
+				}
 			}
 		}
-		warstwa++;
 	}
+
+	for (int warstwa = 0; warstwa > 100; warstwa++) {//sortowanie obiektow przed scena (parametr isBehindScene = false)
+		for (int i = 0; i < iloscObiektow; i++) {
+			if (*obiekty[i].isBehindScene = false) {
+				if (*obiekty[i].warstwa == warstwa) {
+					tablicaPosortowanychObiektow[iloscPosortowanychObiektow].copy(obiekty[i]);//SPRAWDZIC CZY JEDEN OBIEKT NIE MOZE BYC DODANY WIECEJ NIZ JEDEN RAZ
+					iloscPosortowanychObiektow++;
+				}
+			}
+		}
+	}
+	
+
 
 	for (int i = 0; i < iloscObiektow; i++) {
-		obiekty[i].copy(miejsceNaObiekty[i]);
+		obiekty[i].copy(tablicaPosortowanychObiektow[i]);
 	}
-
-	delete[] miejsceNaObiekty;
+	delete[] tablicaPosortowanychObiektow;
 }
 
 int Mapa::getSizeX(){
