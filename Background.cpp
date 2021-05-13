@@ -18,7 +18,6 @@ void Background::load(Player * player, int iloscObiektow){
 }
 
 void Background::sterowanie() {
-	sf::Keyboard keyboard;
 
 	if (player->moveTop == true){
 		obiekty[0].move(0, -*obiekty[0].predkosc);

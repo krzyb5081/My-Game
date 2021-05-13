@@ -1,7 +1,7 @@
 #include "Obiekt.h"
 
 
-void Obiekt::load(const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa){
+void Obiekt::load(const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData){
 	this->texture = new sf::Texture;
 	this->sprite = new sf::Sprite;
 
@@ -12,6 +12,8 @@ void Obiekt::load(const char * nazwaTextury, float startX, float startY, float p
 	this->isVisible = new bool;
 	this->width = new float;
 	this->height = new float;
+	this->interactionType = new int;
+	this->interactionData = new int;
 
     texture->loadFromFile(nazwaTextury);
     sprite->setTexture(*texture);
@@ -24,6 +26,8 @@ void Obiekt::load(const char * nazwaTextury, float startX, float startY, float p
 	*this->isVisible = true;
 	*this->width = (sprite->getTexture()->getSize().x)*(sprite->getScale().x);
 	*this->height = (sprite->getTexture()->getSize().y)*(sprite->getScale().y);
+	*this->interactionType = interactionType;
+	*this->interactionData = interactionData;
 
 	
 	
@@ -39,6 +43,8 @@ void Obiekt::copy(Obiekt &obiekt){
 	isVisible = obiekt.isVisible;
 	width = obiekt.width;
 	height = obiekt.height;
+	interactionType = obiekt.interactionType;
+	interactionData = obiekt.interactionData;
 }
 
 void Obiekt::move(float x, float y){
