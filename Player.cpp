@@ -12,7 +12,7 @@ Player::Player(){
 	collisionLeft = false;
 	collisionRight = false;
 
-	load("bohater.png", 600, 360, 0.2, 0, Obiekt::INTERACTION_TYPE_NONE, 0);
+	load("bohater.png", 600, 360, 0.2, 0, Obiekt::INTERACTION_TYPE_NONE, 0, false);
 	sprite->setScale(0.15, 0.15);
 
 	xPos = 0;

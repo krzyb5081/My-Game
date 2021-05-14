@@ -5,31 +5,6 @@
 #include "Gra.h"
 
 
-/*/////////////////////////////////////////////////////////////////////
-*
-*
-* 
-*
-*
-*
-*
-* 
-*
-*
-*
-*
-*
-*
-*
-*
-*jak sie idzie na gore albo dol to jesli cos sie znajduje nad bohaterem w dosc dalekiej odleglosci to ma sie przesuwac w gore a potem dopiero w dol 
-*
-*
-**////////////////////////////////////////////////////////////////////
-
-
-
-
 using namespace std;
 
 enum stan_gry {
@@ -39,7 +14,7 @@ enum stan_gry {
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1400,800),"Okno gry");
+    sf::RenderWindow window(sf::VideoMode(1280,800),"Save Dino Pimpus");
 	sf::Event event;
 
 	stan_gry stan = MENU;

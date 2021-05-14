@@ -12,6 +12,6 @@ public:
 
 	Background();
 	Background(Player * player, int iloscObiektow);
-	void load(Player * player, int iloscObiektow);
+	void initiate(Player * player, int iloscObiektow);
 	void sterowanie();
 };

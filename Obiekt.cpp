@@ -1,7 +1,7 @@
 #include "Obiekt.h"
 
 
-void Obiekt::load(const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData){
+void Obiekt::load(const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData, bool isBehindScene){
 	this->texture = new sf::Texture;
 	this->sprite = new sf::Sprite;
 
@@ -26,7 +26,7 @@ void Obiekt::load(const char * nazwaTextury, float startX, float startY, float p
 	*this->startX = startX;
 	*this->startY = startY;
 	*this->isVisible = true;
-	*this->isBehindScene = false;
+	*this->isBehindScene = isBehindScene;
 	*this->width = (sprite->getTexture()->getSize().x)*(sprite->getScale().x);
 	*this->height = (sprite->getTexture()->getSize().y)*(sprite->getScale().y);
 	*this->interactionType = interactionType;
@@ -37,18 +37,18 @@ void Obiekt::load(const char * nazwaTextury, float startX, float startY, float p
 }
 
 void Obiekt::copy(Obiekt &obiekt){
-	texture = obiekt.texture;
-	sprite = obiekt.sprite;
-	predkosc = obiekt.predkosc;
-	warstwa = obiekt.warstwa;
-	startX = obiekt.startX;
-	startY = obiekt.startY;
-	isVisible = obiekt.isVisible;
-	isBehindScene = obiekt.isBehindScene;
-	width = obiekt.width;
-	height = obiekt.height;
-	interactionType = obiekt.interactionType;
-	interactionData = obiekt.interactionData;
+	this->texture = obiekt.texture;
+	this->sprite = obiekt.sprite;
+	this->predkosc = obiekt.predkosc;
+	this->warstwa = obiekt.warstwa;
+	this->startX = obiekt.startX;
+	this->startY = obiekt.startY;
+	this->isVisible = obiekt.isVisible;
+	this->isBehindScene = obiekt.isBehindScene;
+	this->width = obiekt.width;
+	this->height = obiekt.height;
+	this->interactionType = obiekt.interactionType;
+	this->interactionData = obiekt.interactionData;
 }
 
 void Obiekt::move(float x, float y){

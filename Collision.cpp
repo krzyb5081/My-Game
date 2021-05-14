@@ -14,9 +14,9 @@ void Collision::load(Player * player, Obiekt * gameItems, int iloscItems) {
 	this->iloscItems = iloscItems;
 }
 
-int Collision::checkPlayerCollision(Player player, Obiekt obiekt) {
-	sf::FloatRect playerRect = player.sprite->getGlobalBounds();
-	sf::FloatRect obiektRect = obiekt.sprite->getGlobalBounds();
+int Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
+	sf::FloatRect playerRect = player->sprite->getGlobalBounds();
+	sf::FloatRect obiektRect = obiekt->sprite->getGlobalBounds();
 
 
 	int wysokoscKolizyjnejPodstawyObiektu = 0;//kolizyjna podstawa w ksztalcie polowki (kwardrat uciety w polowie wysokosci) kwadratu o dlugosci boku takiej jak szerokosc obiektu, chyba ze obiekt ma wieksza szerokosc niz wysokosc, wtedy kolizyjna podstawa ma ksztalt obiektu, czyli nie da sie za nim przejsc
@@ -28,12 +28,12 @@ int Collision::checkPlayerCollision(Player player, Obiekt obiekt) {
 	}
 
 
-	if (obiektRect.top + obiektRect.height - wysokoscKolizyjnejPodstawyObiektu > playerRect.top + playerRect.height) {// jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu
+	if (obiektRect.top + obiektRect.height - wysokoscKolizyjnejPodstawyObiektu > playerRect.top + playerRect.height) {// jesli player jest za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu)
 		playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu;
 	}
 
 
-	if (obiektRect.top + obiektRect.height < playerRect.top + playerRect.height) {//jesli dol playera jest nizej niz dol obiektu
+	if (obiektRect.top + obiektRect.height < playerRect.top + playerRect.height) {//jesli player jest przed obiektem (jesli dol playera jest nizej niz dol obiektu)
 		playerRect.top += playerRect.height - 10;// przesuniecie teoretycznego kwardaru w dol uwzgledniajac ze bohater ma stopy i chodzi nimi przed obiektem, czyli ma stopy ponizej poziomu dolu obiektu, -10 bo stopami nie chodzi po scianie tylko po podlodze przed obiektem
 	}
 
@@ -58,7 +58,7 @@ bool Collision::checkPlayerCollisionTop() {
 		if ((*gameItems[i].isVisible == false) || (player->yPos - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
 
 		}
-		else if (checkPlayerCollision(*player, gameItems[i]) == 1) {
+		else if (checkPlayerCollision(player, &gameItems[i]) == 1) {
 			player->move(0, playerPredkosc);
 			return false;
 		}
@@ -74,7 +74,7 @@ bool Collision::checkPlayerCollisionBot() {
 	for (int i = 0; i < iloscItems; i++) {
 		if ((*gameItems[i].isVisible == false) || (player->yPos - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
 		}
-		else if (checkPlayerCollision(*player, gameItems[i]) == 1) {
+		else if (checkPlayerCollision(player, &gameItems[i]) == 1) {
 			player->move(0, -playerPredkosc);
 			return false;
 		}
@@ -91,7 +91,7 @@ bool Collision::checkPlayerCollisionLeft() {
 		if ((*gameItems[i].isVisible == false) || (player->yPos - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
 
 		}
-		else if (checkPlayerCollision(*player, gameItems[i]) == 1) {
+		else if (checkPlayerCollision(player, &gameItems[i]) == 1) {
 			player->move(playerPredkosc, 0);
 			return false;
 		}
@@ -108,7 +108,7 @@ bool Collision::checkPlayerCollisionRight() {
 		if ((*gameItems[i].isVisible == false) || (player->yPos - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
 
 		}
-		else if (checkPlayerCollision(*player, gameItems[i]) == 1) {
+		else if (checkPlayerCollision(player, &gameItems[i]) == 1) {
 			player->move(-playerPredkosc, 0);
 			return false;
 		}

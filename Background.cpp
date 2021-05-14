@@ -7,10 +7,10 @@ Background::Background(){
 }
 
 Background::Background(Player * player, int iloscObiektow){
-	load(player, iloscObiektow);
+	initiate(player, iloscObiektow);
 }
 
-void Background::load(Player * player, int iloscObiektow){
+void Background::initiate(Player * player, int iloscObiektow){
 	obiekty = new Obiekt[iloscObiektow];
 
 	this->player = player;

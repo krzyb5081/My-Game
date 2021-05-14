@@ -13,7 +13,7 @@ public:
 
 	GameItems();
 	GameItems(Player * player, int iloscItems);
-	void load(Player * player, int iloscItems);
+	void initiate(Player * player, int iloscItems);
 	void ruszanie();
 	void checkingVisibility();
 

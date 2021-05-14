@@ -28,7 +28,7 @@ public:
 	Mapa(Player * player, Collision * collision, Background * background, GameItems * gameItems);
 
 	void loadMap(Player * player, Collision * collision, Background * background, GameItems * gameItems);
-	void sortowanieObiektow();
+	Obiekt * sortowanieObiektow();
 	int getSizeX();
 	int getSizeY();
 	int getNumberOfObiects();

@@ -2,15 +2,15 @@
 #include <iostream>
 
 GameItems::GameItems(){
-	load(new Player, 0);
+	initiate(new Player, 0);
 }
 
 GameItems::GameItems(Player * player, int iloscItems){
-	load(player, iloscItems);
+	initiate(player, iloscItems);
 }
 
-void GameItems::load(Player * player, int iloscItems){
-	items = new Obiekt[iloscItems];
+void GameItems::initiate(Player * player, int iloscItems){
+	this->items = new Obiekt[iloscItems];
 	this->player = player;
 	this->iloscItems = iloscItems;
 }
@@ -24,19 +24,19 @@ void GameItems::ruszanie(){
 
 		if (player->moveTop){
 			for (int i = 0; i < iloscItems; i++){
-				items[i].move(0, playerPredkosc);
+				this->items[i].move(0, playerPredkosc);
 			}
 		}if (player->moveBot){
 			for (int i = 0; i < iloscItems; i++){
-				items[i].move(0, -playerPredkosc);
+				this->items[i].move(0, -playerPredkosc);
 			}
 		}if (player->moveLeft){
 			for (int i = 0; i < iloscItems; i++){
-				items[i].move(playerPredkosc, 0);
+				this->items[i].move(playerPredkosc, 0);
 			}
 		}if (player->moveRight){
 			for (int i = 0; i < iloscItems; i++){
-				items[i].move(-playerPredkosc, 0);
+				this->items[i].move(-playerPredkosc, 0);
 			}
 		}
 	}
@@ -44,21 +44,21 @@ void GameItems::ruszanie(){
 
 void GameItems::checkingVisibility(){
 	for (int i = 0; i < iloscItems; i++){
-		float odlegloscY = player->yPos - *items[i].startY;
+		float odlegloscY = player->yPos - *this->items[i].startY;
 		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - 350;//350 to pozycja y sprajta odpowiedzialnego za trawe                                                                                                                                               ZBUGOWANY BUG OMG
 
-		if ((odlegloscY <= 2 * (*items[i].height) + odlegloscPlayeraOdKrawedzi) && (odlegloscY >= odlegloscPlayeraOdKrawedzi + *items[i].height)){//obiekt wychodzi albo zachodzi za scene ale juz albo jeszcze jest widoczny
-			*items[i].isVisible = true;
-			*items[i].isBehindScene = true;
-			items[i].sprite->setPosition(items[i].sprite->getPosition().x, 350 + odlegloscY - 2 * (*items[i].height) - odlegloscPlayeraOdKrawedzi);
+		if ((odlegloscY <= 2 * (*this->items[i].height) + odlegloscPlayeraOdKrawedzi) && (odlegloscY >= odlegloscPlayeraOdKrawedzi + *this->items[i].height)){//obiekt wychodzi albo zachodzi za scene ale juz albo jeszcze jest widoczny
+			*this->items[i].isVisible = true;
+			*this->items[i].isBehindScene = true;
+			this->items[i].sprite->setPosition(this->items[i].sprite->getPosition().x, 350 + odlegloscY - 2 * (*this->items[i].height) - odlegloscPlayeraOdKrawedzi);
 		}
-		else if (odlegloscY > 2 * (*items[i].height) + odlegloscPlayeraOdKrawedzi){//obiekt jest juz za scena, jest niewidoczny, obiekt jest za scena wiec obiekt isBehindScene = true
-			*items[i].isVisible = false;
-			*items[i].isBehindScene = true;
+		else if (odlegloscY > 2 * (*this->items[i].height) + odlegloscPlayeraOdKrawedzi){//obiekt jest juz za scena, jest niewidoczny, obiekt jest za scena wiec obiekt isBehindScene = true
+			*this->items[i].isVisible = false;
+			*this->items[i].isBehindScene = true;
 			
 		}
 		else {
-			*items[i].isBehindScene = false;
+			*this->items[i].isBehindScene = false;
 		}
 	}
 }

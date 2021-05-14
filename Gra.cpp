@@ -1,7 +1,7 @@
 #include "Gra.h"
 
 Gra::Gra() {
-	obiekty = new Obiekt;
+	this->obiekty = new Obiekt;
 
 	player = new Player;
 	collision = new Collision;
@@ -9,7 +9,7 @@ Gra::Gra() {
 	gameItems = new GameItems;
 
 	mapa.loadMap(player, collision, background, gameItems);
-	obiekty = mapa.getObiects();
+	this->obiekty = mapa.getObiects();
 }
 
 void Gra::loop(sf::RenderWindow & window){
@@ -23,12 +23,11 @@ void Gra::loop(sf::RenderWindow & window){
 }
 
 void Gra::rysuj(sf::RenderWindow & window) {
-	mapa.sortowanieObiektow();
-	obiekty = mapa.getObiects();
+	this->obiekty = mapa.sortowanieObiektow();
 
 	for (int i = 0; i < mapa.getNumberOfObiects(); i++){
-		if (*obiekty[i].isVisible == true){
-			window.draw(*obiekty[i].sprite);
+		if (*this->obiekty[i].isVisible == true){
+			window.draw(*this->obiekty[i].sprite);
 		}
 	}
 
