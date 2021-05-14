@@ -45,7 +45,7 @@ void GameItems::ruszanie(){
 void GameItems::checkingVisibility(){
 	for (int i = 0; i < iloscItems; i++){
 		float odlegloscY = player->yPos - *this->items[i].startY;
-		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - 350;//350 to pozycja y sprajta odpowiedzialnego za trawe                                                                                                                                               ZBUGOWANY BUG OMG
+		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - 350;//350 to pozycja y sprajta odpowiedzialnego za trawe
 
 		if ((odlegloscY <= 2 * (*this->items[i].height) + odlegloscPlayeraOdKrawedzi) && (odlegloscY >= odlegloscPlayeraOdKrawedzi + *this->items[i].height)){//obiekt wychodzi albo zachodzi za scene ale juz albo jeszcze jest widoczny
 			*this->items[i].isVisible = true;

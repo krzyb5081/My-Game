@@ -18,8 +18,15 @@ int Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 	sf::FloatRect playerRect = player->sprite->getGlobalBounds();
 	sf::FloatRect obiektRect = obiekt->sprite->getGlobalBounds();
 
+	float playerRectRight = playerRect.left + playerRect.width;
+	float playerRectDown = playerRect.top + playerRect.height;
 
-	int wysokoscKolizyjnejPodstawyObiektu = 0;//kolizyjna podstawa w ksztalcie polowki (kwardrat uciety w polowie wysokosci) kwadratu o dlugosci boku takiej jak szerokosc obiektu, chyba ze obiekt ma wieksza szerokosc niz wysokosc, wtedy kolizyjna podstawa ma ksztalt obiektu, czyli nie da sie za nim przejsc
+	float obiektRectRight = obiektRect.left + obiektRect.width;
+	float obiektRectDown = obiektRect.top + obiektRect.height;
+
+
+	//kolizyjna podstawa w ksztalcie polowki kwadratu (kwardrat uciety w polowie wysokosci) o dlugosci boku takiej jak szerokosc obiektu, chyba ze obiekt ma wieksza szerokosc niz wysokosc, wtedy kolizyjna podstawa ma ksztalt obiektu, czyli nie da sie za nim przejsc
+	int wysokoscKolizyjnejPodstawyObiektu = 0;
 	if (obiektRect.width/2 >= obiektRect.height) {
 		wysokoscKolizyjnejPodstawyObiektu = obiektRect.height;
 	}
@@ -28,13 +35,17 @@ int Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 	}
 
 
-	if (obiektRect.top + obiektRect.height - wysokoscKolizyjnejPodstawyObiektu > playerRect.top + playerRect.height) {// jesli player jest za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu)
-		playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu;
-	}
+	//jesli player jest w calosci za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu, a gora playera jest nizej niz gora obiektu, player nie wychodzi tez z prawej ani z lewej strony obiektu, czyli jest w calosci za obiektem)
+	if ((((obiektRect.contains(playerRect.left, playerRect.top)) && (obiektRect.contains(playerRectRight, playerRect.top))) && ((obiektRect.contains(playerRect.left, playerRectDown)) && (obiektRect.contains(playerRectRight, playerRectDown)))) && (obiektRectDown - wysokoscKolizyjnejPodstawyObiektu > playerRectDown)) {//czy kwadrat jest w kwadracie ale nadal uwzglednic kolizyjna podstawe!@!@
+		
+	}//jesli player jest za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu)
+	else if (obiektRectDown - wysokoscKolizyjnejPodstawyObiektu > playerRectDown) {
+		playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu
 
-
-	if (obiektRect.top + obiektRect.height < playerRect.top + playerRect.height) {//jesli player jest przed obiektem (jesli dol playera jest nizej niz dol obiektu)
+	}//jesli player jest przed obiektem (jesli dol playera jest nizej niz dol obiektu)
+	else if (obiektRectDown < playerRectDown) {
 		playerRect.top += playerRect.height - 10;// przesuniecie teoretycznego kwardaru w dol uwzgledniajac ze bohater ma stopy i chodzi nimi przed obiektem, czyli ma stopy ponizej poziomu dolu obiektu, -10 bo stopami nie chodzi po scianie tylko po podlodze przed obiektem
+	
 	}
 
 
@@ -47,6 +58,37 @@ int Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 	}
 
 	return intersects;
+}
+
+void Collision::doCollision() {
+
+	if (!checkPlayerCollisionTop()) {
+		player->collisionTop = true;
+	}
+	else {
+		player->collisionTop = false;
+	}
+
+	if (!checkPlayerCollisionBot()) {
+		player->collisionBot = true;
+	}
+	else {
+		player->collisionBot = false;
+	}
+
+	if (!checkPlayerCollisionLeft()) {
+		player->collisionLeft = true;
+	}
+	else {
+		player->collisionLeft = false;
+	}
+
+	if (!checkPlayerCollisionRight()) {
+		player->collisionRight = true;
+	}
+	else {
+		player->collisionRight = false;
+	}
 }
 
 bool Collision::checkPlayerCollisionTop() {
@@ -116,38 +158,5 @@ bool Collision::checkPlayerCollisionRight() {
 	player->move(-playerPredkosc, 0);
 	return true;
 }
-
-void Collision::doCollision() {
-
-	if (!checkPlayerCollisionTop()) {
-		player->collisionTop = true;
-	}
-	else {
-		player->collisionTop = false;
-	}
-
-	if (!checkPlayerCollisionBot()) {
-		player->collisionBot = true;
-	}
-	else {
-		player->collisionBot = false;
-	}
-
-	if (!checkPlayerCollisionLeft()) {
-		player->collisionLeft = true;
-	}
-	else {
-		player->collisionLeft = false;
-	}
-
-	if (!checkPlayerCollisionRight()) {
-		player->collisionRight = true;
-	}
-	else {
-		player->collisionRight = false;
-	}
-}
-
-
 
 //ruch gracza nie wspolgra z kolizja zmienic zeby nie bylo kolizji z tym co sie chowa za plansza

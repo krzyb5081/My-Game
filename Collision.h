@@ -14,11 +14,11 @@ public:
 	Collision();
 	Collision(Player * player, Obiekt * gameItems, int iloscItems);
 	void load(Player * player, Obiekt * gameItems, int iloscItems);
-
+	
+	void doCollision();
 	bool checkPlayerCollisionTop();
 	bool checkPlayerCollisionBot();
 	bool checkPlayerCollisionLeft();
 	bool checkPlayerCollisionRight();
-	void doCollision();
 };
 
