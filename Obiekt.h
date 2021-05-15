@@ -11,6 +11,8 @@ public:
 	static const int INTERACTION_TYPE_GATEWAY = 2;
 	static const int INTERACTION_TYPE_USABLE = 3;
 
+	int * idNumber;
+
 	sf::Texture * texture;
 	sf::Sprite * sprite;
 	float * predkosc;
@@ -26,13 +28,10 @@ public:
 
 
 
-    void load(const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData, bool isBehindScene);
+    void load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData, bool isBehindScene);
 	void copy(Obiekt &obiekt);
 	void move(float x, float y);
 	void setScale(float scaleX, float scaleY);
-	
-    
-
 
 
 };

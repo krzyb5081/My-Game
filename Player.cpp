@@ -12,11 +12,10 @@ Player::Player(){
 	collisionLeft = false;
 	collisionRight = false;
 
-	load("bohater.png", 600, 360, 0.2, 0, Obiekt::INTERACTION_TYPE_NONE, 0, false);
-	sprite->setScale(0.15, 0.15);
-
 	xPos = 0;
 	yPos = 0;
+
+	isTransparent = false;
 }
 
 void Player::sterowanie(){
@@ -56,16 +55,28 @@ void Player::sterowanie(){
 
 
 void Player::copy(Obiekt &obiekt){
-	texture = obiekt.texture;
-	sprite = obiekt.sprite;
-	predkosc = obiekt.predkosc;
-	warstwa = obiekt.warstwa;
-	startX = obiekt.startX;
-	startY = obiekt.startY;
-	isVisible = obiekt.isVisible;
-	height = obiekt.height;
-	width = obiekt.width;
+	this->texture = obiekt.texture;
+	this->sprite = obiekt.sprite;
+	this->idNumber = obiekt.idNumber;
+	this->predkosc = obiekt.predkosc;
+	this->warstwa = obiekt.warstwa;
+	this->startX = obiekt.startX;
+	this->startY = obiekt.startY;
+	this->isVisible = obiekt.isVisible;
+	this->height = obiekt.height;
+	this->width = obiekt.width;
 
+	/*//
 	xPos = *startX;
 	yPos = *startY;
+	*/
+}
+
+bool Player::isObiectAPlayer(Obiekt & obiekt) {
+	if (*this->idNumber == *obiekt.idNumber) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }

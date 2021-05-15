@@ -40,7 +40,7 @@ int Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 		
 	}//jesli player jest za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu)
 	else if (obiektRectDown - wysokoscKolizyjnejPodstawyObiektu > playerRectDown) {
-		playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu
+		playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu;
 
 	}//jesli player jest przed obiektem (jesli dol playera jest nizej niz dol obiektu)
 	else if (obiektRectDown < playerRectDown) {

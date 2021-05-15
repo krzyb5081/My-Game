@@ -20,8 +20,14 @@ public:
 	float xPos;
 	float yPos;
 
+	bool isTransparent;
+
 	Player();
 
 	void copy(Obiekt &obiekt);
 	void sterowanie();
+	bool isObiectAPlayer(Obiekt & obiekt);
+
+
+
 };

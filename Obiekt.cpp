@@ -1,9 +1,11 @@
 #include "Obiekt.h"
 
 
-void Obiekt::load(const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData, bool isBehindScene){
+void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData, bool isBehindScene){
 	this->texture = new sf::Texture;
 	this->sprite = new sf::Sprite;
+
+	this->idNumber = new int;
 
 	this->predkosc = new float;
 	this->warstwa = new int;
@@ -20,6 +22,8 @@ void Obiekt::load(const char * nazwaTextury, float startX, float startY, float p
     this->texture->loadFromFile(nazwaTextury);
     this->sprite->setTexture(*texture);
 	this->sprite->setPosition(startX, startY);
+
+	*this->idNumber = idNumber;
 
 	*this->predkosc = predkosc;
 	*this->warstwa = warstwa;
@@ -39,6 +43,7 @@ void Obiekt::load(const char * nazwaTextury, float startX, float startY, float p
 void Obiekt::copy(Obiekt &obiekt){
 	this->texture = obiekt.texture;
 	this->sprite = obiekt.sprite;
+	this->idNumber = obiekt.idNumber;
 	this->predkosc = obiekt.predkosc;
 	this->warstwa = obiekt.warstwa;
 	this->startX = obiekt.startX;
