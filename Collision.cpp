@@ -97,7 +97,7 @@ bool Collision::checkPlayerCollisionTop() {
 
 	player->move(0, -playerPredkosc);
 	for (int i = 0; i < iloscItems; i++) {
-		if ((*gameItems[i].isVisible == false) || (player->yPos - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
+		if ((*gameItems[i].isVisible == false) || (player->worldPlayerCoordinatesY - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
 
 		}
 		else if (checkPlayerCollision(player, &gameItems[i]) == 1) {
@@ -114,7 +114,7 @@ bool Collision::checkPlayerCollisionBot() {
 
 	player->move(0, playerPredkosc);
 	for (int i = 0; i < iloscItems; i++) {
-		if ((*gameItems[i].isVisible == false) || (player->yPos - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
+		if ((*gameItems[i].isVisible == false) || (player->worldPlayerCoordinatesY - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
 		}
 		else if (checkPlayerCollision(player, &gameItems[i]) == 1) {
 			player->move(0, -playerPredkosc);
@@ -130,7 +130,7 @@ bool Collision::checkPlayerCollisionLeft() {
 
 	player->move(-playerPredkosc, 0);
 	for (int i = 0; i < iloscItems; i++) {
-		if ((*gameItems[i].isVisible == false) || (player->yPos - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
+		if ((*gameItems[i].isVisible == false) || (player->worldPlayerCoordinatesY - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
 
 		}
 		else if (checkPlayerCollision(player, &gameItems[i]) == 1) {
@@ -147,7 +147,7 @@ bool Collision::checkPlayerCollisionRight() {
 
 	player->move(playerPredkosc, 0);
 	for (int i = 0; i < iloscItems; i++) {
-		if ((*gameItems[i].isVisible == false) || (player->yPos - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
+		if ((*gameItems[i].isVisible == false) || (player->worldPlayerCoordinatesY - *gameItems[i].startY > *gameItems[i].height + 10)) {// sprawdzanie czy nie zaszla bledna kolizja z obiektem wychodzacym zza planszy albo wchodzacym za nia (watpliwej jakosci)
 
 		}
 		else if (checkPlayerCollision(player, &gameItems[i]) == 1) {

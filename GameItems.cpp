@@ -16,41 +16,34 @@ void GameItems::initiate(Player * player, int iloscItems){
 }
 
 void GameItems::ruszanie(){
-	if ((player->moveTop) || (player->moveBot) || (player->moveLeft) || (player->moveRight)){
+	float playerX = this->player->worldPlayerCoordinatesX;
+	float playerY = this->player->worldPlayerCoordinatesY;
 
-		checkingVisibility();
+	checkingVisibility();
+	for (int i = 0; i < iloscItems; i++) {
+		if (*this->items[i].isVisible == true) {//ustawianie pozycji tylko sprajtom ktore sa widoczne
 
-		float playerPredkosc = *player->predkosc;
-
-		if (player->moveTop){
-			for (int i = 0; i < iloscItems; i++){
-				this->items[i].move(0, playerPredkosc);
-			}
-		}if (player->moveBot){
-			for (int i = 0; i < iloscItems; i++){
-				this->items[i].move(0, -playerPredkosc);
-			}
-		}if (player->moveLeft){
-			for (int i = 0; i < iloscItems; i++){
-				this->items[i].move(playerPredkosc, 0);
-			}
-		}if (player->moveRight){
-			for (int i = 0; i < iloscItems; i++){
-				this->items[i].move(-playerPredkosc, 0);
-			}
+			//pozycja obiektu wzgledem playera jest taka sama na ekranie dla sprajtow tylko ze sprajty maja pozycje nie na swiecie gry tylko na ekranie i dlatego potrzebne te obliczenia
+			float spriteX = this->player->sprite->getPosition().x - (this->player->worldPlayerCoordinatesX - *this->items[i].startX);
+			float spriteY = this->player->sprite->getPosition().y - (this->player->worldPlayerCoordinatesY - *this->items[i].startY);
+			this->items[i].setSpritePosition(spriteX, spriteY);
 		}
 	}
+	checkingVisibility();
 }
 
 void GameItems::checkingVisibility(){
+
+	const float pozycjaScenyY = 450;//pozycja y sprajta odpowiedzialnego za trawe
+
 	for (int i = 0; i < iloscItems; i++){
-		float odlegloscY = player->yPos - *this->items[i].startY;
-		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - 350;//350 to pozycja y sprajta odpowiedzialnego za trawe
+		float odlegloscY = player->worldPlayerCoordinatesY - *this->items[i].startY;
+		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - pozycjaScenyY;
 
 		if ((odlegloscY <= 2 * (*this->items[i].height) + odlegloscPlayeraOdKrawedzi) && (odlegloscY >= odlegloscPlayeraOdKrawedzi + *this->items[i].height)){//obiekt wychodzi albo zachodzi za scene ale juz albo jeszcze jest widoczny
 			*this->items[i].isVisible = true;
 			*this->items[i].isBehindScene = true;
-			this->items[i].sprite->setPosition(this->items[i].sprite->getPosition().x, 350 + odlegloscY - 2 * (*this->items[i].height) - odlegloscPlayeraOdKrawedzi);
+			this->items[i].sprite->setPosition(this->items[i].sprite->getPosition().x, pozycjaScenyY + odlegloscY - 2 * (*this->items[i].height) - odlegloscPlayeraOdKrawedzi);
 		}
 		else if (odlegloscY > 2 * (*this->items[i].height) + odlegloscPlayeraOdKrawedzi){//obiekt jest juz za scena, jest niewidoczny, obiekt jest za scena wiec obiekt isBehindScene = true
 			*this->items[i].isVisible = false;

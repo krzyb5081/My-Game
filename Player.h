@@ -17,8 +17,8 @@ public:
 	bool collisionLeft;
 	bool collisionRight;
 
-	float xPos;
-	float yPos;
+	float worldPlayerCoordinatesX;
+	float worldPlayerCoordinatesY;
 
 	bool isTransparent;
 

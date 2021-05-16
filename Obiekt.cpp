@@ -60,6 +60,10 @@ void Obiekt::move(float x, float y){
 	sprite->move(x, y);
 }
 
+void Obiekt::setSpritePosition(float x, float y) {
+	this->sprite->setPosition(x, y);
+}
+
 void Obiekt::setScale(float scaleX, float scaleY){
 	sprite->setScale(scaleX, scaleY);
 	*this->width = (sprite->getTexture()->getSize().x)*(sprite->getScale().x);

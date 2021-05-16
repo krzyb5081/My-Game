@@ -11,7 +11,7 @@ Mapa::Mapa(Player * player, Collision * collision, Background * background, Game
 }
 
 void Mapa::loadMap(Player * player, Collision * collision, Background * background, GameItems * gameItems){
-	
+
 	// ustawianie wlasciwosci mapy ////////////////////////////////////////////////////////////////////////
 	wielkoscX = 1000;
 	wielkoscY = 1000;
@@ -22,7 +22,7 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 
 	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
 	this->obiekty[0].load(0, "Bohater.bmp", 650, 520, 0.2, 20, Obiekt::INTERACTION_TYPE_NONE, 0, false);
-	this->obiekty[0].setScale(0.15, 0.15);
+	this->obiekty[0].setScale(0.1, 0.1);
 
 	
 	player->copy(this->obiekty[0]);
@@ -31,7 +31,7 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
 	this->obiekty[1].load(1, "Niebo.bmp", -400, 0, 0.004, 0, Obiekt::INTERACTION_TYPE_NONE, 0, true);//za scena
 	this->obiekty[2].load(2, "Gory.bmp", -400, 200, 0.008, 1, Obiekt::INTERACTION_TYPE_NONE, 0, true);//za scena
-	this->obiekty[3].load(3, "trawa.bmp", -400, 350, 0, 2, Obiekt::INTERACTION_TYPE_NONE, 0, false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
+	this->obiekty[3].load(3, "trawa.bmp", -400, 450, 0, 2, Obiekt::INTERACTION_TYPE_NONE, 0, false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
 
 	background->initiate(player, 3);
 	background->obiekty[0].copy(this->obiekty[1]);
@@ -40,9 +40,9 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 	
 	// LOADING GAMEITEMS //////////////////////////////////////////////////////////////////////////////////
 	this->obiekty[4].load(4, "Cytadela.bmp", 350, 520, 0, 3, Obiekt::INTERACTION_TYPE_WALL, 0, false);
-	this->obiekty[4].setScale(4, 3);
-	this->obiekty[5].load(5, "bohater.png", 50, 500, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, 1337, false);
-	this->obiekty[5].setScale(0.15, 0.15);
+	this->obiekty[4].setScale(3, 2);
+	this->obiekty[5].load(5, "bohater.png", 20, 20, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, 1337, false);
+	this->obiekty[5].setScale(0.1, 0.1);
 
 	gameItems->initiate(player, 2);
 	gameItems->items[0].copy(this->obiekty[4]);

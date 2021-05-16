@@ -14,7 +14,7 @@ enum stan_gry {
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1280,800),"Save Dino Pimpus");
+    sf::RenderWindow window(sf::VideoMode(1280,800),"Save Dino Pimpus",sf::Style::Fullscreen);
 	sf::Event event;
 
 	stan_gry stan = MENU;

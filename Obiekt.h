@@ -31,6 +31,7 @@ public:
     void load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData, bool isBehindScene);
 	void copy(Obiekt &obiekt);
 	void move(float x, float y);
+	void setSpritePosition(float x, float y);
 	void setScale(float scaleX, float scaleY);
 
 
