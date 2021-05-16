@@ -16,13 +16,13 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 	wielkoscX = 1000;
 	wielkoscY = 1000;
 	this->najwyzszaWarstwa = 20;
-	this->iloscObiektow = 6;
+	this->iloscObiektow = 16;
 
 	this->obiekty = new Obiekt[iloscObiektow];
 
 	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
 	this->obiekty[0].load(0, "Bohater.bmp", 650, 520, 0.2, 20, Obiekt::INTERACTION_TYPE_NONE, 0, false);
-	this->obiekty[0].setScale(0.1, 0.1);
+	this->obiekty[0].setScale(0.15, 0.15);
 
 	
 	player->copy(this->obiekty[0]);
@@ -39,14 +39,32 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 	background->obiekty[2].copy(this->obiekty[3]);
 	
 	// LOADING GAMEITEMS //////////////////////////////////////////////////////////////////////////////////
-	this->obiekty[4].load(4, "Cytadela.bmp", 350, 520, 0, 3, Obiekt::INTERACTION_TYPE_WALL, 0, false);
-	this->obiekty[4].setScale(3, 2);
-	this->obiekty[5].load(5, "bohater.png", 20, 20, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, 1337, false);
-	this->obiekty[5].setScale(0.1, 0.1);
+	this->obiekty[4].load(4, "bohater.bmp", -500, 0, 0, 3, Obiekt::INTERACTION_TYPE_WALL, 0, false);
+	this->obiekty[5].load(5, "bohater1.bmp", -200, -100, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, 1337, false);
+	this->obiekty[6].load(4, "bohater2.bmp", -200, -200, 0, 3, Obiekt::INTERACTION_TYPE_WALL, 0, false);
+	this->obiekty[7].load(5, "bohater3.bmp", 40, 100, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, 1337, false);
+	this->obiekty[8].load(4, "bohater4.bmp", 200, -30, 0, 3, Obiekt::INTERACTION_TYPE_WALL, 0, false);
+	this->obiekty[9].load(5, "bohater5.bmp", 140, 100, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, 1337, false);
+	this->obiekty[10].load(4, "budynek.bmp", -400, -1000, 0, 3, Obiekt::INTERACTION_TYPE_WALL, 0, false);
+	this->obiekty[11].load(5, "budynek1.bmp", 40, -1400, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, 1337, false);
+	this->obiekty[12].load(4, "budynek2.bmp", 400, -1800, 0, 3, Obiekt::INTERACTION_TYPE_WALL, 0, false);
+	this->obiekty[13].load(5, "budynek3.bmp", 200, 20, -800, 3, Obiekt::INTERACTION_TYPE_USABLE, 1337, false);
+	this->obiekty[14].load(4, "budynek4.bmp", -400, -600, 0, 3, Obiekt::INTERACTION_TYPE_WALL, 0, false);
+	this->obiekty[15].load(5, "budynek5.bmp", 800, -1000, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, 1337, false);
 
-	gameItems->initiate(player, 2);
+	gameItems->initiate(player, 12);
 	gameItems->items[0].copy(this->obiekty[4]);
 	gameItems->items[1].copy(this->obiekty[5]);
+	gameItems->items[2].copy(this->obiekty[6]);
+	gameItems->items[3].copy(this->obiekty[7]);
+	gameItems->items[4].copy(this->obiekty[8]);
+	gameItems->items[5].copy(this->obiekty[9]);
+	gameItems->items[6].copy(this->obiekty[10]);
+	gameItems->items[7].copy(this->obiekty[11]);
+	gameItems->items[8].copy(this->obiekty[12]);
+	gameItems->items[9].copy(this->obiekty[13]);
+	gameItems->items[10].copy(this->obiekty[14]);
+	gameItems->items[11].copy(this->obiekty[15]);
 
 	// LOADING GAMEITEMS TO COLLISION /////////////////////////////////////////////////////////////////////
 	collision->load(player, gameItems->items, gameItems->iloscItems);

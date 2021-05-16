@@ -61,6 +61,12 @@ int Menu::zmienianieOpcji(sf::RenderWindow & window) {
 
 
 void Menu::rysowanieMenu(sf::RenderWindow & window) {
+	sf::Texture texture;
+	texture.loadFromFile("title screen.bmp");
+	sf::Sprite sprite(texture);
+	sprite.setScale(1.1, 1.2);
+
+	window.draw(sprite);
     for(unsigned int i=0;i<sizeof(menuText)/sizeof(sf::Text);i++){
         menuText[i].setFillColor(sf::Color::Yellow);
         if((int)i==ktoraOpcja){

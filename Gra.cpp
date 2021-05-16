@@ -15,7 +15,7 @@ Gra::Gra() {
 void Gra::loop(sf::RenderWindow & window){
 
 	collision->doCollision();
-	player->sterowanie();
+	player->loop();
 	background->sterowanie();
 	gameItems->ruszanie();
 	rysuj(window);

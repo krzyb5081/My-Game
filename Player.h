@@ -3,7 +3,9 @@
 #include "Obiekt.h"
 
 class Player :public Obiekt{
-
+private:
+	void sterowanie();
+	void makePlayerTransparent();
 
 public:
 
@@ -20,12 +22,12 @@ public:
 	float worldPlayerCoordinatesX;
 	float worldPlayerCoordinatesY;
 
-	bool isTransparent;
+	bool * isTransparent;
 
 	Player();
 
 	void copy(Obiekt &obiekt);
-	void sterowanie();
+	void loop();
 	bool isObiectAPlayer(Obiekt & obiekt);
 
 

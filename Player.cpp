@@ -15,11 +15,48 @@ Player::Player(){
 	worldPlayerCoordinatesX = 0;
 	worldPlayerCoordinatesY = 0;
 
-	isTransparent = false;
+	isTransparent = new bool(false);
 }
 
-void Player::sterowanie(){
+void Player::loop() {
+	this->sterowanie();
+	this->makePlayerTransparent();
+
+}
+
+
+void Player::copy(Obiekt &obiekt){
+	this->texture = obiekt.texture;
+	this->sprite = obiekt.sprite;
+	this->idNumber = obiekt.idNumber;
+	this->predkosc = obiekt.predkosc;
+	this->warstwa = obiekt.warstwa;
+	this->isVisible = obiekt.isVisible;
+	this->height = obiekt.height;
+	this->width = obiekt.width;
+
+	//pozycje startowe raczej do niczego nie potrzebne ale by byc dokladnym mozna napisac bo startowe kordy playera na swiecie to 0x0
+	this->startX = new float(0);
+	this->startY = new float(0);
 	
+	worldPlayerCoordinatesX = 0;
+	worldPlayerCoordinatesY = 0;
+
+	this->setSpritePosition(*obiekt.startX, *obiekt.startY);
+	
+}
+
+bool Player::isObiectAPlayer(Obiekt & obiekt) {
+	if (*this->idNumber == *obiekt.idNumber) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Player::sterowanie() {
+
 	sf::Keyboard keyboard;
 
 	moveTop = false;
@@ -53,33 +90,11 @@ void Player::sterowanie(){
 	}
 }
 
-
-void Player::copy(Obiekt &obiekt){
-	this->texture = obiekt.texture;
-	this->sprite = obiekt.sprite;
-	this->idNumber = obiekt.idNumber;
-	this->predkosc = obiekt.predkosc;
-	this->warstwa = obiekt.warstwa;
-	this->isVisible = obiekt.isVisible;
-	this->height = obiekt.height;
-	this->width = obiekt.width;
-
-	//pozycje startowe raczej do niczego nie potrzebne ale by byc dokladnym mozna napisac bo startowe kordy playera na swiecie to 0x0
-	this->startX = new float(0);
-	this->startY = new float(0);
-	
-	worldPlayerCoordinatesX = 0;
-	worldPlayerCoordinatesY = 0;
-
-	this->setSpritePosition(*obiekt.startX, *obiekt.startY);
-	
-}
-
-bool Player::isObiectAPlayer(Obiekt & obiekt) {
-	if (*this->idNumber == *obiekt.idNumber) {
-		return true;
+void Player::makePlayerTransparent() {
+	if (*this->isTransparent == true) {
+		this->sprite->setColor(sf::Color(70, 70, 70, 180));
 	}
 	else {
-		return false;
+		this->sprite->setColor(sf::Color(255, 255, 255, 255));
 	}
 }

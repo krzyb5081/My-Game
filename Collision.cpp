@@ -34,18 +34,24 @@ int Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 		wysokoscKolizyjnejPodstawyObiektu = obiektRect.width/2;
 	}
 
+	if (playerRect.intersects(obiektRect)) {//sprajty musza sie totknac zeby robic te sprawdzenia bo inaczej sa bugi ze np koliduje z oddalonym obiektem bo zgadza sie wysokosc
 
-	//jesli player jest w calosci za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu, a gora playera jest nizej niz gora obiektu, player nie wychodzi tez z prawej ani z lewej strony obiektu, czyli jest w calosci za obiektem)
-	if ((((obiektRect.contains(playerRect.left, playerRect.top)) && (obiektRect.contains(playerRectRight, playerRect.top))) && ((obiektRect.contains(playerRect.left, playerRectDown)) && (obiektRect.contains(playerRectRight, playerRectDown)))) && (obiektRectDown - wysokoscKolizyjnejPodstawyObiektu > playerRectDown)) {//czy kwadrat jest w kwadracie ale nadal uwzglednic kolizyjna podstawe!@!@
-		
-	}//jesli player jest za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu)
-	else if (obiektRectDown - wysokoscKolizyjnejPodstawyObiektu > playerRectDown) {
-		playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu;
 
-	}//jesli player jest przed obiektem (jesli dol playera jest nizej niz dol obiektu)
-	else if (obiektRectDown < playerRectDown) {
-		playerRect.top += playerRect.height - 10;// przesuniecie teoretycznego kwardaru w dol uwzgledniajac ze bohater ma stopy i chodzi nimi przed obiektem, czyli ma stopy ponizej poziomu dolu obiektu, -10 bo stopami nie chodzi po scianie tylko po podlodze przed obiektem
-	
+		*player->isTransparent = false;
+		//jesli player jest w calosci za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu, a gora playera jest nizej niz gora obiektu, player nie wychodzi tez z prawej ani z lewej strony obiektu, czyli jest w calosci za obiektem)
+		if ((((obiektRect.contains(playerRect.left, playerRect.top)) && (obiektRect.contains(playerRectRight, playerRect.top))) && ((obiektRect.contains(playerRect.left, playerRectDown)) && (obiektRect.contains(playerRectRight, playerRectDown)))) && (obiektRectDown - wysokoscKolizyjnejPodstawyObiektu > playerRectDown)) {//czy kwadrat jest w kwadracie ale nadal uwzglednic kolizyjna podstawe!@!@
+			playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu;
+			*player->warstwa = *obiekt->warstwa;
+			*player->isTransparent = true;
+		}//jesli player jest za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu)
+		else if (obiektRectDown - wysokoscKolizyjnejPodstawyObiektu > playerRectDown) {
+			playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu;
+			*player->warstwa = *obiekt->warstwa - 1;
+		}//jesli player jest przed obiektem (jesli dol playera jest nizej niz dol obiektu)
+		else if (obiektRectDown < playerRectDown) {
+			playerRect.top += playerRect.height - 10;// przesuniecie teoretycznego kwardaru w dol uwzgledniajac ze bohater ma stopy i chodzi nimi przed obiektem, czyli ma stopy ponizej poziomu dolu obiektu, -10 bo stopami nie chodzi po scianie tylko po podlodze przed obiektem
+			*player->warstwa = *obiekt->warstwa;
+		}
 	}
 
 
