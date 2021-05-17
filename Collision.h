@@ -15,6 +15,8 @@ public:
 	Collision(Player * player, Obiekt * gameItems, int iloscItems);
 	void load(Player * player, Obiekt * gameItems, int iloscItems);
 	
+	std::string doInteraction();
+
 	void doCollision();
 	bool checkPlayerCollisionTop();
 	bool checkPlayerCollisionBot();

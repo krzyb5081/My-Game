@@ -31,11 +31,14 @@ private:
 	Background * background;
 	GameItems * gameItems;
 
+	void loop(sf::RenderWindow & window);
+	void gameStateControll(sf::RenderWindow & window);
+	void rysuj(sf::RenderWindow & window);
+
 public:
 
     Gra();
 	void main(sf::RenderWindow & window);
-	void loop(sf::RenderWindow & window);
-	void rysuj(sf::RenderWindow & window);
+	
 
 };

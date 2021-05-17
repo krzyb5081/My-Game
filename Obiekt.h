@@ -24,11 +24,11 @@ public:
 	float * height;
 	float * width;
 	int * interactionType;
-	int * interactionData;//do kad prowadzi przejscie co robi E to use itd
+	std::string * interactionData;//do kad prowadzi przejscie co robi E to use itd
 
 
 
-    void load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData, bool isBehindScene);
+    void load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, std::string interactionData, bool isBehindScene);
 	void copy(Obiekt &obiekt);
 	void move(float x, float y);
 	void setSpritePosition(float x, float y);

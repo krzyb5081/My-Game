@@ -14,6 +14,8 @@ public:
 	bool moveLeft;
 	bool moveRight;
 
+	bool use;
+
 	bool collisionTop;
 	bool collisionBot;
 	bool collisionLeft;

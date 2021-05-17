@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1440,900),"Save Dino Pimpus");
+    sf::RenderWindow window(sf::VideoMode(1440,900),"Save Dino Pimpus", sf::Style::Fullscreen);
 	window.setFramerateLimit(140);
 
     Gra gra;

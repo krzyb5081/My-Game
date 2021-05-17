@@ -2,28 +2,23 @@
 
 Player::Player(){
 
-	moveTop = false;
-	moveBot = false;
-	moveLeft = false;
-	moveRight = false;
+	this->moveTop = false;
+	this->moveBot = false;
+	this->moveLeft = false;
+	this->moveRight = false;
 
-	collisionTop = false;
-	collisionBot = false;
-	collisionLeft = false;
-	collisionRight = false;
+	this->use = false;
 
-	worldPlayerCoordinatesX = 0;
-	worldPlayerCoordinatesY = 0;
+	this->collisionTop = false;
+	this->collisionBot = false;
+	this->collisionLeft = false;
+	this->collisionRight = false;
 
-	isTransparent = new bool(false);
+	this->worldPlayerCoordinatesX = 0;
+	this->worldPlayerCoordinatesY = 0;
+
+	this->isTransparent = new bool(false);
 }
-
-void Player::loop() {
-	this->sterowanie();
-	this->makePlayerTransparent();
-
-}
-
 
 void Player::copy(Obiekt &obiekt){
 	this->texture = obiekt.texture;
@@ -46,6 +41,12 @@ void Player::copy(Obiekt &obiekt){
 	
 }
 
+void Player::loop() {
+	this->sterowanie();
+	this->makePlayerTransparent();
+
+}
+
 bool Player::isObiectAPlayer(Obiekt & obiekt) {
 	if (*this->idNumber == *obiekt.idNumber) {
 		return true;
@@ -59,34 +60,39 @@ void Player::sterowanie() {
 
 	sf::Keyboard keyboard;
 
-	moveTop = false;
-	moveBot = false;
-	moveLeft = false;
-	moveRight = false;
+	this->moveTop = false;
+	this->moveBot = false;
+	this->moveLeft = false;
+	this->moveRight = false;
+	this->use = false;
 
 	if (!collisionTop) {
 		if (keyboard.isKeyPressed(sf::Keyboard::Up)) {
-			moveTop = true;
+			this->moveTop = true;
 			worldPlayerCoordinatesY -= *predkosc;
 		}
 	}
 	if (!collisionBot) {
 		if (keyboard.isKeyPressed(sf::Keyboard::Down)) {
-			moveBot = true;
+			this->moveBot = true;
 			worldPlayerCoordinatesY += *predkosc;
 		}
 	}
 	if (!collisionLeft) {
 		if (keyboard.isKeyPressed(sf::Keyboard::Left)) {
-			moveLeft = true;
+			this->moveLeft = true;
 			worldPlayerCoordinatesX -= *predkosc;
 		}
 	}
 	if (!collisionRight) {
 		if (keyboard.isKeyPressed(sf::Keyboard::Right)) {
-			moveRight = true;
+			this->moveRight = true;
 			worldPlayerCoordinatesX += *predkosc;
 		}
+	}
+	if (keyboard.isKeyPressed(sf::Keyboard::E)) {
+		this->moveRight = true;
+		worldPlayerCoordinatesX += *predkosc;
 	}
 }
 

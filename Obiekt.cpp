@@ -1,7 +1,7 @@
 #include "Obiekt.h"
 
 
-void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, int interactionData, bool isBehindScene){
+void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, int interactionType, std::string interactionData, bool isBehindScene){
 	this->texture = new sf::Texture;
 	this->sprite = new sf::Sprite;
 
@@ -16,7 +16,7 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
 	this->width = new float;
 	this->height = new float;
 	this->interactionType = new int;
-	this->interactionData = new int;
+	this->interactionData = new std::string;
 
 
     this->texture->loadFromFile(nazwaTextury);

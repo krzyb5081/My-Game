@@ -18,52 +18,72 @@ Gra::Gra() {
 
 void Gra::main(sf::RenderWindow & window) {
 	
-	sf::Keyboard keyboard;
-
-	
+	this->gameStateControll(window);
 	
 	switch (this->gameState) {
 		case this->GAME_STATE_MENU:
 
-			if (this->menu.zmienianieOpcji(window) == 0) {
-				this->gameState = this->GAME_STATE_GAME;
-			}
 			this->menu.rysuj(window);
 
-		break;
+			break;
 		case this->GAME_STATE_GAME:
-
-			if (keyboard.isKeyPressed(sf::Keyboard::Escape)) {
-				this->gameState = this->GAME_STATE_MENU;
-			}
 
 			this->loop(window);
 
-		break;
+			break;
 		case this->GAME_STATE_DIALOG:
 			
-			if (this->dialog.dialogContinues) {
-				this->dialog.main(window);
-			}
-			else {
-				this->gameState = this->GAME_STATE_GAME;
-			}
-		break;
+			this->dialog.main(window);
+
+			break;
 		default:
+			break;
+	}
+}
+
+void Gra::gameStateControll(sf::RenderWindow & window) {
+
+	sf::Keyboard keyboard;
+
+	switch (this->gameState) {
+	case this->GAME_STATE_MENU:
+
+		if (this->menu.zmienianieOpcji(window) == 0) {
+			this->gameState = this->GAME_STATE_GAME;
+		}
+
+		break;
+	case this->GAME_STATE_GAME:
+
+		if (keyboard.isKeyPressed(sf::Keyboard::Escape)) {
+			this->gameState = this->GAME_STATE_MENU;
+		}
+		
+		this->collision->doInteraction();
+
+		break;
+	case this->GAME_STATE_DIALOG:
+
+		if (this->dialog.dialogContinues == false) {
+			this->gameState = this->GAME_STATE_GAME;
+		}
+		break;
+	default:
 
 		std::cout << "Gra nie wie w jakim jest stanie" << std::endl;
 		window.close();
+		break;
 	}
 }
 
 void Gra::loop(sf::RenderWindow & window){
 
 	
-
 	collision->doCollision();
 	player->loop();
 	background->sterowanie();
 	gameItems->ruszanie();
+
 	rysuj(window);
 	
 }
