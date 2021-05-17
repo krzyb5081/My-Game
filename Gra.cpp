@@ -1,6 +1,8 @@
 #include "Gra.h"
 
 Gra::Gra() {
+	this->gameState = this->GAME_STATE_DIALOG;
+
 	this->obiekty = new Obiekt;
 
 	player = new Player;
@@ -12,7 +14,42 @@ Gra::Gra() {
 	this->obiekty = mapa.getObiects();
 }
 
+void Gra::main(sf::RenderWindow & window) {
+	
+	sf::Keyboard keyboard;
+
+	if (keyboard.isKeyPressed(sf::Keyboard::Escape)) {
+		this->gameState = this->GAME_STATE_MENU;
+	}
+	
+	switch (this->gameState) {
+		case this->GAME_STATE_MENU:
+
+			if (this->menu.zmienianieOpcji(window) == 0) {
+				this->gameState = this->GAME_STATE_GAME;
+			}
+			this->menu.rysuj(window);
+
+		break;
+		case this->GAME_STATE_GAME:
+
+			loop(window);
+
+		break;
+		case this->GAME_STATE_DIALOG:
+
+			this->dialog.setDialog("halu_sztefi");
+		break;
+		default:
+
+		std::cout << "Gra nie wie w jakim jest stanie" << std::endl;
+		window.close();
+	}
+}
+
 void Gra::loop(sf::RenderWindow & window){
+
+	
 
 	collision->doCollision();
 	player->loop();

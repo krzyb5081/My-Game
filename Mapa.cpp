@@ -21,7 +21,7 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 	this->obiekty = new Obiekt[iloscObiektow];
 
 	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
-	this->obiekty[0].load(0, "Bohater.bmp", 650, 520, 0.2, 20, Obiekt::INTERACTION_TYPE_NONE, 0, false);
+	this->obiekty[0].load(0, "Bohater.bmp", 650, 600, 1, 20, Obiekt::INTERACTION_TYPE_NONE, 0, false);
 	this->obiekty[0].setScale(0.15, 0.15);
 
 	

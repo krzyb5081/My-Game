@@ -1,0 +1,6 @@
+DIALOG_ID: halu_sztefi
+TEXT: helo sztefi wi hajs du
+TEXT: helo brajan am guda as fak
+TEXT: holi sit lodap ma man
+TEXT: je siur ofkors
+DIALOG_END

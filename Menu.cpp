@@ -21,6 +21,7 @@ Menu::Menu() {
 }
 
 int Menu::zmienianieOpcji(sf::RenderWindow & window) {
+	sf::Keyboard klawiatura;
     if((klawiatura.isKeyPressed(sf::Keyboard::Up))&&(bylPuszczonyUp)){
         bylPuszczonyUp = false;
         if(ktoraOpcja==0){
@@ -60,11 +61,11 @@ int Menu::zmienianieOpcji(sf::RenderWindow & window) {
 }
 
 
-void Menu::rysowanieMenu(sf::RenderWindow & window) {
+void Menu::rysuj(sf::RenderWindow & window) {
 	sf::Texture texture;
 	texture.loadFromFile("title screen.bmp");
 	sf::Sprite sprite(texture);
-	sprite.setScale(1.1, 1.2);
+	sprite.setScale(1.2, 1.3);
 
 	window.draw(sprite);
     for(unsigned int i=0;i<sizeof(menuText)/sizeof(sf::Text);i++){

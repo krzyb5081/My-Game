@@ -73,6 +73,7 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="GameItems.cpp" />
     <ClCompile Include="Gra.cpp" />
     <ClCompile Include="main.cpp" />
@@ -85,6 +86,7 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="Dialog.h" />
     <ClInclude Include="GameItems.h" />
     <ClInclude Include="Gra.h" />
     <ClInclude Include="Mapa.h" />
