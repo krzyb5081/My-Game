@@ -76,6 +76,7 @@
     <ClCompile Include="Dialog.cpp" />
     <ClCompile Include="GameItems.cpp" />
     <ClCompile Include="Gra.cpp" />
+    <ClCompile Include="Interaction.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mapa.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -89,6 +90,7 @@
     <ClInclude Include="Dialog.h" />
     <ClInclude Include="GameItems.h" />
     <ClInclude Include="Gra.h" />
+    <ClInclude Include="Interaction.h" />
     <ClInclude Include="Mapa.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Obiekt.h" />
