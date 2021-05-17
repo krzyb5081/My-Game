@@ -1,6 +1,17 @@
 DIALOG_ID: halu_sztefi
-TEXT: helo sztefi wi hajs du
-TEXT: helo brajan am guda as fak
-TEXT: holi sit lodap ma man
-TEXT: je siur ofkors
+TEXT: aaaaaTaaaaaaaaaaaaaa1
+TEXT: aaaaaTaaaaaaaaaaaaaa2
+TEXT: aaaaaTaaaaaaaaaaaaaa3
+DIALOG_END
+DIALOG_ID: jotpe
+TEXT: jotpe goscu
+TEXT: nie no wiadomo
+TEXT: o dzieki to ja ide
+DIALOG_END
+DIALOG_ID: gudbaj_sztefi
+TEXT: gudbaj sztefi
+TEXT: gudbaj brajan
+TEXT: dobra brajan koniec z nami
+TEXT: ta dupa chyba
+TEXT: dupa ci w dupe tez
 DIALOG_END

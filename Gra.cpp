@@ -12,15 +12,15 @@ Gra::Gra() {
 
 	mapa.loadMap(player, collision, background, gameItems);
 	this->obiekty = mapa.getObiects();
+
+	this->dialog.load("gudbaj_sztefi");//usunac to stad i dac gdzies w petli gry jak trzeba bedzie wywolac dialog
 }
 
 void Gra::main(sf::RenderWindow & window) {
 	
 	sf::Keyboard keyboard;
 
-	if (keyboard.isKeyPressed(sf::Keyboard::Escape)) {
-		this->gameState = this->GAME_STATE_MENU;
-	}
+	
 	
 	switch (this->gameState) {
 		case this->GAME_STATE_MENU:
@@ -33,12 +33,21 @@ void Gra::main(sf::RenderWindow & window) {
 		break;
 		case this->GAME_STATE_GAME:
 
-			loop(window);
+			if (keyboard.isKeyPressed(sf::Keyboard::Escape)) {
+				this->gameState = this->GAME_STATE_MENU;
+			}
+
+			this->loop(window);
 
 		break;
 		case this->GAME_STATE_DIALOG:
-
-			this->dialog.setDialog("halu_sztefi");
+			
+			if (this->dialog.dialogContinues) {
+				this->dialog.main(window);
+			}
+			else {
+				this->gameState = this->GAME_STATE_GAME;
+			}
 		break;
 		default:
 

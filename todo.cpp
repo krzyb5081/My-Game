@@ -8,9 +8,11 @@
 
 \.poprawic wydajnosc transparentnosci playera
 
-stworzyc system czytajacy dialogi
+\, dodac null terminatory
 
-X zrobic dialogi w formie menu
+\, stworzyc system czytajacy dialogi
+
+\, zrobic dialogi w formie menu
 
 ZROBIC KLASE GOALS czy cos takiego KTORA BEDZIE SPRAWDZALA CZY ZOSTALY WYKONANE CELE GRY 
 
