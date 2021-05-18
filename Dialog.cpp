@@ -31,6 +31,7 @@ void Dialog::load(std::string dialogId) {
 
 
 	loadDialog(dialogId);
+	doDialog();
 }
 
 void Dialog::main(sf::RenderWindow & window) {

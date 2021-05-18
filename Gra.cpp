@@ -1,7 +1,7 @@
 #include "Gra.h"
 
 Gra::Gra() {
-	this->gameState = this->GAME_STATE_DIALOG;
+	this->gameState = this->GAME_STATE_MENU;
 
 	this->obiekty = new Obiekt;
 

@@ -64,6 +64,7 @@ bool Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 }
 
 std::string Collision::doInteraction() {
+	if((this->player->collisionTop)||(this->player->collisionBot)||(this->player->collisionLeft)||(this->player->collisionRight))//jesli player w ogole z czyms sie na prawde styka
 	if (*this->player->use) {
 
 		for (int i = 0; i < iloscItems; i++) {

@@ -1,17 +1,34 @@
 DIALOG_ID: halu_sztefi
-TEXT: aaaaaTaaaaaaaaaaaaaa1
-TEXT: aaaaaTaaaaaaaaaaaaaa2
-TEXT: aaaaaTaaaaaaaaaaaaaa3
+TEXT: Ja:
+Gdzie znajde twojego starego?
+TEXT: Robert:
+Musisz szukac za gurwami!
+TEXT: Ja:
+Ojej! To brzmi przewrotowo, czy to nie za duze wyzwanie?
+TEXT: Robert:
+Racja, moze ci sie przydac pomoc. Popytaj ludzi o artefakt!
 DIALOG_END
 DIALOG_ID: jotpe
-TEXT: jotpe goscu
-TEXT: nie no wiadomo
-TEXT: o dzieki to ja ide
+TEXT: Ja:
+Poszukuje twojego starego. Czy mozesz mi jakos pomoc?
+TEXT: Sztefi:
+Powinienes udac sie za gurwy, to dosc daleko.
+TEXT: Ja:
+Ojej! To brzmi krejzolsko, czy jest jakis sposob zeby bylo szybciej?
+TEXT: Sztefi:
+Jesli pojdziesz tou scieszkou w gore to dojdziesz do autostrady
+zlozonej z samych latarni
+one wskarza ci najszybsza droge.
 DIALOG_END
 DIALOG_ID: gudbaj_sztefi
-TEXT: gudbaj sztefi
-TEXT: gudbaj brajan
-TEXT: dobra brajan koniec z nami
-TEXT: ta dupa chyba
-TEXT: dupa ci w dupe tez
+TEXT: Ja:
+Szukam twojego starego i potrzebuje pomocy. Wiesz cos o przedmiotach,
+ktore moga mi pomoc?
+TEXT: Piotr:
+Powinienes poszukac artefaktu!
+TEXT: Ja:
+Gdzie go znajde?
+TEXT: Piotr:
+Artefakt znajduje sie w zamku ksiecia Leona, musisz udac sie w dol
+miasta czy cos ale artefaktu tam nie ma tak na prawde.
 DIALOG_END
