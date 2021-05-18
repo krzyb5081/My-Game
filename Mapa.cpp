@@ -21,7 +21,7 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 	this->obiekty = new Obiekt[iloscObiektow];
 
 	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
-	this->obiekty[0].load(0, "Bohater.bmp", 650, 600, 1, 20, false, "", false);
+	this->obiekty[0].load(0, "bohater.bmp", 650, 600, 1, 20, false, "", false);
 	this->obiekty[0].setScale(0.15, 0.15);
 
 	
@@ -30,7 +30,7 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 
 	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
 	this->obiekty[1].load(1, "niebo.bmp", -400, 0, 0.01, 0, false, "", true);//za scena
-	this->obiekty[2].load(2, "slonce.bmp", 800, 100, 0, 1, false, "", true);//za scena
+	this->obiekty[2].load(2, "slonce.bmp", 210, -210, 0, 1, false, "", true);//za scena
 	this->obiekty[3].load(3, "gory.bmp", -400, 200, 0.02, 2, false, "", true);//za scena
 	this->obiekty[4].load(4, "trawa.bmp", -400, 450, 0, 0, false, "", false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
 

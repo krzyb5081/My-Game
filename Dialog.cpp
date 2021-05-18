@@ -17,8 +17,8 @@ void Dialog::load(std::string dialogId) {
 	this->text[0].setPosition(100, 600);
 	this->text[1].setPosition(600, 800);
 
-	this->text[0].setFillColor(sf::Color::Yellow);
-	this->text[1].setFillColor(sf::Color::Yellow);
+	this->text[0].setFillColor(sf::Color::Cyan);
+	this->text[1].setFillColor(sf::Color::Cyan);
 
 	this->text[0].setString("");
 	this->text[1].setString("Press space to continue...");
@@ -42,11 +42,20 @@ void Dialog::main(sf::RenderWindow & window) {
 
 void Dialog::rysuj(sf::RenderWindow & window) {
 	sf::Texture texture;
-	texture.loadFromFile("title screen.bmp");
+	texture.loadFromFile("dialog.bmp");
 	sf::Sprite sprite(texture);
 	sprite.setScale(1.2, 1.3);
 
+	sf::Texture texture1;
+	texture1.loadFromFile("text-background.bmp");
+	sf::Sprite sprite1(texture1);
+	sprite1.setPosition(0, 580);
+	sprite1.setScale(2, 3.5);
+	sprite1.setColor(sf::Color(60, 60, 60, 220));
+	
+
 	window.draw(sprite);
+	window.draw(sprite1);
 	
 	window.draw(text[0]);
 	window.draw(text[1]);

@@ -38,7 +38,6 @@ void Gra::doInteraction() {
 
 		std::string dialogId;
 		dialogId.assign(interaction, 7, interaction.length() - 7);//7 to dlugosc tekstu "DIALOG "
-		std::cout << dialogId << std::endl;
 
 		this->gameState = this->GAME_STATE_DIALOG;
 		this->dialog.load(dialogId);

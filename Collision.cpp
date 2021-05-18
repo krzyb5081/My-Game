@@ -74,7 +74,6 @@ std::string Collision::doInteraction() {
 
 			if (this->player->sprite->getGlobalBounds().intersects(this->gameItems[i].sprite->getGlobalBounds()) == true) {//interakcja z pierwszym napotkanym obiektem na podstawie prostej kolizji sprajtow
 				if (*this->gameItems[i].interacts == true) {
-					std::cout << "dialog: " << *this->player->use << std::endl;
 					return "DIALOG "+ *this->gameItems[i].interactionData;
 				}
 			}
