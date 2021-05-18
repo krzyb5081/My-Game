@@ -64,16 +64,18 @@ bool Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 }
 
 std::string Collision::doInteraction() {
-	if (this->player->use) { ; }//jakis if no nie wiem zapomnialem
+	if (*this->player->use) {
 
-	for (int i = 0; i < iloscItems; i++) {
-		if ((*gameItems[i].isVisible == false) || (*gameItems[i].isBehindScene == true)) {//jesli obiekt jest za scena albo jest niewidzialny to go nie sprawdzaj
-			continue;
-		}
+		for (int i = 0; i < iloscItems; i++) {
+			if ((*gameItems[i].isVisible == false) || (*gameItems[i].isBehindScene == true)) {//jesli obiekt jest za scena albo jest niewidzialny to go nie sprawdzaj
+				continue;
+			}
 
-		if (checkPlayerCollision(player, &gameItems[i]) == true) {//interakcja z pierwszym napotkanym obiektem
-			if (*this->gameItems[i].interactionType == Obiekt::INTERACTION_TYPE_USABLE) {
-
+			if (this->player->sprite->getGlobalBounds().intersects(this->gameItems[i].sprite->getGlobalBounds()) == true) {//interakcja z pierwszym napotkanym obiektem na podstawie prostej kolizji sprajtow
+				if (*this->gameItems[i].interacts == true) {
+					std::cout << "dialog: " << *this->player->use << std::endl;
+					return "DIALOG "+ *this->gameItems[i].interactionData;
+				}
 			}
 		}
 	}

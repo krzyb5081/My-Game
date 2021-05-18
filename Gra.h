@@ -34,6 +34,7 @@ private:
 	void loop(sf::RenderWindow & window);
 	void gameStateControll(sf::RenderWindow & window);
 	void rysuj(sf::RenderWindow & window);
+	void doInteraction();
 
 public:
 

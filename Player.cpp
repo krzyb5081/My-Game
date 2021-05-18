@@ -7,8 +7,6 @@ Player::Player(){
 	this->moveLeft = false;
 	this->moveRight = false;
 
-	this->use = false;
-
 	this->collisionTop = false;
 	this->collisionBot = false;
 	this->collisionLeft = false;
@@ -18,6 +16,7 @@ Player::Player(){
 	this->worldPlayerCoordinatesY = 0;
 
 	this->isTransparent = new bool(false);
+	this->use = new bool(false);
 }
 
 void Player::copy(Obiekt &obiekt){
@@ -64,7 +63,7 @@ void Player::sterowanie() {
 	this->moveBot = false;
 	this->moveLeft = false;
 	this->moveRight = false;
-	this->use = false;
+	*this->use = false;
 
 	if (!collisionTop) {
 		if (keyboard.isKeyPressed(sf::Keyboard::Up)) {
@@ -91,8 +90,7 @@ void Player::sterowanie() {
 		}
 	}
 	if (keyboard.isKeyPressed(sf::Keyboard::E)) {
-		this->moveRight = true;
-		worldPlayerCoordinatesX += *predkosc;
+		*this->use = true;
 	}
 }
 

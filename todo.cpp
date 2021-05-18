@@ -14,9 +14,8 @@
 
 \, zrobic dialogi w formie menu
 
-X funkcja use w playerze
+\, zrobic e to use
 
-X zrobic e to use
 
 ZROBIC KLASE GOALS czy cos takiego KTORA BEDZIE SPRAWDZALA CZY ZOSTALY WYKONANE CELE GRY 
 

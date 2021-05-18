@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "Obiekt.h"
 
+#include <iostream>
+
 class Collision {
 	Player * player;
 	Obiekt * gameItems;

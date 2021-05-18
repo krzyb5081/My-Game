@@ -23,10 +23,10 @@ void Dialog::load(std::string dialogId) {
 	this->text[0].setString("");
 	this->text[1].setString("Press space to continue...");
 
-	this->dialogStrings = new std::string[2];//do usuwania bloku stringow w loadDialog
-	this->ktoryText = 0;
+	this->dialogStrings = new std::string[2];//zeby delete[] moglo usunac blok danych w loadDialog (sprawdzic czy to musi byc blok bo nie wiem)
+	this->numerWyswietlanegoTextu = 0;
 
-	this->spaceClickedOnce = false;
+	this->spacePressedOnce = false;
 	this->dialogContinues = true;
 
 
@@ -55,22 +55,22 @@ void Dialog::sterowanie() {
 	sf::Keyboard keyboard;
 
 	if (keyboard.isKeyPressed(sf::Keyboard::Space)) {
-		this->spaceClickedOnce = true;
+		this->spacePressedOnce = true;
 	}
-	else if (this->spaceClickedOnce) {
-		this->spaceClickedOnce = false;
+	else if (this->spacePressedOnce) {
+		this->spacePressedOnce = false;
 		this->doDialog();
 	}
 }
 
 void Dialog::doDialog() {
-	if (this->ktoryText >= this->ileDialogTextow) {
-		this->ktoryText = 0;
+	if (this->numerWyswietlanegoTextu >= this->ileDialogTextow) {
+		this->numerWyswietlanegoTextu = 0;
 		this->dialogContinues = false;
 	}
 	else {
- 		this->text[0].setString(this->dialogStrings[this->ktoryText]);
-		this->ktoryText++;
+ 		this->text[0].setString(this->dialogStrings[this->numerWyswietlanegoTextu]);
+		this->numerWyswietlanegoTextu++;
 	}
 
  

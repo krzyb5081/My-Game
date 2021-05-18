@@ -16,28 +16,65 @@ Gra::Gra() {
 	this->dialog.load("gudbaj_sztefi");//usunac to stad i dac gdzies w petli gry jak trzeba bedzie wywolac dialog
 }
 
+void Gra::loop(sf::RenderWindow & window){
+
+	
+	this->collision->doCollision();
+
+	this->player->loop();
+	this->background->sterowanie();
+	this->gameItems->ruszanie();
+
+	this->doInteraction();
+
+	this->rysuj(window);
+	
+}
+
+void Gra::doInteraction() {
+	std::string interaction = this->collision->doInteraction();
+	
+	if (interaction.find("DIALOG ") != std::string::npos) {
+
+		std::string dialogId;
+		dialogId.assign(interaction, 7, interaction.length() - 7);//7 to dlugosc tekstu "DIALOG "
+		std::cout << dialogId << std::endl;
+
+		this->gameState = this->GAME_STATE_DIALOG;
+		this->dialog.load(dialogId);
+		return;
+		
+	}
+	else if (interaction == "") {
+		//brak interakcji
+	}
+	else {
+		std::cout << "unknown interaction type" << std::endl;
+	}
+}
+
 void Gra::main(sf::RenderWindow & window) {
-	
+
 	this->gameStateControll(window);
-	
+
 	switch (this->gameState) {
-		case this->GAME_STATE_MENU:
+	case this->GAME_STATE_MENU:
 
-			this->menu.rysuj(window);
+		this->menu.rysuj(window);
 
-			break;
-		case this->GAME_STATE_GAME:
+		break;
+	case this->GAME_STATE_GAME:
 
-			this->loop(window);
+		this->loop(window);
 
-			break;
-		case this->GAME_STATE_DIALOG:
-			
-			this->dialog.main(window);
+		break;
+	case this->GAME_STATE_DIALOG:
 
-			break;
-		default:
-			break;
+		this->dialog.main(window);
+
+		break;
+	default:
+		break;
 	}
 }
 
@@ -58,8 +95,6 @@ void Gra::gameStateControll(sf::RenderWindow & window) {
 		if (keyboard.isKeyPressed(sf::Keyboard::Escape)) {
 			this->gameState = this->GAME_STATE_MENU;
 		}
-		
-		this->collision->doInteraction();
 
 		break;
 	case this->GAME_STATE_DIALOG:
@@ -74,18 +109,6 @@ void Gra::gameStateControll(sf::RenderWindow & window) {
 		window.close();
 		break;
 	}
-}
-
-void Gra::loop(sf::RenderWindow & window){
-
-	
-	collision->doCollision();
-	player->loop();
-	background->sterowanie();
-	gameItems->ruszanie();
-
-	rysuj(window);
-	
 }
 
 void Gra::rysuj(sf::RenderWindow & window) {

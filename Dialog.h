@@ -9,9 +9,9 @@ class Dialog {
 
 	std::string * dialogStrings;
 	int ileDialogTextow;
-	int ktoryText;
+	int numerWyswietlanegoTextu;
 
-	bool spaceClickedOnce;
+	bool spacePressedOnce;
 	
 	void rysuj(sf::RenderWindow & window);
 	void sterowanie();

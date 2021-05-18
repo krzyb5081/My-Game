@@ -21,7 +21,7 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 	this->obiekty = new Obiekt[iloscObiektow];
 
 	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
-	this->obiekty[0].load(0, "Bohater.bmp", 650, 600, 1, 20, Obiekt::INTERACTION_TYPE_NONE, "", false);
+	this->obiekty[0].load(0, "Bohater.bmp", 650, 600, 1, 20, false, "", false);
 	this->obiekty[0].setScale(0.15, 0.15);
 
 	
@@ -29,9 +29,9 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 	this->player = player;
 
 	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
-	this->obiekty[1].load(1, "Niebo.bmp", -400, 0, 0.004, 0, Obiekt::INTERACTION_TYPE_NONE, "", true);//za scena
-	this->obiekty[2].load(2, "Gory.bmp", -400, 200, 0.008, 1, Obiekt::INTERACTION_TYPE_NONE, "", true);//za scena
-	this->obiekty[3].load(3, "trawa.bmp", -400, 450, 0, 2, Obiekt::INTERACTION_TYPE_NONE, "", false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
+	this->obiekty[1].load(1, "Niebo.bmp", -400, 0, 0.004, 0, false, "", true);//za scena
+	this->obiekty[2].load(2, "Gory.bmp", -400, 200, 0.008, 1, false, "", true);//za scena
+	this->obiekty[3].load(3, "trawa.bmp", -400, 450, 0, 2, false, "", false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
 
 	background->initiate(player, 3);
 	background->obiekty[0].copy(this->obiekty[1]);
@@ -39,18 +39,18 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 	background->obiekty[2].copy(this->obiekty[3]);
 	
 	// LOADING GAMEITEMS //////////////////////////////////////////////////////////////////////////////////
-	this->obiekty[4].load(4, "bohater.bmp", -500, 0, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, "", false);
-	this->obiekty[5].load(5, "bohater1.bmp", -200, -100, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, "", false);
-	this->obiekty[6].load(6, "bohater2.bmp", -200, -200, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, "", false);
-	this->obiekty[7].load(7, "bohater3.bmp", 40, 100, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, "", false);
-	this->obiekty[8].load(8, "bohater4.bmp", 200, -30, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, "", false);
-	this->obiekty[9].load(9, "bohater5.bmp", 140, 100, 0, 3, Obiekt::INTERACTION_TYPE_USABLE, "", false);
-	this->obiekty[10].load(10, "budynek.bmp", -400, -1000, 0, 3, Obiekt::INTERACTION_TYPE_WALL, "", false);
-	this->obiekty[11].load(11, "budynek1.bmp", 40, -1400, 0, 3, Obiekt::INTERACTION_TYPE_WALL, "", false);
-	this->obiekty[12].load(12, "budynek2.bmp", 400, -1800, 0, 3, Obiekt::INTERACTION_TYPE_WALL, "", false);
-	this->obiekty[13].load(13, "budynek3.bmp", 200, 20, -800, 3, Obiekt::INTERACTION_TYPE_WALL, "", false);
-	this->obiekty[14].load(14, "budynek4.bmp", -400, -600, 0, 3, Obiekt::INTERACTION_TYPE_WALL, "", false);
-	this->obiekty[15].load(15, "budynek5.bmp", 800, -1000, 0, 3, Obiekt::INTERACTION_TYPE_WALL, "", false);
+	this->obiekty[4].load(4, "bohater.bmp", -500, 0, 0, 3, true, "jotpe", false);
+	this->obiekty[5].load(5, "bohater1.bmp", -200, -100, 0, 3, true, "jotpe", false);
+	this->obiekty[6].load(6, "bohater2.bmp", -200, -200, 0, 3, true, "halu_sztefi", false);
+	this->obiekty[7].load(7, "bohater3.bmp", 40, 100, 0, 3, true, "halu_sztefi", false);
+	this->obiekty[8].load(8, "bohater4.bmp", 200, -30, 0, 3, true, "gudbaj_sztefi", false);
+	this->obiekty[9].load(9, "bohater5.bmp", 140, 100, 0, 3, true, "gudbaj_sztefi", false);
+	this->obiekty[10].load(10, "budynek.bmp", -400, -1000, 0, 3, false, "", false);
+	this->obiekty[11].load(11, "budynek1.bmp", 40, -1400, 0, 3, false, "", false);
+	this->obiekty[12].load(12, "budynek2.bmp", 400, -1800, 0, 3, false, "", false);
+	this->obiekty[13].load(13, "budynek3.bmp", 200, 20, -800, 3, false, "", false);
+	this->obiekty[14].load(14, "budynek4.bmp", -400, -600, 0, 3, false, "", false);
+	this->obiekty[15].load(15, "budynek5.bmp", 800, -1000, 0, 3, false, "", false);
 
 	gameItems->initiate(player, 12);
 	gameItems->items[0].copy(this->obiekty[4]);

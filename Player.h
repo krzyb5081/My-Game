@@ -14,8 +14,6 @@ public:
 	bool moveLeft;
 	bool moveRight;
 
-	bool use;
-
 	bool collisionTop;
 	bool collisionBot;
 	bool collisionLeft;
@@ -25,6 +23,8 @@ public:
 	float worldPlayerCoordinatesY;
 
 	bool * isTransparent;
+
+	bool * use;
 
 	Player();
 
