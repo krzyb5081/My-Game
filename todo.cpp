@@ -3,10 +3,10 @@ poprawic ten background kiedys
 
 zrobic przesuwanie viewu na po scenie zeby np ulica byla
 
-zrobic brak kolizji ktory bedzie dzialal jak bycie calkowicie za obiektem ale troche inaczej i bez kolizyjnej podstawy
+\. zrobic brak kolizji ktory bedzie dzialal jak bycie calkowicie za obiektem ale troche inaczej i bez kolizyjnej podstawy
 usprawnic interakcje
-zrobic rodzaj kolizjii brak
 moze zrobic zeby to obiekty byly transparentne a nie player
+zrobic klase npc ktore beda mogly sie ruszac i w ogole
 
 zrobic animacje
 

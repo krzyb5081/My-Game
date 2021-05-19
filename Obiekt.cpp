@@ -1,7 +1,7 @@
 #include "Obiekt.h"
 
 
-void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, bool interacts, std::string interactionData, bool isBehindScene){
+void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, bool colides, bool interacts, std::string interactionData, bool isBehindScene){
 	this->texture = new sf::Texture;
 	this->sprite = new sf::Sprite;
 
@@ -15,6 +15,8 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
 	this->isBehindScene = new bool;
 	this->width = new float;
 	this->height = new float;
+
+	this->colides = new bool;
 	this->interacts = new bool;
 	this->interactionData = new std::string;
 
@@ -33,6 +35,8 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
 	*this->isBehindScene = isBehindScene;
 	*this->width = (sprite->getTexture()->getSize().x)*(sprite->getScale().x);
 	*this->height = (sprite->getTexture()->getSize().y)*(sprite->getScale().y);
+
+	*this->colides = colides;
 	*this->interacts = interacts;
 	*this->interactionData = interactionData;
 
@@ -52,6 +56,8 @@ void Obiekt::copy(Obiekt &obiekt){
 	this->isBehindScene = obiekt.isBehindScene;
 	this->width = obiekt.width;
 	this->height = obiekt.height;
+
+	this->colides = obiekt.colides;
 	this->interacts = obiekt.interacts;
 	this->interactionData = obiekt.interactionData;
 }

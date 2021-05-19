@@ -34,8 +34,25 @@ bool Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 		wysokoscKolizyjnejPodstawyObiektu = obiektRect.width/2;
 	}
 
+	if ( (*obiekt->colides == false) && (playerRect.intersects(obiektRect)) ) {//jesli jest bezkolizyjnym (przenikalnym) obiektem, sprajty musza sie dotknac
+		*player->isTransparent = false;
+		//jesli player jest za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu)
+		if (obiektRectDown - wysokoscKolizyjnejPodstawyObiektu > playerRectDown) {
 
-	if (playerRect.intersects(obiektRect)) {//sprajty musza sie totknac zeby robic te sprawdzenia bo inaczej sa bugi ze np koliduje z oddalonym obiektem bo zgadza sie wysokosc
+			playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu;
+			*player->warstwa = *obiekt->warstwa - 1;
+
+		}//jesli player jest przed obiektem (jesli dol playera jest nizej niz dol obiektu)
+		else if (obiektRectDown < playerRectDown) {
+
+			playerRect.top += playerRect.height - 10;// przesuniecie teoretycznego kwardaru w dol uwzgledniajac ze bohater ma stopy i chodzi nimi przed obiektem, czyli ma stopy ponizej poziomu dolu obiektu, -10 bo stopami nie chodzi po scianie tylko po podlodze przed obiektem
+			*player->warstwa = *obiekt->warstwa;
+
+		}
+		return false;//nie koliduje na pewno bo jest bezkolizyjny
+
+	}
+	else if (playerRect.intersects(obiektRect)) {//sprajty musza sie dotknac zeby robic te sprawdzenia bo inaczej sa bugi ze np koliduje z oddalonym obiektem bo zgadza sie wysokosc
 
 		*player->isTransparent = false;
 		//jesli player jest w calosci za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu, a gora playera jest nizej niz gora obiektu, player nie wychodzi tez z prawej ani z lewej strony obiektu, czyli jest w calosci za obiektem)
@@ -58,9 +75,8 @@ bool Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 			*player->warstwa = *obiekt->warstwa;
 
 		}
+		return playerRect.intersects(obiektRect);
 	}
-
-	return playerRect.intersects(obiektRect);
 }
 
 std::string Collision::doInteraction() {
