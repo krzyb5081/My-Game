@@ -2,17 +2,20 @@
 
 
 void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, bool colides, bool interacts, std::string interactionData, bool isBehindScene){
+	
+	this->idNumber = new int;
+
 	this->texture = new sf::Texture;
 	this->sprite = new sf::Sprite;
 
-	this->idNumber = new int;
-
-	this->predkosc = new float;
 	this->warstwa = new int;
-	this->startX = new float;
-	this->startY = new float;
 	this->isVisible = new bool;
 	this->isBehindScene = new bool;
+	this->isTransparent = new bool;
+
+	this->predkosc = new float;
+	this->startX = new float;
+	this->startY = new float;
 	this->width = new float;
 	this->height = new float;
 
@@ -21,18 +24,20 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
 	this->interactionData = new std::string;
 
 
+	*this->idNumber = idNumber;
+
     this->texture->loadFromFile(nazwaTextury);
     this->sprite->setTexture(*texture);
 	this->sprite->setPosition(startX, startY);
 
-	*this->idNumber = idNumber;
-
-	*this->predkosc = predkosc;
 	*this->warstwa = warstwa;
-	*this->startX = startX;
-	*this->startY = startY;
 	*this->isVisible = true;
 	*this->isBehindScene = isBehindScene;
+	*this->isTransparent = false;
+
+	*this->predkosc = predkosc;
+	*this->startX = startX;
+	*this->startY = startY;
 	*this->width = (sprite->getTexture()->getSize().x)*(sprite->getScale().x);
 	*this->height = (sprite->getTexture()->getSize().y)*(sprite->getScale().y);
 
@@ -41,19 +46,22 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
 	*this->interactionData = interactionData;
 
 	
-	
 }
 
 void Obiekt::copy(Obiekt &obiekt){
+	this->idNumber = obiekt.idNumber;
+
 	this->texture = obiekt.texture;
 	this->sprite = obiekt.sprite;
-	this->idNumber = obiekt.idNumber;
-	this->predkosc = obiekt.predkosc;
+	
 	this->warstwa = obiekt.warstwa;
-	this->startX = obiekt.startX;
-	this->startY = obiekt.startY;
 	this->isVisible = obiekt.isVisible;
 	this->isBehindScene = obiekt.isBehindScene;
+	this->isTransparent = obiekt.isTransparent;
+
+	this->predkosc = obiekt.predkosc;
+	this->startX = obiekt.startX;
+	this->startY = obiekt.startY;
 	this->width = obiekt.width;
 	this->height = obiekt.height;
 
@@ -74,4 +82,15 @@ void Obiekt::setScale(float scaleX, float scaleY){
 	sprite->setScale(scaleX, scaleY);
 	*this->width = (sprite->getTexture()->getSize().x)*(sprite->getScale().x);
 	*this->height = (sprite->getTexture()->getSize().y)*(sprite->getScale().y);
+}
+
+void Obiekt::makeObiectTransparent(bool isTransparent) {
+	*this->isTransparent = isTransparent;
+
+	if (*this->isTransparent == true) {
+		this->sprite->setColor(sf::Color(255, 255, 255, 100));
+	}
+	else {
+		this->sprite->setColor(sf::Color(255, 255, 255, 255));
+	}
 }

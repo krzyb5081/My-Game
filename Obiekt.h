@@ -10,10 +10,13 @@ public:
 
 	sf::Texture * texture;
 	sf::Sprite * sprite;
-	float * predkosc;
+	
 	int * warstwa;
 	bool * isVisible;
 	bool * isBehindScene;
+	bool * isTransparent;
+
+	float * predkosc;
 	float * startX;
 	float * startY;
 	float * height;
@@ -30,6 +33,7 @@ public:
 	void move(float x, float y);
 	void setSpritePosition(float x, float y);
 	void setScale(float scaleX, float scaleY);
+	void makeObiectTransparent(bool isTransparent);
 
 
 };
