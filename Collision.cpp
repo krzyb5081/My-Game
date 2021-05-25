@@ -61,7 +61,7 @@ bool Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 		if ((((obiektRect.contains(playerRect.left, playerRect.top)) && (obiektRect.contains(playerRectRight, playerRect.top))) && ((obiektRect.contains(playerRect.left, playerRectDown)) && (obiektRect.contains(playerRectRight, playerRectDown)))) && (obiektRectDown - wysokoscKolizyjnejPodstawyObiektu > playerRectDown)) {//czy kwadrat jest w kwadracie ale nadal uwzglednic kolizyjna podstawe!@!@
 			
 			playerRect.top -= obiektRect.height - wysokoscKolizyjnejPodstawyObiektu;
-			*player->warstwa = *obiekt->warstwa;
+			*player->warstwa = *obiekt->warstwa - 1;
 			obiekt->makeObiectTransparent(true);
 
 		}//jesli player jest za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu)

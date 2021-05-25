@@ -10,6 +10,8 @@ zrobic klase npc ktore beda mogly sie ruszac i w ogole
 
 zrobic animacje
 
+zrobic animowana scene beda problemy ze skalowaniem jej i przesuwaniem pozycji, moze zrobic przesuwanie na podstawie pozycji gracza
+
 ZROBIC KLASE GOALS czy cos takiego KTORA BEDZIE SPRAWDZALA CZY ZOSTALY WYKONANE CELE GRY 
 
 

@@ -1,44 +1,79 @@
 #include "Background.h"
 
 Background::Background(){
-	obiekty = new Obiekt;
-	iloscObiektow = 0;
-	player = new Player;
+	this->initiate(new Player, 0, 0);
 }
 
-Background::Background(Player * player, int iloscObiektow){
-	initiate(player, iloscObiektow);
+Background::Background(Player * player, int iloscObiektow, int sceneObiectIdNumber){
+	this->initiate(player, iloscObiektow, sceneObiectIdNumber);
 }
 
-void Background::initiate(Player * player, int iloscObiektow){
+void Background::initiate(Player * player, int iloscObiektow, int sceneObiectIdNumber){
 	obiekty = new Obiekt[iloscObiektow];
 
 	this->player = player;
 	this->iloscObiektow = iloscObiektow;
+	this->sceneObiectIdNumber = sceneObiectIdNumber;
+
+	this->sceneRectWidth = 400;
+	this->sceneRectHeight = 100;
+
+	
+
+	//wyszukiwanie obiektu sceny
+	int scenaIndex = 0;
+	for (int i = 0; i < this->iloscObiektow; i++) {
+		if (*obiekty[i].idNumber == this->sceneObiectIdNumber) {
+			scenaIndex = i;
+			break;
+		}
+	}
+
+	obiekty[scenaIndex].sprite->setTextureRect(sf::IntRect())
+
+
 }
 
 void Background::sterowanie() {
+	
 
-	if (player->moveTop == true){
-		obiekty[0].move(0, -*obiekty[0].predkosc);
-		obiekty[1].move(0, -*obiekty[1].predkosc);
-		obiekty[2].move(0, -*obiekty[2].predkosc);
+	for (int i = 0; i < iloscObiektow; i++) {
+		if (*this->obiekty[i].idNumber == this->sceneObiectIdNumber) {
+			this->sterowanieScena(i);
+		}
+
+		if (player->moveTop == true) {
+			obiekty[i].move(0, -*obiekty[i].predkosc);
+		}
+		if (player->moveBot == true) {
+			obiekty[i].move(0, *obiekty[i].predkosc);
+		}
+		if (player->moveLeft == true) {
+			obiekty[i].move(*obiekty[i].predkosc, 0);
+		}
+		if (player->moveRight == true) {
+			obiekty[i].move(-*obiekty[i].predkosc, 0);
+		}
+
 	}
-	if (player->moveBot == true){
-		obiekty[0].move(0, *obiekty[0].predkosc);
-		obiekty[1].move(0, *obiekty[1].predkosc);
-		obiekty[2].move(0, *obiekty[2].predkosc);
+}
+
+void Background::sterowanieScena(int scenaObiektIndex) {
+	sf::IntRect sceneRect = this->obiekty[scenaObiektIndex].sprite->getTextureRect();
+
+	if (player->moveTop == true) {
+		obiekty[i].move(0, -*obiekty[i].predkosc);
 	}
-	if (player->moveLeft == true){
-		obiekty[0].move(*obiekty[0].predkosc, 0);
-		obiekty[1].move(*obiekty[1].predkosc, 0);
-		obiekty[2].move(*obiekty[2].predkosc, 0);
-		obiekty[3].move(*obiekty[3].predkosc, 0);
+	if (player->moveBot == true) {
+		obiekty[i].move(0, *obiekty[i].predkosc);
 	}
-	if (player->moveRight == true){
-		obiekty[0].move(-*obiekty[0].predkosc, 0);
-		obiekty[1].move(-*obiekty[1].predkosc, 0);
-		obiekty[2].move(-*obiekty[2].predkosc, 0);
-		obiekty[3].move(-*obiekty[3].predkosc, 0);
+	if (player->moveLeft == true) {
+		obiekty[i].move(*obiekty[i].predkosc, 0);
 	}
+	if (player->moveRight == true) {
+		obiekty[i].move(-*obiekty[i].predkosc, 0);
+	}
+
+	sf::IntRect newRect(sceneRectX, sceneRectY, );
+	this->obiekty[scenaObiektIndex].sprite->setTextureRect();
 }

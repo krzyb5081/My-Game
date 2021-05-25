@@ -22,19 +22,18 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 
 	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
 	this->obiekty[0].load(0, "bohater.bmp", 650, 600, 1, 20, true, false, "", false);
-	this->obiekty[0].setScale(0.15, 0.15);
 
 	
 	player->copy(this->obiekty[0]);
 	this->player = player;
 
 	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
-	this->obiekty[1].load(1, "niebo.bmp", -400, 0, 0.01, 0, false, false, "", true);//za scena
-	this->obiekty[2].load(2, "slonce.bmp", 210, -210, 0, 1, false, false, "", true);//za scena
-	this->obiekty[3].load(3, "gory.bmp", -400, 200, 0.02, 2, false, false, "", true);//za scena
-	this->obiekty[4].load(4, "trawa.bmp", -400, 450, 0, 0, false, false, "", false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
+	this->obiekty[1].load(1, "trawa.bmp", -400, 450, 0, 0, false, false, "", false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
+	this->obiekty[2].load(2, "niebo.bmp", -400, 0, 0.01, 0, false, false, "", true);//za scena
+	this->obiekty[3].load(3, "slonce.bmp", 210, -210, 0, 1, false, false, "", true);//za scena
+	this->obiekty[4].load(4, "gory.bmp", -400, 200, 0.02, 2, false, false, "", true);//za scena
 
-	background->initiate(player, 4);
+	background->initiate(player, 4, 1);
 	background->obiekty[0].copy(this->obiekty[1]);
 	background->obiekty[1].copy(this->obiekty[2]);
 	background->obiekty[2].copy(this->obiekty[3]);
