@@ -22,13 +22,13 @@ void Mapa::loadMap(Player * player, Collision * collision, Background * backgrou
 
 	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
 	this->obiekty[0].load(0, "bohater.bmp", 650, 600, 1, 20, true, false, "", false);
-
 	
 	player->copy(this->obiekty[0]);
 	this->player = player;
 
 	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
-	this->obiekty[1].load(1, "trawa.bmp", -400, 450, 0, 0, false, false, "", false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
+	this->obiekty[1].load(1, "scene.bmp", 0, 450, 0, 0, false, false, "", false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
+	this->obiekty[1].setScale(4, 4);
 	this->obiekty[2].load(2, "niebo.bmp", -400, 0, 0.01, 0, false, false, "", true);//za scena
 	this->obiekty[3].load(3, "slonce.bmp", 210, -210, 0, 1, false, false, "", true);//za scena
 	this->obiekty[4].load(4, "gory.bmp", -400, 200, 0.02, 2, false, false, "", true);//za scena

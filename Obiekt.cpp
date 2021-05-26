@@ -80,8 +80,8 @@ void Obiekt::setSpritePosition(float x, float y) {
 
 void Obiekt::setScale(float scaleX, float scaleY){
 	sprite->setScale(scaleX, scaleY);
-	*this->width = (sprite->getTexture()->getSize().x)*(sprite->getScale().x);
-	*this->height = (sprite->getTexture()->getSize().y)*(sprite->getScale().y);
+	*this->width = (sprite->getTextureRect().width)*(sprite->getScale().x);//sprawdzic
+	*this->height = (sprite->getTextureRect().height)*(sprite->getScale().y);
 }
 
 void Obiekt::makeObiectTransparent(bool isTransparent) {
