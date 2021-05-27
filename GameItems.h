@@ -5,6 +5,8 @@
 
 class GameItems{
 
+	void ruszaniePlaskichObiektow(int indexObiektu);
+
 public:
 
 	int iloscItems;

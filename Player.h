@@ -5,7 +5,6 @@
 class Player :public Obiekt{
 private:
 	void sterowanie();
-	void makePlayerTransparent();
 
 public:
 
@@ -21,8 +20,6 @@ public:
 
 	float worldPlayerCoordinatesX;
 	float worldPlayerCoordinatesY;
-
-	bool * isTransparent;
 
 	bool * use;
 

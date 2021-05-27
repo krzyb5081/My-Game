@@ -28,13 +28,16 @@ bool Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 	//kolizyjna podstawa w ksztalcie polowki kwadratu (kwardrat uciety w polowie wysokosci) o dlugosci boku takiej jak szerokosc obiektu, chyba ze obiekt ma wieksza szerokosc niz wysokosc, wtedy kolizyjna podstawa ma ksztalt obiektu, czyli nie da sie za nim przejsc
 	int wysokoscKolizyjnejPodstawyObiektu = 0;
 	if (obiektRect.width/2 >= obiektRect.height) {
-		wysokoscKolizyjnejPodstawyObiektu = obiektRect.height;
+		wysokoscKolizyjnejPodstawyObiektu = obiektRect.height / 2;
 	}
 	else {
 		wysokoscKolizyjnejPodstawyObiektu = obiektRect.width/2;
 	}
 
-	if ( (*obiekt->colides == false) && (playerRect.intersects(obiektRect)) ) {//jesli jest bezkolizyjnym (przenikalnym) obiektem, sprajty musza sie dotknac
+
+
+	//jesli jest bezkolizyjnym (przenikalnym) obiektem, sprajty musza sie dotknac
+	if ( (*obiekt->colides == false) && (playerRect.intersects(obiektRect)) ) {
 		obiekt->makeObiectTransparent(false);
 		wysokoscKolizyjnejPodstawyObiektu = 0;//gracz jest przed obiektem jesli jego nogi sa nizej niz on
 
@@ -54,7 +57,11 @@ bool Collision::checkPlayerCollision(Player * player, Obiekt * obiekt) {
 		return false;//nie koliduje na pewno bo jest bezkolizyjny
 
 	}
-	else if (playerRect.intersects(obiektRect)) {//sprajty musza sie dotknac zeby robic te sprawdzenia bo inaczej sa bugi ze np koliduje z oddalonym obiektem bo zgadza sie wysokosc
+
+
+
+	//sprajty musza sie dotknac zeby robic te sprawdzenia bo inaczej sa bugi ze np koliduje z oddalonym obiektem bo zgadza sie wysokosc
+	else if (playerRect.intersects(obiektRect)) {
 
 		obiekt->makeObiectTransparent(false);
 		//jesli player jest w calosci za obiektem (jesli dol playera jest wyzej niz gora kolizyjnej podstawy obiektu, a gora playera jest nizej niz gora obiektu, player nie wychodzi tez z prawej ani z lewej strony obiektu, czyli jest w calosci za obiektem)

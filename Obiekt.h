@@ -25,10 +25,11 @@ public:
 	bool * colides;
 	bool * interacts;
 	std::string * interactionData;//do kad prowadzi przejscie co robi E to use itd
+	bool * isFlat;
 
 
 
-    void load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, bool colides, bool interacts, std::string interactionData, bool isBehindScene);
+    void load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, bool colides, bool interacts, std::string interactionData, bool isFlat, bool isBehindScene);
 	void copy(Obiekt &obiekt);
 	void move(float x, float y);
 	void setSpritePosition(float x, float y);

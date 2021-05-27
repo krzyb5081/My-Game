@@ -1,7 +1,7 @@
 #include "Obiekt.h"
 
 
-void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, bool colides, bool interacts, std::string interactionData, bool isBehindScene){
+void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float startY, float predkosc, int warstwa, bool colides, bool interacts, std::string interactionData, bool isFlat, bool isBehindScene){
 	
 	this->idNumber = new int;
 
@@ -22,6 +22,7 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
 	this->colides = new bool;
 	this->interacts = new bool;
 	this->interactionData = new std::string;
+	this->isFlat = new bool;
 
 
 	*this->idNumber = idNumber;
@@ -44,6 +45,7 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
 	*this->colides = colides;
 	*this->interacts = interacts;
 	*this->interactionData = interactionData;
+	*this->isFlat = isFlat;
 
 	
 }
@@ -68,6 +70,7 @@ void Obiekt::copy(Obiekt &obiekt){
 	this->colides = obiekt.colides;
 	this->interacts = obiekt.interacts;
 	this->interactionData = obiekt.interactionData;
+	this->isFlat = obiekt.isFlat;
 }
 
 void Obiekt::move(float x, float y){

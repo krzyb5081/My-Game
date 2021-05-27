@@ -15,7 +15,6 @@ Player::Player(){
 	this->worldPlayerCoordinatesX = 0;
 	this->worldPlayerCoordinatesY = 0;
 
-	this->isTransparent = new bool(false);
 	this->use = new bool(false);
 }
 
@@ -42,7 +41,6 @@ void Player::copy(Obiekt &obiekt){
 
 void Player::loop() {
 	this->sterowanie();
-	this->makePlayerTransparent();
 
 }
 
@@ -91,14 +89,5 @@ void Player::sterowanie() {
 	}
 	if (keyboard.isKeyPressed(sf::Keyboard::E)) {
 		*this->use = true;
-	}
-}
-
-void Player::makePlayerTransparent() {
-	if (*this->isTransparent == true) {
-		this->sprite->setColor(sf::Color(70, 70, 70, 180));
-	}
-	else {
-		this->sprite->setColor(sf::Color(255, 255, 255, 255));
 	}
 }
