@@ -79,6 +79,9 @@ void GameItems::ruszaniePlaskichObiektow(int indexObiektu) {
 
 	const float pozycjaScenyY = 450;//pozycja y sprajta odpowiedzialnego za scene
 
+	float odlegloscY = player->worldPlayerCoordinatesY - *this->items[indexObiektu].startY;
+	float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - pozycjaScenyY;
+
 
 	sf::Vector2u obiectTextureSize = this->items[indexObiektu].sprite->getTexture()->getSize();
 	sf::IntRect obiectRect = this->items[indexObiektu].sprite->getTextureRect();
@@ -86,15 +89,19 @@ void GameItems::ruszaniePlaskichObiektow(int indexObiektu) {
 	//wychodzi zza sceny
 	if (*this->items[indexObiektu].isBehindScene == true) {
 
-		obiectRect.left = 0;
-		obiectRect.top = 0;
-		obiectRect.width = obiectTextureSize.x;
-		obiectRect.height = obiectTextureSize.y;
-		this->items[indexObiektu].sprite->setTextureRect(obiectRect);
+		
 
 		float spriteX = this->player->sprite->getPosition().x - (this->player->worldPlayerCoordinatesX - *this->items[indexObiektu].startX);
-		float spriteY = pozycjaScenyY - 10; //a tak dla wypuklosci -10
+		float spriteY = pozycjaScenyY;
 		this->items[indexObiektu].setSpritePosition(spriteX, spriteY);
+
+		//pozycjaScenyY + odlegloscY - 2 * (*this->items[indexObiektu].height) - odlegloscPlayeraOdKrawedzi
+
+		obiectRect.left = 0;
+		obiectRect.top = odlegloscY - odlegloscPlayeraOdKrawedzi;
+		obiectRect.width = obiectTextureSize.x;
+		obiectRect.height = obiectTextureSize.y - odlegloscY + odlegloscPlayeraOdKrawedzi;
+		this->items[indexObiektu].sprite->setTextureRect(obiectRect);
 	}
 
 	else {
