@@ -3,18 +3,75 @@
 #include <iostream>
 
 Mapa::Mapa(){
-	loadMap(new Player, new Collision, new Background, new GameItems);
+	loadMap("", new Player, new Collision, new Background, new GameItems);
 }
 
-Mapa::Mapa(Player * player, Collision * collision, Background * background, GameItems * gameItems){
-	loadMap(player, collision, background, gameItems);
+Mapa::Mapa(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems){
+	loadMap(mapFile, player, collision, background, gameItems);
 }
 
-void Mapa::loadMap(Player * player, Collision * collision, Background * background, GameItems * gameItems){
+void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems){
+
+	if (mapFile == "") {
+		printf("No map loaded, please exit game\n");
+		while (1) {}
+		return;
+	}
+
+	sf::FileInputStream file;
+	if (!file.open(mapFile)) {
+		printf("No map loaded, problem with opening file, please exit game\n");
+		while (1) {}
+		return;
+	}
+
+	//wstukanie pliku do bufora
+	char * buffer = new char[file.getSize()];
+	file.read(buffer, file.getSize());
+	std::string stringBuffer(buffer);
+	delete[] buffer;
+
+
+	////////////////////////////////////////////////////////////////TUTAJ SKONCZYLEM
+	//wyszukanie dialogu w buforze
+	int pozycjaPoczatkuDialogu = stringBuffer.find("DIALOG_ID: " + dialogId, 0);
+	int pozycjaKoncaDialogu = stringBuffer.find("DIALOG_END", pozycjaPoczatkuDialogu);
+
+	int pozycjaOstatniegoTekstu = stringBuffer.rfind("TEXT: ", pozycjaKoncaDialogu) + 6;//dlugosc "TEXT: "
+
+
+	//liczenie tekstow w dialogu
+	int pozycjaTekstu = pozycjaPoczatkuDialogu;//zeby szukanie zaczelo sie przed pierwszym "TEXT: "
+	this->ileDialogTextow = 0;
+	while (pozycjaTekstu < pozycjaOstatniegoTekstu) {
+		pozycjaTekstu = stringBuffer.find("TEXT: ", pozycjaTekstu);
+		pozycjaTekstu += 6;//dlugosc "TEXT: "
+		this->ileDialogTextow++;
+
+	}
+
+	//wczytywanie tekstow do zmiennych
+	this->dialogStrings = new std::string[this->ileDialogTextow];
+	pozycjaTekstu = pozycjaPoczatkuDialogu;//zeby szukanie zaczelo sie przed pierwszym "TEXT: "
+	for (int numerTekstu = 0; numerTekstu < this->ileDialogTextow; numerTekstu++) {
+		pozycjaTekstu = stringBuffer.find("TEXT: ", pozycjaTekstu);
+		pozycjaTekstu += 6;//dlugosc "TEXT: "
+
+		int iloscZnakowWTekscie;
+		if (pozycjaTekstu == pozycjaOstatniegoTekstu) {
+			iloscZnakowWTekscie = pozycjaKoncaDialogu - pozycjaTekstu;
+		}
+		else if (pozycjaTekstu != pozycjaOstatniegoTekstu) {
+			iloscZnakowWTekscie = stringBuffer.find("TEXT: ", pozycjaTekstu) - pozycjaTekstu;//pozycja nastepnego tekstu - pozycja tekstu = ilosc znakow miedzy tekstam
+		}
+
+		this->dialogStrings[numerTekstu].assign(stringBuffer, pozycjaTekstu, iloscZnakowWTekscie);//od miejsca pozycji tekstu skopiowac iloscZnakowWTekscie znakow do charBuffera
+
+	}
 
 	// ustawianie wlasciwosci mapy ////////////////////////////////////////////////////////////////////////
-	wielkoscX = 1000;
-	wielkoscY = 1000;
+	this->wielkoscX = 1000;
+	this->wielkoscY = 1000;
 	this->najwyzszaWarstwa = 20;
 	this->iloscObiektow = 38;
 

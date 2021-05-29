@@ -25,9 +25,9 @@ class Mapa {
 public:
 	
 	Mapa();
-	Mapa(Player * player, Collision * collision, Background * background, GameItems * gameItems);
+	Mapa(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems);
 
-	void loadMap(Player * player, Collision * collision, Background * background, GameItems * gameItems);
+	void loadMap(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems);
 	Obiekt * sortowanieObiektow();
 	int getSizeX();
 	int getSizeY();
