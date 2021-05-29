@@ -95,12 +95,24 @@ void GameItems::ruszaniePlaskichObiektow(int indexObiektu) {
 		float spriteY = pozycjaScenyY;
 		this->items[indexObiektu].setSpritePosition(spriteX, spriteY);
 
-		//pozycjaScenyY + odlegloscY - 2 * (*this->items[indexObiektu].height) - odlegloscPlayeraOdKrawedzi
 
-		obiectRect.left = 0;
-		obiectRect.top = odlegloscY - odlegloscPlayeraOdKrawedzi;
-		obiectRect.width = obiectTextureSize.x;
-		obiectRect.height = obiectTextureSize.y - odlegloscY + odlegloscPlayeraOdKrawedzi;
+		//sprawdzenie czy wartosci nie sa za duze
+		if (odlegloscY - odlegloscPlayeraOdKrawedzi <= obiectTextureSize.y) {
+			obiectRect.top = odlegloscY - odlegloscPlayeraOdKrawedzi;
+			
+		}
+		else {
+			obiectRect.top = obiectTextureSize.y;
+		}
+
+		//sprawdzanie czy wartosci nie sa ujemne
+		if (obiectTextureSize.y - obiectRect.top >= 0) {
+			obiectRect.height = obiectTextureSize.y - obiectRect.top;
+		}
+		else {
+			obiectRect.height = 0;
+		}
+
 		this->items[indexObiektu].sprite->setTextureRect(obiectRect);
 	}
 

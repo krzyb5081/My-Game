@@ -82,8 +82,8 @@ void Obiekt::setSpritePosition(float x, float y) {
 }
 
 void Obiekt::setScale(float scaleX, float scaleY){
-	sprite->setScale(scaleX, scaleY);
-	*this->width = (sprite->getTextureRect().width)*(sprite->getScale().x);//sprawdzic
+	this->sprite->setScale(scaleX, scaleY);
+	*this->width = (sprite->getTextureRect().width)*(sprite->getScale().x);
 	*this->height = (sprite->getTextureRect().height)*(sprite->getScale().y);
 }
 
