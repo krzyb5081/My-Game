@@ -7,12 +7,7 @@
 class Background{
 
 	int iloscObiektow;
-	int sceneObiectIdNumber;
 
-	int sceneRectWidth;
-	int sceneRectHeight;
-
-	void sterowanieScena(int scenaObiektIndex);
 
 public:
 	Obiekt * obiekty;
@@ -21,7 +16,7 @@ public:
 	
 
 	Background();
-	Background(Player * player, int iloscObiektow, int sceneObiectIdNumber);
-	void initiate(Player * player, int iloscObiektow, int sceneObiectIdNumber);
+	Background(Player * player, int iloscObiektow);
+	void initiate(Player * player, int iloscObiektow);
 	void sterowanie();
 };

@@ -31,6 +31,15 @@ void Gra::loop(sf::RenderWindow & window){
 	
 }
 
+void Gra::loopMapEditor(sf::RenderWindow & window) {
+
+	this->player->loop();
+	this->background->sterowanie();
+	this->gameItems->ruszanie();
+
+	this->rysuj(window);
+}
+
 void Gra::doInteraction() {
 	std::string interaction = this->collision->doInteraction();
 	
@@ -72,6 +81,11 @@ void Gra::main(sf::RenderWindow & window) {
 		this->dialog.main(window);
 
 		break;
+	case this->GAME_STATE_MAP_EDITOR:
+
+		
+
+		break;
 	default:
 		break;
 	}
@@ -101,6 +115,10 @@ void Gra::gameStateControll(sf::RenderWindow & window) {
 		if (this->dialog.dialogContinues == false) {
 			this->gameState = this->GAME_STATE_GAME;
 		}
+		break;
+	case this->GAME_STATE_MAP_EDITOR:
+
+		
 		break;
 	default:
 

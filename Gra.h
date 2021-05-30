@@ -18,6 +18,7 @@ private:
 	static const int GAME_STATE_GAME = 0;
 	static const int GAME_STATE_MENU = 1;
 	static const int GAME_STATE_DIALOG = 2;
+	static const int GAME_STATE_MAP_EDITOR = 3;
 	
 	Menu menu;
 
@@ -32,6 +33,7 @@ private:
 	GameItems * gameItems;
 
 	void loop(sf::RenderWindow & window);
+	void Gra::loopMapEditor(sf::RenderWindow & window);
 	void gameStateControll(sf::RenderWindow & window);
 	void rysuj(sf::RenderWindow & window);
 	void doInteraction();
