@@ -3,7 +3,7 @@
 #include <iostream>
 
 Mapa::Mapa(){
-	loadMap("", new Player, new Collision, new Background, new GameItems);
+	loadMap("map.txt", new Player, new Collision, new Background, new GameItems);
 }
 
 Mapa::Mapa(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems){
@@ -11,7 +11,7 @@ Mapa::Mapa(std::string mapFile, Player * player, Collision * collision, Backgrou
 }
 
 void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems){
-
+	
 	if (mapFile == "") {
 		printf("No map loaded, please exit game\n");
 		while (1) {}
@@ -25,13 +25,129 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 		return;
 	}
 
-	//wstukanie pliku do bufora
+	//wstukanie pliku do stringa
 	char * buffer = new char[file.getSize()];
 	file.read(buffer, file.getSize());
 	std::string stringBuffer(buffer);
 	delete[] buffer;
 
 
+	//na potem
+	//pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	//pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+
+	int pozycjaWStringu = 0;
+	int pozycjaSpacji = 0;
+	int pozycjaKoncaLinii = 0;
+
+
+	//////////////////////////////////////////////CZYTANIE DANYCH//////////////////////////////////////////
+	
+	// ustawianie wlasciwosci mapy ////////////////////////////////////////////////////////////////////////
+
+	//wielkoscX
+	pozycjaWStringu = stringBuffer.find("SIZE_X: ", pozycjaWStringu);
+	pozycjaWStringu += 8;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	this->wielkoscX = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaKoncaLinii - pozycjaWStringu));
+
+	//wielkoscY
+	pozycjaWStringu = stringBuffer.find("SIZE_Y: ", pozycjaWStringu);
+	pozycjaWStringu += 8;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	this->wielkoscY = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaKoncaLinii - pozycjaWStringu));
+
+	//najwyzszaWarstwa
+	pozycjaWStringu = stringBuffer.find("TOP_LAYER: ", pozycjaWStringu);
+	pozycjaWStringu += 11;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	this->najwyzszaWarstwa = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaKoncaLinii - pozycjaWStringu));
+
+	//iloscObiektow
+	pozycjaWStringu = stringBuffer.find("OBIECTS_AMOUT: ", pozycjaWStringu);
+	pozycjaWStringu += 15;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	this->iloscObiektow = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaKoncaLinii - pozycjaWStringu));
+	
+	//tworzenie tablicy obiektow
+	this->obiekty = new Obiekt[this->iloscObiektow];
+
+	
+	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
+	
+	//"PLAYER: "
+	pozycjaWStringu = stringBuffer.find("PLAYER: ", pozycjaWStringu);
+
+	//idNumber
+	pozycjaWStringu += 8;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	int idNumber = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaSpacji - pozycjaWStringu));
+	
+	//nazwaTextury
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	std::string nazwaTextury = stringBuffer.substr(pozycjaWStringu, pozycjaSpacji-pozycjaWStringu);
+
+	//startX
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	float startX = std::stof(stringBuffer.substr(pozycjaWStringu, pozycjaSpacji - pozycjaWStringu));
+
+	//startY
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	float startY = std::stof(stringBuffer.substr(pozycjaWStringu, pozycjaSpacji - pozycjaWStringu));
+
+	//predkosc
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	float predkosc = std::stof(stringBuffer.substr(pozycjaWStringu, pozycjaSpacji - pozycjaWStringu));
+
+	//warstwa
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	int warstwa = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaSpacji - pozycjaWStringu));
+
+	//colides
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	bool colides = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaSpacji - pozycjaWStringu));
+
+	//interacts
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	bool interacts = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaSpacji - pozycjaWStringu));
+
+	//interactionData
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	std::string interactionData = stringBuffer.substr(pozycjaWStringu, pozycjaSpacji - pozycjaWStringu);
+
+	//isFlat
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
+	bool isFlat = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaSpacji - pozycjaWStringu));
+
+	//isBehindScene
+	pozycjaWStringu = pozycjaSpacji + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaKoncaLinii - pozycjaWStringu));
+	
+
+
+	this->obiekty[0].load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
+
+	player->copy(this->obiekty[0]);
+	this->player = player;
+
+	
+
+
+
+
+	std::cout << "liczba " << interactionData << std::endl;
+	std::cout << "size: " << pozycjaWStringu << " spacja: " << pozycjaSpacji << " koniec: " << pozycjaKoncaLinii << std::endl;
+	/*
 	////////////////////////////////////////////////////////////////TUTAJ SKONCZYLEM
 	//wyszukanie dialogu w buforze
 	int pozycjaPoczatkuDialogu = stringBuffer.find("DIALOG_ID: " + dialogId, 0);
@@ -64,33 +180,33 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 		else if (pozycjaTekstu != pozycjaOstatniegoTekstu) {
 			iloscZnakowWTekscie = stringBuffer.find("TEXT: ", pozycjaTekstu) - pozycjaTekstu;//pozycja nastepnego tekstu - pozycja tekstu = ilosc znakow miedzy tekstam
 		}
-
+		
 		this->dialogStrings[numerTekstu].assign(stringBuffer, pozycjaTekstu, iloscZnakowWTekscie);//od miejsca pozycji tekstu skopiowac iloscZnakowWTekscie znakow do charBuffera
 
 	}
-
+	*/
+	/*
 	// ustawianie wlasciwosci mapy ////////////////////////////////////////////////////////////////////////
 	this->wielkoscX = 1000;
 	this->wielkoscY = 1000;
 	this->najwyzszaWarstwa = 20;
 	this->iloscObiektow = 38;
 
-	this->obiekty = new Obiekt[iloscObiektow];
+	this->obiekty = new Obiekt[this->iloscObiektow];
 
 	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
 	this->obiekty[0].load(0, "bohater.bmp", 650, 600, 1, 20, true, false, "", false, false);
 	
 	player->copy(this->obiekty[0]);
 	this->player = player;
-
+	*/
 	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
 	this->obiekty[1].load(1, "scene.bmp", 0, 450, 0, 0, false, false, "", false, false);//pierwsza zerowa warstwa 'przed scena' bo ten obiekt jest scena
-	this->obiekty[1].setScale(4, 4.5);
 	this->obiekty[2].load(2, "niebo.bmp", -400, 0, 0.01, 0, false, false, "", false, true);//za scena
 	this->obiekty[3].load(3, "slonce.bmp", 210, -210, 0, 1, false, false, "", false, true);//za scena
 	this->obiekty[4].load(4, "gory.bmp", -400, 200, 0.02, 2, false, false, "", false, true);//za scena
 
-	background->initiate(player, 4, 1);
+	background->initiate(player, 4, 1);//pierwszy wczytany background jest scena
 	background->obiekty[0].copy(this->obiekty[1]);
 	background->obiekty[1].copy(this->obiekty[2]);
 	background->obiekty[2].copy(this->obiekty[3]);

@@ -3,4 +3,51 @@ SIZE_Y: 1000
 TOP_LAYER: 20
 OBIECTS_AMOUT: 38
 
-PLAYER: 
+PLAYER: 0 bohater.bmp 650 600 1 20 1 0 0 0 0
+
+BACKGROUND_AMOUNT: 4
+
+BACKGROUND: 1 scene.bmp 0 450 0 0 0 0 0 0 0
+BACKGROUND: 2 "niebo.bmp" -400 0 0.01 0 0 0 0 0 1
+BACKGROUND: 3 "slonce.bmp" 210 -210 0 1 0 0 0 0 1
+BACKGROUND: 4 "gory.bmp" -400 200 0.02 2 0 0 0 0 1
+
+BACKGROUND_END
+
+GAMEITEMS_AMOUNT: 33
+
+GAMEITEM: 5 bohater.bmp -500 0 0 3 1 1 jotpe 0 0
+GAMEITEM: 6 bohater1.bmp -200 -100 0 3 1 1 jotpe 1 0
+GAMEITEM: 7 bohater2.bmp -200 -200 0 3 1 1 halu_sztefi 1 0
+GAMEITEM: 8 bohater3.bmp 40 100 0 3 1 1 halu_sztefi 1 0
+GAMEITEM: 9 bohater4.bmp 200 -30 0 3 1 1 gudbaj_sztefi 0 0
+GAMEITEM: 10 bohater5.bmp 140 100 0 3 1 1 gudbaj_sztefi 0 0
+
+GAMEITEM: 11 budynek.bmp -400 -1000 0 3 1 0 0 0 0
+GAMEITEM: 12 budynek1.bmp 40 -1400 0 3 1 0 0 0 0
+GAMEITEM: 13 budynek2.bmp 400 -1800 0 3 1 0 0 0 0
+GAMEITEM: 14 budynek3.bmp 200 20 -800 3 1 0 0 0 0
+GAMEITEM: 15 budynek4.bmp -400 -600 0 3 1 0 0 0 0
+GAMEITEM: 16 budynek5.bmp 800 -1000 0 3 1 0 0 0 0
+
+GAMEITEM: 17 latarnia.bmp 100 -2000 0 3 0 0 0 0 0
+GAMEITEM: 18 latarnia.bmp 100 -2300 0 3 0 0 0 0 0
+GAMEITEM: 19 latarnia.bmp 100 -2600 0 3 0 0 0 0 0
+GAMEITEM: 20 latarnia.bmp 100 -2900 0 3 0 0 0 0 0
+GAMEITEM: 21 latarnia.bmp 100 -3200 0 3 0 0 0 0 0
+GAMEITEM: 22 latarnia.bmp 100 -3500 0 3 0 0 0 0 0
+GAMEITEM: 23 latarnia.bmp 100 -3800 0 3 0 0 0 0 0
+GAMEITEM: 24 latarnia.bmp 100 -4100 0 3 0 0 0 0 0
+GAMEITEM: 25 latarnia.bmp 100 -4400 0 3 0 0 0 0 0
+GAMEITEM: 26 latarnia.bmp 100 -4700 0 3 0 0 0 0 0
+GAMEITEM: 27 latarnia.bmp -100 -4800 0 3 0 0 0 0 0
+GAMEITEM: 28 latarnia.bmp -200 -5000 0 3 0 0 0 0 0
+GAMEITEM: 29 latarnia.bmp -400 -5200 0 3 0 0 0 0 0
+GAMEITEM: 30 latarnia.bmp -700 -5300 0 3 0 0 0 0 0
+GAMEITEM: 31 latarnia.bmp -900 -5400 0 3 0 0 0 0 0
+GAMEITEM: 32 latarnia.bmp -1200 -5400 0 3 0 0 0 0 0
+GAMEITEM: 33 latarnia.bmp -1500 -5400 0 3 0 0 0 0 0
+GAMEITEM: 34 latarnia.bmp -1800 -5400 0 3 0 0 0 0 0
+GAMEITEM: 35 latarnia.bmp -2100 -5400 0 3 0 0 0 0 0
+GAMEITEM: 36 latarnia.bmp -2400 -5400 0 3 0 0 0 0 0
+GAMEITEM: 37 latarnia.bmp -2700 -5400 0 3 0 0 0 0 0

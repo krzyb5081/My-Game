@@ -10,7 +10,7 @@ Gra::Gra() {
 	background = new Background;
 	gameItems = new GameItems;
 
-	mapa.loadMap(player, collision, background, gameItems);
+	mapa.loadMap("map.txt", player, collision, background, gameItems);
 	this->obiekty = mapa.getObiects();
 
 	this->dialog.load("gudbaj_sztefi");//usunac to stad i dac gdzies w petli gry jak trzeba bedzie wywolac dialog
