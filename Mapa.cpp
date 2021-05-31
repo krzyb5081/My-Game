@@ -459,61 +459,76 @@ void Mapa::loadObiectFromFile(std::string obiectFile) {
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	std::string nazwaTextury = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
 
+	//"Start positon x: "
+	pozycjaWStringu = stringBuffer.find("Start positon x: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	float startX = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//"Start positon y: "
+	pozycjaWStringu = stringBuffer.find("Start positon y: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	float startY = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//"Velocity: "
+	pozycjaWStringu = stringBuffer.find("Velocity: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	float predkosc = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//"Layer: "
+	pozycjaWStringu = stringBuffer.find("Layer: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	int warstwa = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//"Colides: "
+	pozycjaWStringu = stringBuffer.find("Colides: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	bool colides = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//"Interacts: "
+	pozycjaWStringu = stringBuffer.find("Interacts: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	bool interacts = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//"Interaction data: "
+	pozycjaWStringu = stringBuffer.find("Interaction data: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	std::string interactionData = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
+
+	//"Is flat: "
+	pozycjaWStringu = stringBuffer.find("Is flat: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	bool isFlat = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
 	//"Is behind scene: "
 	pozycjaWStringu = stringBuffer.find("Is behind scene: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
-	std::string nazwaTextury = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
-
-	
 	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
 
+	//sprawdzic czy to w ogole dziala
 
+	/*
+	this->iloscObiektow++;
+	this->gameItems->iloscItems++;
+	int idNumber = this->iloscObiektow - 1;
+
+
+	Obiekt * obiekt = new Obiekt;
 	
-	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-
-	//startX
-	
-	float startX = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//startY
-	
-	float startY = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//predkosc
-	
-	float predkosc = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//warstwa
-	
-	int warstwa = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//colides
-	
-	bool colides = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//interacts
-	
-	bool interacts = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//interactionData
-	
-	std::string interactionData = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
-
-	//isFlat
-	
-	bool isFlat = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//isBehindScene
-	
-	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaKoncaLinii - pozycjaWStringu));
-
-
+	obiekt->load(idNumber, nazwaTextury.c_str(), startX, starty, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 	//tworzenie i kopiowanie obiektow
 	this->obiekty[idNumber].load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 
-	gameItems->items[i].copy(this->obiekty[idNumber]);
+	this->gameItems->items[i].copy(this->obiekty[idNumber]);
+	*/
 }
 
 Obiekt * Mapa::sortowanieObiektow(){
