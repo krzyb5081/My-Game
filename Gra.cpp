@@ -13,7 +13,12 @@ Gra::Gra() {
 	mapa.loadMap("map.txt", player, collision, background, gameItems);
 	this->obiekty = mapa.getObiects();
 
+	//usunac to bo zapis
+	mapa.saveMap("map2.txt");
+
 	this->dialog.load("gudbaj_sztefi");//usunac to stad i dac gdzies w petli gry jak trzeba bedzie wywolac dialog
+
+	this->gameState = this->GAME_STATE_MAP_EDITOR;
 }
 
 void Gra::loop(sf::RenderWindow & window){
@@ -83,7 +88,7 @@ void Gra::main(sf::RenderWindow & window) {
 		break;
 	case this->GAME_STATE_MAP_EDITOR:
 
-		
+		this->loopMapEditor(window);
 
 		break;
 	default:

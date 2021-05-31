@@ -10,6 +10,7 @@ public:
 
 	sf::Texture * texture;
 	sf::Sprite * sprite;
+	std::string * textureName;
 	
 	int * warstwa;
 	bool * isVisible;

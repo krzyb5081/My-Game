@@ -1,6 +1,7 @@
 #include "Mapa.h"
 
 #include <iostream>
+#include <fstream>
 
 Mapa::Mapa(){}
 
@@ -10,6 +11,11 @@ Mapa::Mapa(std::string mapFile, Player * player, Collision * collision, Backgrou
 
 void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems){
 	
+	this->player = player;
+	this->collision = collision;
+	this->background = background;
+	this->gameItems = gameItems;
+
 	if (mapFile == "") {
 		printf("No map loaded, please exit game\n");
 		while (1) {}
@@ -29,10 +35,6 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 	std::string stringBuffer(buffer);
 	delete[] buffer;
 
-
-	//na potem //usunac to
-	//pozycjaSpacji = stringBuffer.find(" ", pozycjaWStringu);
-	//pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 
 	int pozycjaWStringu = 0;
 	int pozycjaSpacji = 0;
@@ -136,7 +138,6 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 	this->obiekty[idNumber].load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 
 	player->copy(this->obiekty[0]);
-	this->player = player;
 
 	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
 
@@ -293,10 +294,226 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 	}
 
 	// LOADING GAMEITEMS TO COLLISION /////////////////////////////////////////////////////////////////////
-	collision->load(player, gameItems->items, gameItems->iloscItems);
+	collision->load(player, gameItems->items, *gameItems->iloscItems);
 
 	//CHECKING GAMEITEMS VISIBILITY ///////////////////////////////////////////////////////////////////////
 	gameItems->checkingVisibility();
+}
+
+void Mapa::saveMap(std::string mapFile) {
+	if (mapFile == "") {
+		printf("Map is not saved\n");
+		return;
+	}
+
+	std::string stringBuffer = "";
+
+
+	//////////////////////////////////////////////ZAPIS DANYCH/////////////////////////////////////////////
+
+	// wlasciwosci mapy ///////////////////////////////////////////////////////////////////////////////////
+
+	//wielkoscX
+	stringBuffer += "SIZE_X: ";
+	stringBuffer += std::to_string(this->wielkoscX);
+	stringBuffer += "\n";
+
+	//wielkoscY
+	stringBuffer += "SIZE_Y: ";
+	stringBuffer += std::to_string(this->wielkoscY);
+	stringBuffer += "\n";
+
+	//najwyzszaWarstwa
+	stringBuffer += "TOP_LAYER: ";
+	stringBuffer += std::to_string(this->najwyzszaWarstwa);
+	stringBuffer += "\n";
+
+	//iloscObiektow
+	stringBuffer += "OBIECTS_AMOUT: ";
+	stringBuffer += std::to_string(this->iloscObiektow);
+	stringBuffer += "\n";
+
+	stringBuffer += "\n";
+
+	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
+
+	//"PLAYER: "
+	stringBuffer += "PLAYER:";
+	stringBuffer += " ";
+	stringBuffer += std::to_string(*this->player->idNumber);
+	stringBuffer += " ";
+	stringBuffer += *this->player->textureName;
+	stringBuffer += " ";
+	stringBuffer += std::to_string(*this->player->startX);
+	stringBuffer += " ";
+	stringBuffer += std::to_string(*this->player->startY);
+	stringBuffer += " ";
+	stringBuffer += std::to_string(*this->player->predkosc);
+	stringBuffer += " ";
+	stringBuffer += std::to_string(*this->player->warstwa);
+	stringBuffer += " ";
+	stringBuffer += std::to_string(*this->player->colides);
+	stringBuffer += " ";
+	stringBuffer += std::to_string(*this->player->interacts);
+	stringBuffer += " ";
+	stringBuffer += *this->player->interactionData;
+	stringBuffer += " ";
+	stringBuffer += std::to_string(*this->player->isFlat);
+	stringBuffer += " ";
+	stringBuffer += std::to_string(*this->player->isBehindScene);
+
+	stringBuffer += "\n\n";
+
+	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
+
+	//backgroundIlosc
+	stringBuffer += "BACKGROUND_AMOUNT: ";
+	stringBuffer += std::to_string(*this->background->iloscObiektow);
+	stringBuffer += "\n\n";
+
+	//obiekty background
+	for (int i = 0; i < *this->background->iloscObiektow; i++) {
+
+		stringBuffer += "BACKGROUND:";
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->background->obiekty[i].idNumber);
+		stringBuffer += " ";
+		stringBuffer += *this->background->obiekty[i].textureName;
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->background->obiekty[i].startX);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->background->obiekty[i].startY);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->background->obiekty[i].predkosc);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->background->obiekty[i].warstwa);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->background->obiekty[i].colides);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->background->obiekty[i].interacts);
+		stringBuffer += " ";
+		stringBuffer += *this->background->obiekty[i].interactionData;
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->background->obiekty[i].isFlat);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->background->obiekty[i].isBehindScene);
+		stringBuffer += "\n";
+	}
+	stringBuffer += "\n";
+
+	// LOADING GAMEITEMS //////////////////////////////////////////////////////////////////////////////////
+
+	//gameItemsIlosc
+	stringBuffer += "GAMEITEMS_AMOUNT: ";
+	stringBuffer += std::to_string(*this->gameItems->iloscItems);
+	stringBuffer += "\n\n";
+
+	//obiekty gameItems
+	for (int i = 0; i < *this->gameItems->iloscItems; i++) {
+
+		stringBuffer += "GAMEITEM:";
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->gameItems->items[i].idNumber);
+		stringBuffer += " ";
+		stringBuffer += *this->gameItems->items[i].textureName;
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->gameItems->items[i].startX);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->gameItems->items[i].startY);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->gameItems->items[i].predkosc);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->gameItems->items[i].warstwa);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->gameItems->items[i].colides);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->gameItems->items[i].interacts);
+		stringBuffer += " ";
+		stringBuffer += *this->gameItems->items[i].interactionData;
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->gameItems->items[i].isFlat);
+		stringBuffer += " ";
+		stringBuffer += std::to_string(*this->gameItems->items[i].isBehindScene);
+		stringBuffer += "\n";
+	}
+	stringBuffer += "\n";
+
+	std::fstream file;
+	file.open(mapFile, std::ios_base::out | std::ios_base::trunc);
+	file << stringBuffer;
+	file.close();
+	std::cout << stringBuffer << std::endl;
+}
+
+void Mapa::loadObiectFromFile(std::string obiectFile) {
+
+	int pozycjaWStringu = 0;
+	int pozycjaPoSpacji = 0;
+	int pozycjaKoncaLinii = 0;
+	std::string stringBuffer = "";
+
+	
+	//"Texture file name: "
+	pozycjaWStringu = stringBuffer.find("Texture file name: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	std::string nazwaTextury = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
+
+	//"Is behind scene: "
+	pozycjaWStringu = stringBuffer.find("Is behind scene: ", pozycjaWStringu);
+	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
+	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
+	std::string nazwaTextury = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
+
+	
+	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+
+	
+	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+
+	//startX
+	
+	float startX = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//startY
+	
+	float startY = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//predkosc
+	
+	float predkosc = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//warstwa
+	
+	int warstwa = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//colides
+	
+	bool colides = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//interacts
+	
+	bool interacts = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//interactionData
+	
+	std::string interactionData = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
+
+	//isFlat
+	
+	bool isFlat = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
+
+	//isBehindScene
+	
+	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaKoncaLinii - pozycjaWStringu));
+
+
+	//tworzenie i kopiowanie obiektow
+	this->obiekty[idNumber].load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
+
+	gameItems->items[i].copy(this->obiekty[idNumber]);
 }
 
 Obiekt * Mapa::sortowanieObiektow(){

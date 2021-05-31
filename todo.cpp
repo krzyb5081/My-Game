@@ -9,5 +9,10 @@ zrobic animacje
 
 ZROBIC KLASE GOALS czy cos takiego KTORA BEDZIE SPRAWDZALA CZY ZOSTALY WYKONANE CELE GRY 
 
+zrobic map editor
+zrobic map editor ktory bedzie dzialal w trybie map editor
+po wcisnieciu e odczytuje z pliku obiekt ktory ma byc postawiony
+spacja stawia obiekt
+
 
 */

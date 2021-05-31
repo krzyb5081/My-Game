@@ -19,18 +19,28 @@ Player::Player(){
 }
 
 void Player::copy(Obiekt &obiekt){
+	this->idNumber = obiekt.idNumber;
+
 	this->texture = obiekt.texture;
 	this->sprite = obiekt.sprite;
-	this->idNumber = obiekt.idNumber;
-	this->predkosc = obiekt.predkosc;
+	this->textureName = obiekt.textureName;
+
 	this->warstwa = obiekt.warstwa;
 	this->isVisible = obiekt.isVisible;
+	this->isBehindScene = obiekt.isBehindScene;
+	this->isTransparent = obiekt.isTransparent;
+
+	this->predkosc = obiekt.predkosc;
+	this->startX = obiekt.startX;
+	this->startY = obiekt.startY;
 	this->height = obiekt.height;
 	this->width = obiekt.width;
 
-	//pozycje startowe raczej do niczego nie potrzebne ale by byc dokladnym mozna napisac bo startowe kordy playera na swiecie to 0x0
-	this->startX = new float(0);
-	this->startY = new float(0);
+	this->colides = obiekt.colides;
+	this->interacts = obiekt.interacts;
+	this->interactionData = obiekt.interactionData;
+	this->isFlat = obiekt.isFlat;
+
 	
 	worldPlayerCoordinatesX = 0;
 	worldPlayerCoordinatesY = 0;

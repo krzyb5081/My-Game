@@ -12,14 +12,14 @@ void Background::initiate(Player * player, int iloscObiektow){
 	obiekty = new Obiekt[iloscObiektow];
 
 	this->player = player;
-	this->iloscObiektow = iloscObiektow;
+	this->iloscObiektow = new int(iloscObiektow);
 
 }
 
 void Background::sterowanie() {
 	
 
-	for (int i = 0; i < iloscObiektow; i++) {
+	for (int i = 0; i < *this->iloscObiektow; i++) {
 		if (*this->obiekty[i].isBehindScene == false) {//tylko background sceny ma ustawione na false
 			continue;
 		}

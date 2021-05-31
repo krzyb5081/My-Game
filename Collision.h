@@ -8,7 +8,7 @@
 class Collision {
 	Player * player;
 	Obiekt * gameItems;
-	int iloscItems;
+	int * iloscItems;
 
 	bool checkPlayerCollision(Player * player, Obiekt * obiekt);
 public:

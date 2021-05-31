@@ -28,6 +28,10 @@ public:
 	Mapa(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems);
 
 	void loadMap(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems);
+	void saveMap(std::string mapFile);
+
+	void loadObiectFromFile(std::string obiectFile);
+
 	Obiekt * sortowanieObiektow();
 	int getSizeX();
 	int getSizeY();

@@ -5,11 +5,9 @@
 
 
 class Background{
-
-	int iloscObiektow;
-
-
 public:
+	int * iloscObiektow;
+
 	Obiekt * obiekty;
 	Player * player;
 

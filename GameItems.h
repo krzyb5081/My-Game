@@ -9,7 +9,7 @@ class GameItems{
 
 public:
 
-	int iloscItems;
+	int * iloscItems;
 	Obiekt * items;
 	Player * player;
 

@@ -12,7 +12,7 @@ GameItems::GameItems(Player * player, int iloscItems){
 void GameItems::initiate(Player * player, int iloscItems){
 	this->items = new Obiekt[iloscItems];
 	this->player = player;
-	this->iloscItems = iloscItems;
+	this->iloscItems = new int(iloscItems);
 }
 
 void GameItems::ruszanie(){
@@ -20,7 +20,7 @@ void GameItems::ruszanie(){
 	float playerY = this->player->worldPlayerCoordinatesY;
 
 	checkingVisibility();
-	for (int i = 0; i < iloscItems; i++) {
+	for (int i = 0; i < *this->iloscItems; i++) {
 
 		if (*this->items[i].isVisible == true) {//ustawianie pozycji tylko sprajtom ktore sa widoczne
 
@@ -43,7 +43,7 @@ void GameItems::checkingVisibility(){
 
 	const float pozycjaScenyY = 450;//pozycja y sprajta odpowiedzialnego za scene
 
-	for (int i = 0; i < iloscItems; i++){
+	for (int i = 0; i < *this->iloscItems; i++){
 		float odlegloscY = player->worldPlayerCoordinatesY - *this->items[i].startY;
 		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - pozycjaScenyY;
 

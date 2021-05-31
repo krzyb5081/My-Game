@@ -7,6 +7,7 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
 
 	this->texture = new sf::Texture;
 	this->sprite = new sf::Sprite;
+	this->textureName = new std::string;
 
 	this->warstwa = new int;
 	this->isVisible = new bool;
@@ -30,6 +31,7 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
     this->texture->loadFromFile(nazwaTextury);
     this->sprite->setTexture(*texture);
 	this->sprite->setPosition(startX, startY);
+	*this->textureName = nazwaTextury;
 
 	*this->warstwa = warstwa;
 	*this->isVisible = true;
@@ -50,11 +52,12 @@ void Obiekt::load(int idNumber, const char * nazwaTextury, float startX, float s
 	
 }
 
-void Obiekt::copy(Obiekt &obiekt){
+void Obiekt::copy(Obiekt &obiekt){//przy zmienianiu copy() zmienic jeszcze w playerze
 	this->idNumber = obiekt.idNumber;
 
 	this->texture = obiekt.texture;
 	this->sprite = obiekt.sprite;
+	this->textureName = obiekt.textureName;
 	
 	this->warstwa = obiekt.warstwa;
 	this->isVisible = obiekt.isVisible;
