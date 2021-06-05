@@ -1,5 +1,7 @@
 #include "Dialog.h"
 
+
+//poprawic to zeby bylo bardziej czytelne i sensowne
 Dialog::Dialog() {
 	load("");
 }
