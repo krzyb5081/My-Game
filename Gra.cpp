@@ -5,16 +5,13 @@ Gra::Gra() {
 
 	this->obiekty = new Obiekt;
 
-	player = new Player;
-	collision = new Collision;
-	background = new Background;
-	gameItems = new GameItems;
+	this->player = new Player;
+	this->collision = new Collision;
+	this->background = new Background;
+	this->gameItems = new GameItems;
 
 	mapa.loadMap("map.txt", player, collision, background, gameItems);
 	this->obiekty = mapa.getObiects();
-
-	//usunac to bo zapis
-	mapa.saveMap("map2.txt");
 
 	this->dialog.load("gudbaj_sztefi");//usunac to stad i dac gdzies w petli gry jak trzeba bedzie wywolac dialog
 
@@ -37,6 +34,8 @@ void Gra::loop(sf::RenderWindow & window){
 }
 
 void Gra::loopMapEditor(sf::RenderWindow & window) {
+
+	this->obiekty = mapa.getObiects();
 
 	this->player->loop();
 	this->background->sterowanie();

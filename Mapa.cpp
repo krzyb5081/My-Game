@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-Mapa::Mapa(){}
+Mapa::Mapa(){}// nie uzywac
 
 Mapa::Mapa(std::string mapFile, Player * player, Collision * collision, Background * background, GameItems * gameItems){
 	loadMap(mapFile, player, collision, background, gameItems);
@@ -515,20 +515,20 @@ void Mapa::loadObiectFromFile(std::string obiectFile) {
 
 	//sprawdzic czy to w ogole dziala
 
-	/*
+	
 	this->iloscObiektow++;
 	this->gameItems->iloscItems++;
 	int idNumber = this->iloscObiektow - 1;
 
 
 	Obiekt * obiekt = new Obiekt;
+	obiekt->load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 	
-	obiekt->load(idNumber, nazwaTextury.c_str(), startX, starty, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 	//tworzenie i kopiowanie obiektow
 	this->obiekty[idNumber].load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 
 	this->gameItems->items[i].copy(this->obiekty[idNumber]);
-	*/
+	
 }
 
 Obiekt * Mapa::sortowanieObiektow(){
