@@ -14,11 +14,11 @@ class Mapa {
 	int iloscObiektow;
 	int najwyzszaWarstwa;
 
-    Obiekt * obiekty;
+    std::vector<Obiekt> * obiekty;
 	Player * player;
 	Collision * collision;
-	Background * background;
-	GameItems * gameItems;
+	std::vector <Background> * background;
+	std::vector <GameItems> * gameItems;
 
 
 
