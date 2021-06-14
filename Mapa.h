@@ -17,8 +17,8 @@ class Mapa {
     std::vector<Obiekt> * obiekty;
 	Player * player;
 	Collision * collision;
-	std::vector <Background> * background;
-	std::vector <GameItems> * gameItems;
+	Background * background;
+	GameItems * gameItems;
 
 
 

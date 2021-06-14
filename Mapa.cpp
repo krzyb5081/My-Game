@@ -70,7 +70,7 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 	this->iloscObiektow = std::stoi(stringBuffer.substr(pozycjaWStringu, pozycjaKoncaLinii - pozycjaWStringu));
 	
 	//tworzenie tablicy obiektow
-	this->obiekty = new Obiekt[this->iloscObiektow];
+	this->obiekty = new std::vector<Obiekt>;
 
 	
 	// LOADING PLAYER /////////////////////////////////////////////////////////////////////////////////////
@@ -598,6 +598,6 @@ int Mapa::getNumberOfObiects(){
 	return iloscObiektow;
 }
 
-Obiekt * Mapa::getObiects(){
+std::vector<Obiekt> * Mapa::getObiects(){
 	return this->obiekty;
 }
