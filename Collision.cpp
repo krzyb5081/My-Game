@@ -1,7 +1,7 @@
 #include "Collision.h"
 
 Collision::Collision() {
-	load(new Player, new Obiekt, 0);
+	load(new Player, new std::vector<Obiekt>, 0);
 }
 
 Collision::Collision(Player * player, std::vector<Obiekt> * gameItems, int iloscItems) {
@@ -103,13 +103,13 @@ std::string Collision::doInteraction() {
 	if (*this->player->use) {
 
 		for (int i = 0; i < *this->iloscItems; i++) {
-			if ((*gameItems[i].isVisible == false) || (*gameItems[i].isBehindScene == true)) {//jesli obiekt jest za scena albo jest niewidzialny to go nie sprawdzaj
+			if ((*gameItems->at(i).isVisible == false) || (*gameItems->at(i).isBehindScene == true)) {//jesli obiekt jest za scena albo jest niewidzialny to go nie sprawdzaj
 				continue;
 			}
 
-			if (this->player->sprite->getGlobalBounds().intersects(this->gameItems[i].sprite->getGlobalBounds()) == true) {//interakcja z pierwszym napotkanym obiektem na podstawie prostej kolizji sprajtow
-				if (*this->gameItems[i].interacts == true) {
-					return "DIALOG "+ *this->gameItems[i].interactionData;
+			if (this->player->sprite->getGlobalBounds().intersects(this->gameItems->at(i).sprite->getGlobalBounds()) == true) {//interakcja z pierwszym napotkanym obiektem na podstawie prostej kolizji sprajtow
+				if (*this->gameItems->at(i).interacts == true) {
+					return "DIALOG "+ *this->gameItems->at(i).interactionData;
 				}
 			}
 		}
@@ -131,11 +131,11 @@ bool Collision::checkPlayerCollisionTop() {
 
 	player->move(0, -playerPredkosc);//symulowanie ze player jest w miejscu kolizji
 	for (int i = 0; i < *this->iloscItems; i++) {
-		if ((*gameItems[i].isVisible == false) || ((*gameItems[i].isBehindScene == true)&&(*gameItems[i].isFlat == false)) ) {//jesli obiekt jest za scena i nie jest plaski albo jest niewidzialny to go nie sprawdzaj
+		if ((*gameItems->at(i).isVisible == false) || ((*gameItems->at(i).isBehindScene == true)&&(*gameItems->at(i).isFlat == false)) ) {//jesli obiekt jest za scena i nie jest plaski albo jest niewidzialny to go nie sprawdzaj
 			continue;
 		}
 
-		if (checkPlayerCollision(player, &gameItems[i]) == true) {//jesli zetknie sie z czymkolwiek
+		if (checkPlayerCollision(player, &gameItems->at(i)) == true) {//jesli zetknie sie z czymkolwiek
 			player->move(0, playerPredkosc);
 			return true;
 		}
@@ -149,11 +149,11 @@ bool Collision::checkPlayerCollisionBot() {
 
 	player->move(0, playerPredkosc);//symulowanie ze player jest w miejscu kolizji
 	for (int i = 0; i < *this->iloscItems; i++) {
-		if ((*gameItems[i].isVisible == false) || ((*gameItems[i].isBehindScene == true) && (*gameItems[i].isFlat == false))) {//jesli obiekt jest za scena i nie jest plaski albo jest niewidzialny to go nie sprawdzaj
+		if ((*gameItems->at(i).isVisible == false) || ((*gameItems->at(i).isBehindScene == true) && (*gameItems->at(i).isFlat == false))) {//jesli obiekt jest za scena i nie jest plaski albo jest niewidzialny to go nie sprawdzaj
 			continue;
 		}
 
-		if (checkPlayerCollision(player, &gameItems[i]) == true) {//jesli zetknie sie z czymkolwiek
+		if (checkPlayerCollision(player, &gameItems->at(i)) == true) {//jesli zetknie sie z czymkolwiek
 			player->move(0, -playerPredkosc);
 			return true;
 		}
@@ -167,11 +167,11 @@ bool Collision::checkPlayerCollisionLeft() {
 
 	player->move(-playerPredkosc, 0);//symulowanie ze player jest w miejscu kolizji
 	for (int i = 0; i < *this->iloscItems; i++) {
-		if ((*gameItems[i].isVisible == false) || ((*gameItems[i].isBehindScene == true) && (*gameItems[i].isFlat == false))) {//jesli obiekt jest za scena i nie jest plaski albo jest niewidzialny to go nie sprawdzaj
+		if ((*gameItems->at(i).isVisible == false) || ((*gameItems->at(i).isBehindScene == true) && (*gameItems->at(i).isFlat == false))) {//jesli obiekt jest za scena i nie jest plaski albo jest niewidzialny to go nie sprawdzaj
 			continue;
 		}
 
-		if (checkPlayerCollision(player, &gameItems[i]) == true) {//jesli zetknie sie z czymkolwiek
+		if (checkPlayerCollision(player, &gameItems->at(i)) == true) {//jesli zetknie sie z czymkolwiek
 			player->move(playerPredkosc, 0);
 			return true;
 		}
@@ -185,11 +185,11 @@ bool Collision::checkPlayerCollisionRight() {
 
 	player->move(playerPredkosc, 0);//symulowanie ze player jest w miejscu kolizji
 	for (int i = 0; i < *this->iloscItems; i++) {
-		if ((*gameItems[i].isVisible == false) || ((*gameItems[i].isBehindScene == true) && (*gameItems[i].isFlat == false))) {//jesli obiekt jest za scena i nie jest plaski albo jest niewidzialny to go nie sprawdzaj
+		if ((*gameItems->at(i).isVisible == false) || ((*gameItems->at(i).isBehindScene == true) && (*gameItems->at(i).isFlat == false))) {//jesli obiekt jest za scena i nie jest plaski albo jest niewidzialny to go nie sprawdzaj
 			continue;
 		}
 
-		if (checkPlayerCollision(player, &gameItems[i]) == true) {//jesli zetknie sie z czymkolwiek
+		if (checkPlayerCollision(player, &gameItems->at(i)) == true) {//jesli zetknie sie z czymkolwiek
 			player->move(-playerPredkosc, 0);
 			return true;
 		}

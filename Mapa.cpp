@@ -297,7 +297,7 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 		newObiect.load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 		this->obiekty->push_back(newObiect);
 
-		gameItems->items->at(i).copy(this->obiekty->back());
+		gameItems->items->push_back(this->obiekty->back());
 	}
 
 	// LOADING GAMEITEMS TO COLLISION /////////////////////////////////////////////////////////////////////
@@ -420,27 +420,27 @@ void Mapa::saveMap(std::string mapFile) {
 
 		stringBuffer += "GAMEITEM:";
 		stringBuffer += " ";
-		stringBuffer += std::to_string(*this->gameItems->items[i].idNumber);
+		stringBuffer += std::to_string(*this->gameItems->items->at(i).idNumber);
 		stringBuffer += " ";
-		stringBuffer += *this->gameItems->items[i].textureName;
+		stringBuffer += *this->gameItems->items->at(i).textureName;
 		stringBuffer += " ";
-		stringBuffer += std::to_string(*this->gameItems->items[i].startX);
+		stringBuffer += std::to_string(*this->gameItems->items->at(i).startX);
 		stringBuffer += " ";
-		stringBuffer += std::to_string(*this->gameItems->items[i].startY);
+		stringBuffer += std::to_string(*this->gameItems->items->at(i).startY);
 		stringBuffer += " ";
-		stringBuffer += std::to_string(*this->gameItems->items[i].predkosc);
+		stringBuffer += std::to_string(*this->gameItems->items->at(i).predkosc);
 		stringBuffer += " ";
-		stringBuffer += std::to_string(*this->gameItems->items[i].warstwa);
+		stringBuffer += std::to_string(*this->gameItems->items->at(i).warstwa);
 		stringBuffer += " ";
-		stringBuffer += std::to_string(*this->gameItems->items[i].colides);
+		stringBuffer += std::to_string(*this->gameItems->items->at(i).colides);
 		stringBuffer += " ";
-		stringBuffer += std::to_string(*this->gameItems->items[i].interacts);
+		stringBuffer += std::to_string(*this->gameItems->items->at(i).interacts);
 		stringBuffer += " ";
-		stringBuffer += *this->gameItems->items[i].interactionData;
+		stringBuffer += *this->gameItems->items->at(i).interactionData;
 		stringBuffer += " ";
-		stringBuffer += std::to_string(*this->gameItems->items[i].isFlat);
+		stringBuffer += std::to_string(*this->gameItems->items->at(i).isFlat);
 		stringBuffer += " ";
-		stringBuffer += std::to_string(*this->gameItems->items[i].isBehindScene);
+		stringBuffer += std::to_string(*this->gameItems->items->at(i).isBehindScene);
 		stringBuffer += "\n";
 	}
 	stringBuffer += "\n";
@@ -531,7 +531,7 @@ void Mapa::loadObiectFromFile(std::string obiectFile) {
 	newObiect.load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 	this->obiekty->push_back(newObiect);
 	
-	this->gameItems->items->at(i).copy(this->obiekty->back());
+	this->gameItems->items->push_back(this->obiekty->back());
 	
 	//tutaj skonczylem
 }
