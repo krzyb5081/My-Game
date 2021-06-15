@@ -135,9 +135,12 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 	
 
 	//tworzenie i kopiowanie obiektu
-	this->obiekty[idNumber].load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 
-	player->copy(this->obiekty[0]);
+	Obiekt newObiect;
+	newObiect.load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
+	this->obiekty->push_back(newObiect);
+
+	player->copy(this->obiekty->back());
 
 	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
 
@@ -211,9 +214,11 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 
 
 		//tworzenie i kopiowanie obiektow
-		this->obiekty[idNumber].load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
-	
-		background->obiekty[i].copy(this->obiekty[idNumber]);
+		Obiekt newObiect;
+		newObiect.load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
+		this->obiekty->push_back(newObiect);
+
+		background->obiekty[i].copy(this->obiekty->back());
 	}
 	
 	// LOADING GAMEITEMS //////////////////////////////////////////////////////////////////////////////////
@@ -226,7 +231,7 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 
 	gameItems->initiate(player, gameItemsIlosc);
 
-	//obiekty background
+	//obiekty gameItems
 	for (int i = 0; i < gameItemsIlosc; i++) {
 		//"GAMEITEM: "
 		pozycjaWStringu = stringBuffer.find("GAMEITEM: ", pozycjaWStringu);
@@ -288,9 +293,11 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 
 
 		//tworzenie i kopiowanie obiektow
-		this->obiekty[idNumber].load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
+		Obiekt newObiect;
+		newObiect.load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
+		this->obiekty->push_back(newObiect);
 
-		gameItems->items[i].copy(this->obiekty[idNumber]);
+		gameItems->items->at(i).copy(this->obiekty->back());
 	}
 
 	// LOADING GAMEITEMS TO COLLISION /////////////////////////////////////////////////////////////////////
@@ -513,25 +520,23 @@ void Mapa::loadObiectFromFile(std::string obiectFile) {
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
 
-	//sprawdzic czy to w ogole dziala
 
-	
+	//zwiekszenie liczby obiektow
 	this->iloscObiektow++;
 	this->gameItems->iloscItems++;
 	int idNumber = this->iloscObiektow - 1;
 
-
-	Obiekt * obiekt = new Obiekt;
-	obiekt->load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
-	
 	//tworzenie i kopiowanie obiektow
-	this->obiekty[idNumber].load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
-
-	this->gameItems->items[i].copy(this->obiekty[idNumber]);
+	Obiekt newObiect;
+	newObiect.load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
+	this->obiekty->push_back(newObiect);
 	
+	this->gameItems->items->at(i).copy(this->obiekty->back());
+	
+	//tutaj skonczylem
 }
 
-Obiekt * Mapa::sortowanieObiektow(){
+std::vector<Obiekt> * Mapa::sortowanieObiektow(){
 	
 	//najdalsza warstwa lezy za scena, czyli plansz¹ po której chodzi gracz, jezeli obiekt ma warstwê 12 ale ma ustawiony parametr isBehindScene na true to bêdzie pierwszy w sortowaniu przed warstw¹ 0. Dziêki temu ka¿dy obiekt zachowa swoj¹ warstwê nawet za scen¹, sprawi to ze obiekty stojace jeden na drugim beda wychodzic zza sceny w odpowiedniej kolejnosci
 	Obiekt *posortowaneObiekty = new Obiekt[this->iloscObiektow];
@@ -541,7 +546,7 @@ Obiekt * Mapa::sortowanieObiektow(){
 	//rozpoznawanie ktory obiekt jest obiektem playera
 	int indexObiektuPlayeraWNieposortowanychObiektach = 0;
 	for(int i = 0; i < this->iloscObiektow; i++) {
-		if (this->player->isObiectAPlayer(this->obiekty[i])) {
+		if (this->player->isObiectAPlayer(this->obiekty->at(i))) {
 			indexObiektuPlayeraWNieposortowanychObiektach = i;
 			break;
 		}
@@ -550,9 +555,9 @@ Obiekt * Mapa::sortowanieObiektow(){
 	//sortowanie najpierw obiektow za scena (parametr isBehindScene == true)
 	for (int warstwa = 0; warstwa <= this->najwyzszaWarstwa; warstwa++) {
 		for (int i = 0; i < this->iloscObiektow; i++){
-			if ((*this->obiekty[i].isBehindScene == true) && (*this->obiekty[i].isFlat == false)) {
-				if (*this->obiekty[i].warstwa == warstwa) {
-					posortowaneObiekty[iloscPosortowanychObiektow].copy(this->obiekty[i]);
+			if ((*this->obiekty->at(i).isBehindScene == true) && (*this->obiekty->at(i).isFlat == false)) {
+				if (*this->obiekty->at(i).warstwa == warstwa) {
+					posortowaneObiekty[iloscPosortowanychObiektow].copy(this->obiekty->at(i));
 					iloscPosortowanychObiektow++;
 				}
 			}
@@ -564,22 +569,22 @@ Obiekt * Mapa::sortowanieObiektow(){
 			if (i == indexObiektuPlayeraWNieposortowanychObiektach) {//jesli teraz leci warstwa playera i index playera to pomin go zeby wrzucic go do tej warstwy na koncu, to sprawi ze na pewno bedzie przed wszystkimi obiektami danej warstwy
 				continue;
 			}
-			if ((*this->obiekty[i].isBehindScene == false) || (*this->obiekty[i].isFlat == true)) {
-				if (*this->obiekty[i].warstwa == warstwa) {
-					posortowaneObiekty[iloscPosortowanychObiektow].copy(this->obiekty[i]);
+			if ((*this->obiekty->at(i).isBehindScene == false) || (*this->obiekty->at(i).isFlat == true)) {
+				if (*this->obiekty->at(i).warstwa == warstwa) {
+					posortowaneObiekty[iloscPosortowanychObiektow].copy(this->obiekty->at(i));
 					iloscPosortowanychObiektow++;
 				}
 			}
 		}
-		if (*this->obiekty[indexObiektuPlayeraWNieposortowanychObiektach].warstwa == warstwa) {
-			posortowaneObiekty[iloscPosortowanychObiektow].copy(this->obiekty[indexObiektuPlayeraWNieposortowanychObiektach]);
+		if (*this->obiekty->at(indexObiektuPlayeraWNieposortowanychObiektach).warstwa == warstwa) {
+			posortowaneObiekty[iloscPosortowanychObiektow].copy(this->obiekty->at(indexObiektuPlayeraWNieposortowanychObiektach));
 			iloscPosortowanychObiektow++;
 		}
 	}
 
 	
 	for (int i = 0; i < iloscPosortowanychObiektow; i++) {
-		this->obiekty[i].copy(posortowaneObiekty[i]);
+		this->obiekty->at(i).copy(posortowaneObiekty[i]);
 	}
 	delete[] posortowaneObiekty;
 	

@@ -9,8 +9,8 @@ class GameItems{
 
 public:
 
+	std::vector<Obiekt> * items;
 	int * iloscItems;
-	Obiekt * items;
 	Player * player;
 
 	GameItems();

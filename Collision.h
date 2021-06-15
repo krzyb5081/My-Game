@@ -7,15 +7,15 @@
 
 class Collision {
 	Player * player;
-	Obiekt * gameItems;
+	std::vector<Obiekt> * gameItems;
 	int * iloscItems;
 
 	bool checkPlayerCollision(Player * player, Obiekt * obiekt);
 public:
 
 	Collision();
-	Collision(Player * player, Obiekt * gameItems, int iloscItems);
-	void load(Player * player, Obiekt * gameItems, int iloscItems);
+	Collision(Player * player, std::vector<Obiekt> * gameItems, int iloscItems);
+	void load(Player * player, std::vector<Obiekt> * gameItems, int iloscItems);
 	
 	std::string doInteraction();
 

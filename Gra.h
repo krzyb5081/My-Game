@@ -25,7 +25,7 @@ private:
 	Dialog dialog;
 
 	Mapa mapa;
-	Obiekt * obiekty;
+	std::vector<Obiekt> * obiekty;
 
 	Player * player;
 	Collision * collision;

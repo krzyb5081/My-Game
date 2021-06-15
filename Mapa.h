@@ -32,11 +32,11 @@ public:
 
 	void loadObiectFromFile(std::string obiectFile);
 
-	Obiekt * sortowanieObiektow();
+	std::vector<Obiekt> * sortowanieObiektow();
 	int getSizeX();
 	int getSizeY();
 	int getNumberOfObiects();
-	Obiekt * getObiects();
+	std::vector<Obiekt> * getObiects();
 	
 
 };

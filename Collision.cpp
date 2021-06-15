@@ -4,11 +4,11 @@ Collision::Collision() {
 	load(new Player, new Obiekt, 0);
 }
 
-Collision::Collision(Player * player, Obiekt * gameItems, int iloscItems) {
+Collision::Collision(Player * player, std::vector<Obiekt> * gameItems, int iloscItems) {
 	load(player, gameItems, iloscItems);
 }
 
-void Collision::load(Player * player, Obiekt * gameItems, int iloscItems) {
+void Collision::load(Player * player, std::vector<Obiekt> * gameItems, int iloscItems) {
 	this->player = player;
 	this->gameItems = gameItems;
 	this->iloscItems = new int(iloscItems);

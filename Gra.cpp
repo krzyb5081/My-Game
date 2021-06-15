@@ -3,7 +3,7 @@
 Gra::Gra() {
 	this->gameState = this->GAME_STATE_MENU;
 
-	this->obiekty = new Obiekt;
+	this->obiekty = new std::vector<Obiekt>;
 
 	this->player = new Player;
 	this->collision = new Collision;
@@ -15,6 +15,7 @@ Gra::Gra() {
 
 	this->dialog.load("gudbaj_sztefi");//usunac to stad i dac gdzies w petli gry jak trzeba bedzie wywolac dialog
 
+	//usunac to
 	this->gameState = this->GAME_STATE_MAP_EDITOR;
 }
 
@@ -136,8 +137,8 @@ void Gra::rysuj(sf::RenderWindow & window) {
 	this->obiekty = mapa.sortowanieObiektow();
 
 	for (int i = 0; i < mapa.getNumberOfObiects(); i++){
-		if (*this->obiekty[i].isVisible == true){
-			window.draw(*this->obiekty[i].sprite);
+		if (*this->obiekty->at(i).isVisible == true){
+			window.draw(*this->obiekty->at(i).sprite);
 		}
 	}
 
