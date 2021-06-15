@@ -10,13 +10,16 @@ Gra::Gra() {
 	this->background = new Background;
 	this->gameItems = new GameItems;
 
-	mapa.loadMap("map.txt", player, collision, background, gameItems);
-	this->obiekty = mapa.getObiects();
+	this->mapa.loadMap("map.txt", player, collision, background, gameItems);
+	this->obiekty = this->mapa.getObiects();
 
 	this->dialog.load("gudbaj_sztefi");//usunac to stad i dac gdzies w petli gry jak trzeba bedzie wywolac dialog
 
+
+
 	//usunac to
 	this->gameState = this->GAME_STATE_MAP_EDITOR;
+	this->mapa.loadObiectFromFile("obiect editor.txt");
 }
 
 void Gra::loop(sf::RenderWindow & window){

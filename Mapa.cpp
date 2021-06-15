@@ -453,7 +453,7 @@ void Mapa::saveMap(std::string mapFile) {
 }
 
 void Mapa::loadObiectFromFile(std::string obiectFile) {
-
+	
 	int pozycjaWStringu = 0;
 	int pozycjaPoSpacji = 0;
 	int pozycjaKoncaLinii = 0;
@@ -465,7 +465,11 @@ void Mapa::loadObiectFromFile(std::string obiectFile) {
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	std::string nazwaTextury = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
-
+	
+	//tutaj jest blad
+	std::cout << "madamada" << std::endl; while (1);
+	
+	
 	//"Start positon x: "
 	pozycjaWStringu = stringBuffer.find("Start positon x: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
@@ -495,7 +499,7 @@ void Mapa::loadObiectFromFile(std::string obiectFile) {
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	bool colides = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
+	
 	//"Interacts: "
 	pozycjaWStringu = stringBuffer.find("Interacts: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;

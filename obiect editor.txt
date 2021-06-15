@@ -1,1 +1,10 @@
-Nazwa pliku z tekstura: bohater.bmp
+Texture file name: bohater.bmp
+Start positon x: 0.000000
+Start positon y: 0.000000
+Velocity: 0.000000
+Layer: 2
+Colides: 0
+Interacts: 0
+Interaction data: 0
+Is flat: 1
+Is behind scene: 0
