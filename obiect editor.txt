@@ -1,10 +1,10 @@
-Texture file name: bohater.bmp
-Start positon x: 0.000000
-Start positon y: 0.000000
-Velocity: 0.000000
-Layer: 2
-Colides: 0
-Interacts: 0
-Interaction data: 0
-Is flat: 1
-Is behind scene: 0
+texture_file_name: bohater.bmp
+start_positon_x: 0.000000
+start_positon_y: 0.000000
+velocity: 0.000000
+layer: 2
+colides: 0
+interacts: 0
+interaction_data: 0
+is_flat: 1
+is_behind_scene: 0

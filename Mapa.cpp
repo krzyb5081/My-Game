@@ -454,76 +454,91 @@ void Mapa::saveMap(std::string mapFile) {
 
 void Mapa::loadObiectFromFile(std::string obiectFile) {
 	
+	if (obiectFile == "") {
+		printf("No obiect loaded, please exit game\n");
+		while (1) {}
+		return;
+	}
+
+	sf::FileInputStream file;
+	if (!file.open(obiectFile)) {
+		printf("No obiect loaded, problem with opening file, please exit game\n");
+		while (1) {}
+		return;
+	}
+
+	//wstukanie pliku do stringa
+	char * buffer = new char[file.getSize()];
+	file.read(buffer, file.getSize());
+	std::string stringBuffer(buffer);
+	delete[] buffer;
+
+
 	int pozycjaWStringu = 0;
 	int pozycjaPoSpacji = 0;
 	int pozycjaKoncaLinii = 0;
-	std::string stringBuffer = "";
 
 	
-	//"Texture file name: "
-	pozycjaWStringu = stringBuffer.find("Texture file name: ", pozycjaWStringu);
+	//"texture_file_name: "
+	pozycjaWStringu = stringBuffer.find("texture_file_name: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	std::string nazwaTextury = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
-	
-	//tutaj jest blad
-	std::cout << "madamada" << std::endl; while (1);
-	
-	
-	//"Start positon x: "
-	pozycjaWStringu = stringBuffer.find("Start positon x: ", pozycjaWStringu);
+	std::cout << nazwaTextury << std::endl;
+	//"start_positon_x: "
+	pozycjaWStringu = stringBuffer.find("start_positon_x: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	float startX = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//"Start positon y: "
-	pozycjaWStringu = stringBuffer.find("Start positon y: ", pozycjaWStringu);
+	std::cout << startX << std::endl;
+	//"start_positon_y: "
+	pozycjaWStringu = stringBuffer.find("start_positon_y: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	float startY = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//"Velocity: "
-	pozycjaWStringu = stringBuffer.find("Velocity: ", pozycjaWStringu);
+	std::cout << startY << std::endl;
+	//"velocity: "
+	pozycjaWStringu = stringBuffer.find("velocity: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	float predkosc = std::stof(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//"Layer: "
-	pozycjaWStringu = stringBuffer.find("Layer: ", pozycjaWStringu);
+	std::cout << predkosc << std::endl;
+	//"layer: "
+	pozycjaWStringu = stringBuffer.find("layer: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	int warstwa = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//"Colides: "
-	pozycjaWStringu = stringBuffer.find("Colides: ", pozycjaWStringu);
+	std::cout << warstwa << std::endl;
+	//"colides: "
+	pozycjaWStringu = stringBuffer.find("colides: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	bool colides = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-	
-	//"Interacts: "
-	pozycjaWStringu = stringBuffer.find("Interacts: ", pozycjaWStringu);
+	std::cout << colides << std::endl;
+	//"interacts: "
+	pozycjaWStringu = stringBuffer.find("interacts: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	bool interacts = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//"Interaction data: "
-	pozycjaWStringu = stringBuffer.find("Interaction data: ", pozycjaWStringu);
+	std::cout << interacts << std::endl;
+	//"interaction_data: "
+	pozycjaWStringu = stringBuffer.find("interaction_data: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	std::string interactionData = stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji);
-
-	//"Is flat: "
-	pozycjaWStringu = stringBuffer.find("Is flat: ", pozycjaWStringu);
+	std::cout << interactionData << std::endl;
+	//"is_flat: "
+	pozycjaWStringu = stringBuffer.find("is_flat: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	bool isFlat = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
-	//"Is behind scene: "
-	pozycjaWStringu = stringBuffer.find("Is behind scene: ", pozycjaWStringu);
+	std::cout << isFlat << std::endl;
+	//"is_behind_scene: "
+	pozycjaWStringu = stringBuffer.find("is_behind_scene: ", pozycjaWStringu);
 	pozycjaPoSpacji = stringBuffer.find(" ", pozycjaWStringu) + 1;
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
-
+	std::cout << isBehindScene << std::endl;
 
 	//zwiekszenie liczby obiektow
 	this->iloscObiektow++;
@@ -536,8 +551,6 @@ void Mapa::loadObiectFromFile(std::string obiectFile) {
 	this->obiekty->push_back(newObiect);
 	
 	this->gameItems->items->push_back(this->obiekty->back());
-	
-	//tutaj skonczylem
 }
 
 std::vector<Obiekt> * Mapa::sortowanieObiektow(){
