@@ -140,7 +140,7 @@ void Mapa::loadMap(std::string mapFile, Player * player, Collision * collision, 
 	newObiect.load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
 	this->obiekty->push_back(newObiect);
 
-	player->copy(this->obiekty->back());
+	this->player->copy(this->obiekty->back());
 
 	// LOADING BACKGROUND /////////////////////////////////////////////////////////////////////////////////
 
@@ -539,18 +539,26 @@ void Mapa::loadObiectFromFile(std::string obiectFile) {
 	pozycjaKoncaLinii = stringBuffer.find("\n", pozycjaWStringu);
 	bool isBehindScene = std::stoi(stringBuffer.substr(pozycjaPoSpacji, pozycjaKoncaLinii - pozycjaPoSpacji));
 	std::cout << isBehindScene << std::endl;
-
+	
 	//zwiekszenie liczby obiektow
 	this->iloscObiektow++;
-	this->gameItems->iloscItems++;
-	int idNumber = this->iloscObiektow - 1;
-
+	*this->gameItems->iloscItems++;
+	//int idNumber = this->iloscObiektow;
+	
 	//tworzenie i kopiowanie obiektow
-	Obiekt newObiect;
-	newObiect.load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
-	this->obiekty->push_back(newObiect);
+	Obiekt * newObiect = new Obiekt;
+	//newObiect->load(idNumber, nazwaTextury.c_str(), startX, startY, predkosc, warstwa, colides, interacts, interactionData, isFlat, isBehindScene);
+	newObiect->load(100, "bohater.bmp", 10, 10, 0, 2, 0, 0, "", 1, 0);
+
+	this->obiekty->push_back(*newObiect);
 	
 	this->gameItems->items->push_back(this->obiekty->back());
+
+	// LOADING GAMEITEMS TO COLLISION /////////////////////////////////////////////////////////////////////
+	collision->load(player, this->gameItems->items, *this->gameItems->iloscItems);
+
+	//CHECKING GAMEITEMS VISIBILITY ///////////////////////////////////////////////////////////////////////
+	gameItems->checkingVisibility();
 }
 
 std::vector<Obiekt> * Mapa::sortowanieObiektow(){

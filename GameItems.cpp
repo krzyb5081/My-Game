@@ -18,9 +18,9 @@ void GameItems::initiate(Player * player, int iloscItems){
 void GameItems::ruszanie(){
 	float playerX = this->player->worldPlayerCoordinatesX;
 	float playerY = this->player->worldPlayerCoordinatesY;
-
+	
 	checkingVisibility();
-	for (int i = 0; i < *this->iloscItems; i++) {
+	/*for (int i = 0; i < *this->iloscItems; i++) {
 
 		if (*this->items->at(i).isVisible == true) {//ustawianie pozycji tylko sprajtom ktore sa widoczne
 
@@ -36,17 +36,17 @@ void GameItems::ruszanie(){
 			}
 		}
 	}
-	checkingVisibility();
+	checkingVisibility();*/
 }
 
 void GameItems::checkingVisibility(){
-
+	
 	const float pozycjaScenyY = 450;//pozycja y sprajta odpowiedzialnego za scene
 
 	for (int i = 0; i < *this->iloscItems; i++){
 		float odlegloscY = player->worldPlayerCoordinatesY - *this->items->at(i).startY;
 		float odlegloscPlayeraOdKrawedzi = player->sprite->getPosition().y - pozycjaScenyY;
-
+		
 		//obiekt wychodzi albo zachodzi za scene ale juz albo jeszcze jest widoczny i nie jest plaski (plaskie obiekty nie moga byc za scena)
 		if ( (*this->items->at(i).isFlat == false) && ((odlegloscY <= 2 * (*this->items->at(i).height) + odlegloscPlayeraOdKrawedzi) && (odlegloscY >= odlegloscPlayeraOdKrawedzi + *this->items->at(i).height)) ){
 			*this->items->at(i).isVisible = true;
