@@ -14,10 +14,4 @@ zrobic map editor ktory bedzie dzialal w trybie map editor
 po wcisnieciu e odczytuje z pliku obiekt ktory ma byc postawiony
 spacja stawia obiekt
 
-
-zrobic kopiowanie obiektow do nowej listy i takie tam pierdoly z loadowaniem obiektu
-
-
-sprawdzic czy to loadowanie w ogole dziala
-
 */
