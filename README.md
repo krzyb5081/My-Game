@@ -1,2 +1,2 @@
 # Game Engine
-Engine to make games being written in C++ with SFML library.
+My hobby game project in C++ with SFML library.
